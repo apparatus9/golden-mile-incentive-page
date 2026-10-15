@@ -153,7 +153,7 @@
             <button type="button" data-view="offers" aria-pressed="true">Offers page</button>
             <button type="button" data-view="claim" aria-pressed="false">Claim form</button>
             <button type="button" data-view="gate" aria-pressed="false">Form gate</button>
-            <button type="button" data-view="single" aria-pressed="false">One-page version</button>
+            <button type="button" data-view="single" aria-pressed="false">Standalone pages</button>
           </div>
         </div>
         <div class="bar-group">
@@ -218,7 +218,8 @@
           <a href="edealer/offers.html">Offers page ↗</a>
           <a href="edealer/claim.html?offer=wrangler">Claim form, Wrangler ↗</a>
           <a href="edealer/claim.html">Claim form, no offer ↗</a>
-          <a href="index.html">One-page version ↗</a>
+          <a href="index.html">Offers page, hosted ↗</a>
+          <a href="claim.html?offer=wrangler">Claim form, hosted ↗</a>
         </div>
       </div>
     </aside>
@@ -250,8 +251,8 @@
     },
     single: {
       src: 'index.html',
-      title: 'One-page version',
-      note: 'The original single-page build — all six offers and the form on one page. Kept as a fallback if eDealer will only take one page.'
+      title: 'Standalone pages',
+      note: 'The hosted pair outside eDealer: index.html lists the offers, and Claim This Offer goes through to claim.html with the offer already attached.'
     }
   };
 

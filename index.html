@@ -77,60 +77,6 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
 .gm-btn-ghost:hover{background:transparent;border-color:var(--gm-dark);color:var(--gm-dark)}
 .gm-expiry{font-size:12px;text-align:center;color:var(--gm-muted);letter-spacing:.3px;margin:2px 0 0}
 
-/* ---------- form ---------- */
-.gm-claim{background:#fff;color:var(--gm-ink);padding:14px 0 40px}
-.gm-claim h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
-  text-transform:uppercase;letter-spacing:.4px;margin:0 0 10px}
-.gm-claim-intro{color:var(--gm-muted);font-size:16px;margin:0 0 30px;max-width:760px}
-.gm-formcard{background:var(--gm-card);color:var(--gm-ink);padding:34px 36px 30px;max-width:980px}
-@media (max-width:640px){.gm-formcard{padding:24px 20px}.gm-claim{padding:10px 0 30px}}
-.gm-selected{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
-  border-left:4px solid var(--gm-red);background:#fff;padding:12px 16px;margin:0 0 26px}
-.gm-selected-label{display:block;width:100%;font-size:11.5px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase;color:var(--gm-muted)}
-.gm-selected-name{font-family:var(--gm-head);font-size:20px;font-weight:600;text-transform:uppercase;line-height:1.2}
-.gm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px}
-@media (max-width:700px){.gm-grid{grid-template-columns:1fr}}
-.gm-field{display:flex;flex-direction:column;gap:6px;min-width:0}
-.gm-field-full{grid-column:1/-1}
-.gm-field label,.gm-legend{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--gm-dark)}
-.gm-req{color:var(--gm-red)}
-.gm-field input[type=text],.gm-field input[type=email],.gm-field input[type=tel],
-.gm-field select,.gm-field textarea{
-  font-family:var(--gm-body);font-size:15px;color:var(--gm-ink);background:#fff;
-  border:1px solid #c4c4c4;border-radius:0;padding:11px 12px;width:100%;transition:border-color .15s ease,box-shadow .15s ease}
-.gm-field textarea{min-height:96px;resize:vertical}
-.gm-field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23222' stroke-width='1.6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 13px center;background-size:12px 8px;padding-right:36px}
-.gm-field :is(input,select,textarea):focus{outline:none;border-color:var(--gm-red);box-shadow:0 0 0 3px rgba(202,0,0,.14)}
-.gm-field :is(input,select,textarea):user-invalid{border-color:var(--gm-red);background:#fff8f8}
-fieldset.gm-field{border:0;margin:0;padding:0}
-.gm-radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
-.gm-radios label{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:normal;
-  letter-spacing:0;text-transform:none;border:1px solid #c4c4c4;background:#fff;padding:9px 14px;cursor:pointer;transition:all .15s ease}
-.gm-radios input{accent-color:var(--gm-red);margin:0}
-.gm-radios label:has(input:checked){border-color:var(--gm-red);background:#fdf3f3}
-.gm-conditional{grid-column:1/-1;display:none;gap:18px 24px;grid-template-columns:repeat(2,minmax(0,1fr));
-  border-left:4px solid var(--gm-red);background:#fff;padding:18px 20px}
-@media (max-width:700px){.gm-conditional{grid-template-columns:1fr}}
-.gm-conditional.is-on{display:grid}
-.gm-conditional-note{grid-column:1/-1;margin:0;font-size:12.5px;color:var(--gm-muted)}
-.gm-consent{grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;margin-top:4px}
-.gm-consent input{margin-top:3px;accent-color:var(--gm-red);width:17px;height:17px;flex:0 0 17px}
-.gm-consent span{font-size:12.5px;line-height:1.6;color:#4a4a4a}
-.gm-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px;
-  border-top:1px solid #d2d2d2;padding-top:22px;margin-top:6px}
-.gm-actions .gm-btn{width:auto;min-width:240px}
-.gm-actions small{font-size:12px;color:var(--gm-muted);max-width:360px}
-.gm-formstatus{grid-column:1/-1;font-size:14px;font-weight:bold;color:var(--gm-red);margin:0}
-.gm-success{display:none;text-align:center;padding:26px 10px}
-.gm-success.is-on{display:block}
-.gm-success h3{font-family:var(--gm-head);font-size:30px;font-weight:600;text-transform:uppercase;margin:0 0 10px}
-.gm-success p{font-size:16px;color:var(--gm-muted);margin:0 auto 20px;max-width:560px}
-.gm-check{width:60px;height:60px;border-radius:50%;background:var(--gm-red);margin:0 auto 18px;
-  display:flex;align-items:center;justify-content:center}
-.gm-check svg{width:30px;height:30px}
-.is-hidden{display:none !important}
-
 /* ---------- footer ---------- */
 .gm-foot{background:#fff;border-top:3px solid var(--gm-red);padding:42px 0 50px}
 .gm-foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px 40px}
@@ -179,7 +125,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
           </details>
         </div>
         <div class="gm-offer-cta">
-          <button type="button" class="gm-btn gm-claim-btn" data-offer="wrangler">Claim This Offer</button>
+          <a class="gm-btn" href="claim.html?offer=wrangler">Claim This Offer</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Jeep/Wrangler" target="_blank" rel="noopener">View Wrangler Inventory</a>
           <p class="gm-expiry">Offer ends November 2, 2026</p>
         </div>
@@ -207,7 +153,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
           </details>
         </div>
         <div class="gm-offer-cta">
-          <button type="button" class="gm-btn gm-claim-btn" data-offer="ram">Claim This Offer</button>
+          <a class="gm-btn" href="claim.html?offer=ram">Claim This Offer</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Ram/1500" target="_blank" rel="noopener">View Ram 1500 Inventory</a>
           <p class="gm-expiry">Offer ends November 2, 2026</p>
         </div>
@@ -235,7 +181,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
           </details>
         </div>
         <div class="gm-offer-cta">
-          <button type="button" class="gm-btn gm-claim-btn" data-offer="cherokee">Claim This Offer</button>
+          <a class="gm-btn" href="claim.html?offer=cherokee">Claim This Offer</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Jeep/Cherokee" target="_blank" rel="noopener">View Cherokee Inventory</a>
           <p class="gm-expiry">Offer ends November 2, 2026</p>
         </div>
@@ -262,7 +208,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
           </details>
         </div>
         <div class="gm-offer-cta">
-          <button type="button" class="gm-btn gm-claim-btn" data-offer="loyalty">Claim This Offer</button>
+          <a class="gm-btn" href="claim.html?offer=loyalty">Claim This Offer</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new" target="_blank" rel="noopener">View Eligible Models</a>
           <p class="gm-expiry">Offer ends November 2, 2026</p>
         </div>
@@ -290,7 +236,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
           </details>
         </div>
         <div class="gm-offer-cta">
-          <button type="button" class="gm-btn gm-claim-btn" data-offer="accessories">Claim This Offer</button>
+          <a class="gm-btn" href="claim.html?offer=accessories">Claim This Offer</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Ram" target="_blank" rel="noopener">View Ram Inventory</a>
           <p class="gm-expiry">Offer ends October 31, 2026</p>
         </div>
@@ -317,7 +263,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
           </details>
         </div>
         <div class="gm-offer-cta">
-          <button type="button" class="gm-btn gm-claim-btn" data-offer="first-responders">See If You Qualify</button>
+          <a class="gm-btn" href="claim.html?offer=first-responders">See If You Qualify</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new" target="_blank" rel="noopener">View New Inventory</a>
           <p class="gm-expiry">Ongoing program</p>
         </div>
@@ -327,163 +273,6 @@ fieldset.gm-field{border:0;margin:0;padding:0}
   </div>
 </section>
 
-<section class="gm-claim" id="claim">
-  <div class="gm-wrap">
-    <h2>Claim Your Offer</h2>
-    <p class="gm-claim-intro">Tell us which incentive you want and we'll confirm your eligibility, check availability and send you exact numbers &mdash; usually within one business day. No obligation.</p>
-
-    <div class="gm-formcard">
-      <div class="gm-success" id="gm-success" role="status" aria-live="polite">
-        <div class="gm-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
-        </div>
-        <h3>Request Received</h3>
-        <p id="gm-success-msg">Thanks &mdash; a Golden Mile product advisor will be in touch shortly to confirm your offer.</p>
-        <a class="gm-btn gm-btn-ghost" style="display:inline-flex;width:auto;min-width:220px" href="tel:+16472885337">Or call 647-288-5337</a>
-      </div>
-
-      <form id="gm-form" novalidate>
-        <input type="text" name="_honey" id="gm-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-        <div class="gm-selected">
-          <span class="gm-selected-label">Offer selected</span>
-          <span class="gm-selected-name" id="gm-selected-name">Choose an offer below</span>
-        </div>
-
-        <div class="gm-grid">
-          <div class="gm-field gm-field-full">
-            <label for="gm-offer">Which offer are you claiming? <span class="gm-req">*</span></label>
-            <select id="gm-offer" name="offer" required>
-              <option value="">Select an offer&hellip;</option>
-              <option value="wrangler">0% financing &mdash; 2026 Jeep Wrangler 4-Door Rubicon</option>
-              <option value="ram">0% financing &mdash; 2026 Ram 1500 Big Horn Crew Cab 4x4</option>
-              <option value="cherokee">1.99% lease &mdash; 2026 Jeep Cherokee</option>
-              <option value="loyalty">Double Loyalty &mdash; up to $3,000 savings</option>
-              <option value="accessories">$1,000 no-charge accessories &mdash; 2026/2027 Ram</option>
-              <option value="first-responders">First responder preferred pricing</option>
-              <option value="other">Something else / not sure yet</option>
-            </select>
-          </div>
-
-          <div class="gm-field">
-            <label for="gm-first">First name <span class="gm-req">*</span></label>
-            <input type="text" id="gm-first" name="firstName" autocomplete="given-name" required>
-          </div>
-          <div class="gm-field">
-            <label for="gm-last">Last name <span class="gm-req">*</span></label>
-            <input type="text" id="gm-last" name="lastName" autocomplete="family-name" required>
-          </div>
-          <div class="gm-field">
-            <label for="gm-email">Email <span class="gm-req">*</span></label>
-            <input type="email" id="gm-email" name="email" autocomplete="email" required>
-          </div>
-          <div class="gm-field">
-            <label for="gm-phone">Phone <span class="gm-req">*</span></label>
-            <input type="tel" id="gm-phone" name="phone" autocomplete="tel" placeholder="416-555-0123" required>
-          </div>
-
-          <fieldset class="gm-field gm-field-full">
-            <span class="gm-legend">Preferred contact method</span>
-            <div class="gm-radios">
-              <label><input type="radio" name="contactMethod" value="Phone call" checked> Phone call</label>
-              <label><input type="radio" name="contactMethod" value="Text message"> Text message</label>
-              <label><input type="radio" name="contactMethod" value="Email"> Email</label>
-            </div>
-          </fieldset>
-
-          <div class="gm-field">
-            <label for="gm-vehicle">Vehicle of interest</label>
-            <input type="text" id="gm-vehicle" name="vehicle" placeholder="Year, model and trim">
-          </div>
-          <div class="gm-field">
-            <label for="gm-timeline">Purchase timeline</label>
-            <select id="gm-timeline" name="timeline">
-              <option value="">Select&hellip;</option>
-              <option>Before the offer ends</option>
-              <option>Within 30 days</option>
-              <option>1&ndash;3 months</option>
-              <option>Just researching</option>
-            </select>
-          </div>
-          <div class="gm-field">
-            <label for="gm-trade">Do you have a trade-in?</label>
-            <select id="gm-trade" name="tradeIn">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-          </div>
-          <div class="gm-field">
-            <label for="gm-finance">How will you be buying?</label>
-            <select id="gm-finance" name="financeType">
-              <option value="">Select&hellip;</option>
-              <option>Finance</option>
-              <option>Lease</option>
-              <option>Cash</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-
-          <div class="gm-conditional" data-for="loyalty">
-            <p class="gm-conditional-note"><strong>Double Loyalty eligibility.</strong> You must have a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name on or before October 1, 2026.</p>
-            <div class="gm-field">
-              <label for="gm-loyalty-vehicle">Vehicle currently registered to you</label>
-              <input type="text" id="gm-loyalty-vehicle" name="loyaltyVehicle" placeholder="e.g. 2019 Jeep Grand Cherokee">
-            </div>
-            <div class="gm-field">
-              <label for="gm-loyalty-since">Registered in your name since</label>
-              <input type="text" id="gm-loyalty-since" name="loyaltySince" placeholder="Month and year">
-            </div>
-          </div>
-
-          <div class="gm-conditional" data-for="first-responders">
-            <p class="gm-conditional-note"><strong>First responder eligibility.</strong> Valid proof of active service or employment is required at time of purchase.</p>
-            <div class="gm-field">
-              <label for="gm-responder-role">Your role</label>
-              <select id="gm-responder-role" name="responderRole">
-                <option value="">Select&hellip;</option>
-                <option>Police</option>
-                <option>Firefighter</option>
-                <option>Paramedic / EMT</option>
-                <option>Nurse</option>
-                <option>Physician</option>
-                <option>Other healthcare</option>
-                <option>Other first responder</option>
-              </select>
-            </div>
-            <div class="gm-field">
-              <label for="gm-responder-employer">Service or employer</label>
-              <input type="text" id="gm-responder-employer" name="responderEmployer" placeholder="e.g. Toronto Paramedic Services">
-            </div>
-          </div>
-
-          <div class="gm-conditional" data-for="accessories">
-            <p class="gm-conditional-note"><strong>$1,000 Mopar accessory credit.</strong> Tell us what you'd like and we'll price it out with your Ram.</p>
-            <div class="gm-field gm-field-full">
-              <label for="gm-accessories">Accessories you're interested in</label>
-              <input type="text" id="gm-accessories" name="accessories" placeholder="Running boards, tonneau cover, all-weather mats, bed liner&hellip;">
-            </div>
-          </div>
-
-          <div class="gm-field gm-field-full">
-            <label for="gm-comments">Anything else we should know?</label>
-            <textarea id="gm-comments" name="comments" placeholder="Colour preference, must-have options, budget, questions about the offer&hellip;"></textarea>
-          </div>
-
-          <label class="gm-consent">
-            <input type="checkbox" id="gm-consent" name="consent" required>
-            <span>I agree to be contacted by Golden Mile Chrysler Dodge Jeep Ram about this offer by phone, text or email, and I accept the <a href="https://www.goldenmilechrysler.ca/privacy-policy" target="_blank" rel="noopener">privacy policy</a>. I can unsubscribe at any time. <span class="gm-req">*</span></span>
-          </label>
-
-          <p class="gm-formstatus" id="gm-status" role="alert"></p>
-
-          <div class="gm-actions">
-            <button type="submit" class="gm-btn" id="gm-submit">Send My Request</button>
-            <small>Offers are subject to availability, approved credit and manufacturer program rules. Submitting this form does not reserve a vehicle.</small>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
 </main>
 
 <footer class="gm-foot">
@@ -523,183 +312,18 @@ fieldset.gm-field{border:0;margin:0;padding:0}
 (function () {
   'use strict';
 
-  /* ------------------------------------------------------------------
-     CONFIG - where leads go.
-
-     Every submission is emailed to LEAD_TO, with LEAD_CC copied. Delivery
-     runs through FormSubmit (formsubmit.co), which needs no account and no
-     server - but the FIRST submission sends an activation link to LEAD_TO
-     that has to be clicked before any mail is delivered. Until then
-     submissions are accepted and silently dropped.
-
-     Once activated, FormSubmit will issue a hashed alias for the address.
-     Swap LEAD_TO for that alias so these mailboxes are not sitting in
-     public HTML for scrapers to harvest:
-         var LEAD_TO = 'a1b2c3d4e5f6...';   // alias, not the raw address
-     LEAD_CC cannot be aliased, so it stays visible either way.
-  ------------------------------------------------------------------ */
-  var LEAD_TO = 'ejay@goldenmilechrysler.ca';
-  var LEAD_CC = 'mitch@goldenmilechrysler.ca';
-  var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
-
-  var OFFERS = {
-    'wrangler':         { name: '0% Financing — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'November 2, 2026' },
-    'ram':              { name: '0% Financing — 2026 Ram 1500 Big Horn Crew Cab 4x4', ends: 'November 2, 2026' },
-    'cherokee':         { name: '1.99% Lease — 2026 Jeep Cherokee', ends: 'November 2, 2026' },
-    'loyalty':          { name: 'Double Loyalty — up to $3,000 Savings', ends: 'November 2, 2026' },
-    'accessories':      { name: '$1,000 No-Charge Accessories — 2026/2027 Ram', ends: 'October 31, 2026' },
-    'first-responders': { name: 'First Responder Preferred Pricing', ends: 'Ongoing' },
-    'other':            { name: 'Something else / not sure yet', ends: '' }
-  };
-
-  var form = document.getElementById('gm-form');
-  var select = document.getElementById('gm-offer');
-  var selectedName = document.getElementById('gm-selected-name');
-  var status = document.getElementById('gm-status');
-  var submit = document.getElementById('gm-submit');
-  var success = document.getElementById('gm-success');
-  var successMsg = document.getElementById('gm-success-msg');
-  var conditionals = Array.prototype.slice.call(document.querySelectorAll('.gm-conditional'));
-
-  function syncOffer() {
-    var key = select.value;
-    var offer = OFFERS[key];
-    selectedName.textContent = offer ? offer.name : 'Choose an offer below';
-    conditionals.forEach(function (block) {
-      block.classList.toggle('is-on', block.getAttribute('data-for') === key);
-    });
-  }
-
-  select.addEventListener('change', function () {
-    syncOffer();
-    status.textContent = '';
-  });
-
-  /* "Claim This Offer" - pick the offer, jump to the form, focus the name. */
-  Array.prototype.forEach.call(document.querySelectorAll('.gm-claim-btn'), function (btn) {
-    btn.addEventListener('click', function () {
-      select.value = btn.getAttribute('data-offer');
-      syncOffer();
-      status.textContent = '';
-      document.getElementById('claim').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      window.setTimeout(function () {
-        document.getElementById('gm-first').focus({ preventScroll: true });
-      }, 500);
-    });
-  });
-
-  /* Deep link: ?offer=ram opens the page with that offer preselected. */
-  var deep = new URLSearchParams(window.location.search).get('offer');
-  if (deep && OFFERS[deep]) {
-    select.value = deep;
-    window.requestAnimationFrame(function () {
-      document.getElementById('claim').scrollIntoView({ block: 'start' });
-    });
-  }
-  syncOffer();
-
-  /* Countdown to the end of the clearout event. */
+  /* Days left in the clearout, under the intro. The form that used to live
+     on this page is now claim.html, which the offer buttons link to. */
   var countdown = document.getElementById('gm-countdown');
+  if (!countdown) { return; }
+
   var endsAt = new Date('2026-11-02T23:59:59-04:00');
   var daysLeft = Math.ceil((endsAt - new Date()) / 86400000);
   if (daysLeft > 0) {
-    countdown.innerHTML = 'All-Out Clearout ends in <b>' + daysLeft + '</b> ' + (daysLeft === 1 ? 'day' : 'days');
+    countdown.innerHTML = 'All-Out Clearout ends in <b>' + daysLeft + '</b> ' +
+      (daysLeft === 1 ? 'day' : 'days');
   }
-
-  /* Raw form values, keyed by field name - used for the on-screen copy. */
-  function collect() {
-    var data = {};
-    new FormData(form).forEach(function (value, key) { data[key] = value; });
-    var offer = OFFERS[data.offer];
-    data.offerName = offer ? offer.name : '';
-    data.offerEnds = offer ? offer.ends : '';
-    data.consent = form.consent.checked ? 'Yes' : 'No';
-    return data;
-  }
-
-  /* The email itself. Keys become the row labels in the delivered mail,
-     so they read as plain English, and empty ones are dropped. Only the
-     conditional fields belonging to the chosen offer are included. */
-  function buildEmail(data) {
-    var body = {
-      _subject: 'Offer request: ' + (data.offerName || 'Golden Mile') + ' - ' + data.firstName + ' ' + data.lastName,
-      _cc: LEAD_CC,
-      _template: 'table',
-      _captcha: 'false',
-      _honey: document.getElementById('gm-honey').value,
-      'Offer': data.offerName,
-      'Offer ends': data.offerEnds,
-      'Name': data.firstName + ' ' + data.lastName,
-      'Email': data.email,
-      'Phone': data.phone,
-      'Preferred contact': data.contactMethod,
-      'Vehicle of interest': data.vehicle,
-      'Purchase timeline': data.timeline,
-      'Trade-in': data.tradeIn,
-      'Buying method': data.financeType,
-      'Currently owns': data.loyaltyVehicle,
-      'Registered since': data.loyaltySince,
-      'First responder role': data.responderRole,
-      'Service or employer': data.responderEmployer,
-      'Accessories wanted': data.accessories,
-      'Comments': data.comments,
-      'Consent to contact': data.consent,
-      'Submitted': new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
-      'Page': window.location.href
-    };
-    Object.keys(body).forEach(function (k) {
-      if (body[k] === undefined || body[k] === null || body[k] === '') { delete body[k]; }
-    });
-    return body;
-  }
-
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    status.textContent = '';
-
-    if (!form.checkValidity()) {
-      var firstBad = form.querySelector(':invalid');
-      status.textContent = 'Please complete the highlighted fields before sending.';
-      if (firstBad) {
-        firstBad.focus();
-        firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      return;
-    }
-
-    var data = collect();
-    submit.disabled = true;
-    submit.textContent = 'Sending…';
-
-    function done() {
-      form.classList.add('is-hidden');
-      successMsg.textContent = data.offerName
-        ? 'Thanks ' + data.firstName + ' — your request for the ' + data.offerName + ' offer is in. A Golden Mile product advisor will contact you by ' + String(data.contactMethod).toLowerCase() + ' shortly.'
-        : 'Thanks — a Golden Mile product advisor will be in touch shortly.';
-      success.classList.add('is-on');
-      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    fetch(MAIL_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(buildEmail(data))
-    }).then(function (res) {
-      return res.json().catch(function () { return {}; }).then(function (json) {
-        if (!res.ok || String(json.success) === 'false') {
-          throw new Error(json.message || 'HTTP ' + res.status);
-        }
-        done();
-      });
-    }).catch(function () {
-      submit.disabled = false;
-      submit.textContent = 'Send My Request';
-      status.innerHTML = 'Sorry — that did not go through. Please call ' +
-        '<a href="tel:+16472885337">647-288-5337</a> or email ' +
-        '<a href="mailto:' + LEAD_TO + '">' + LEAD_TO + '</a>, and we will pick it up from there.';
-    });
-  });
-})();
+}());
 </script>
 </body>
 </html>
