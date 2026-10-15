@@ -4,12 +4,106 @@ A single-page offers/incentives landing page for Golden Mile Chrysler Dodge Jeep
 Six live offers, each with a "Claim This Offer" button that drops the visitor into one
 form with that offer already selected and the eligibility questions for it revealed.
 
+There are **two builds** of the same thing:
+
 ```
-index.html          the whole page (inline CSS + JS, no build step, no dependencies)
-assets/*.webp       the six banners, optimized — these are what the page loads
+index.html              STANDALONE — one page, offers + form together.
+                        Inline CSS/JS, no dependencies. Open it off disk and it runs.
+
+edealer/offers.html     EDEALER — two pages. Paste these into two eDealer
+edealer/claim.html      custom pages. See "Importing into eDealer" below.
+edealer/gm-incentives.css   served from GitHub Pages, referenced by both
+edealer/gm-incentives.js    served from GitHub Pages, referenced by both
+
+assets/*.webp       the six banners, optimized — these are what the pages load
 assets/*.png        the original banner exports, kept so the webp can be regenerated
-preview/            reference screenshots (desktop, mobile, form)
+preview/            reference screenshots
 ```
+
+Both builds email leads the same way. Edits to one do **not** reach the other —
+there is no shared source. See "Keeping the two builds in sync".
+
+---
+
+## Importing into eDealer
+
+Two custom pages. The offer cards live on the first; clicking one carries the offer
+across to the form on the second.
+
+| Page | Paste | Default path |
+|---|---|---|
+| Offers listing | `edealer/offers.html` | `/offers` |
+| Claim form | `edealer/claim.html` | `/offers-claim` |
+
+### If your paths differ
+
+The six **Claim This Offer** hrefs are hardcoded in `offers.html` as
+`/offers-claim?offer=<key>` — deliberately, so the buttons still work if the script
+fails to load. If eDealer assigns different slugs, update:
+
+1. those six hrefs in `offers.html`, and
+2. `OFFERS_PATH` at the top of `gm-incentives.js` (used for the "back to offers" links).
+
+### The claim page is gated
+
+Landing on the claim page without a valid `?offer=` shows a "Choose an offer first"
+panel with a link back, instead of a form with nothing attached. Arriving via an offer
+button shows the form with that offer named, locked into a hidden field, and only that
+offer's eligibility questions revealed.
+
+**This is a usability gate, not access control.** An eDealer page is public HTML —
+anyone with the URL can open it, and a hand-typed `?offer=ram` works fine. It stops
+people wandering onto a bare form; it does not stop anyone determined.
+
+Set the claim page to **noindex** in eDealer's page SEO settings and leave it out of the
+nav, so it is only ever reached from an offer button.
+
+### Why the CSS and JS are external
+
+Per the staff-page notes, the eDealer/D2C editor renders the contents of an inline
+`<style>` block and any HTML comment as visible body text. So both fragments carry zero
+`<!--` comments and zero inline `<style>`; everything is pulled in via `<link>` and
+`<script src>` from GitHub Pages, which the editor leaves alone.
+
+The happy side effect: **CSS and JS changes go live on push, with no re-pasting.** Only a
+change to the markup itself needs another paste into eDealer.
+
+### Pre-paste checks
+
+```bash
+cd edealer
+for f in offers.html claim.html; do
+  echo "$f  comments:$(grep -c '<!--' $f)  style:$(grep -c '<style' $f)  relative-src:$(grep -o 'src="[^"]*"' $f | grep -vc 'src="http')"
+done
+```
+
+All three counts must be `0`. Then confirm the hosted assets actually resolve:
+
+```bash
+B=https://apparatus9.github.io/golden-mile-incentive-page
+for u in /edealer/gm-incentives.css /edealer/gm-incentives.js /assets/offer-wrangler.webp; do
+  echo "$(curl -s -o /dev/null -w '%{http_code}' -L $B$u) $u"
+done
+```
+
+### Asset hosting
+
+CSS, JS and banners are served from **GitHub Pages** off this repo's `main` branch:
+`https://apparatus9.github.io/golden-mile-incentive-page/`. A push to `main` republishes
+within a minute or so. Because the repo is public these URLs resolve — the private-repo
+problem that forced the staff page onto Netlify does not apply here.
+
+---
+
+## Keeping the two builds in sync
+
+`index.html` and the `edealer/` pair duplicate the offer content. A change to one does
+not reach the other. When offers change, update both, or retire whichever build you are
+not using. The duplicated parts are the six offer blocks, the `OFFERS` object, and the
+legal footer.
+
+Class prefixes differ on purpose: standalone uses `gm-`, the eDealer build uses `gmi-`
+scoped under a `.gmi` root so eDealer's own stylesheet cannot collide with it.
 
 ## Where the leads go
 
@@ -134,9 +228,9 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 
 - **FormSubmit has not been activated** — see above. Until Ejay clicks the link, nothing
   is delivered.
+- The eDealer page paths (`/offers`, `/offers-claim`) are assumed — confirm the real
+  slugs and update the six card hrefs plus `OFFERS_PATH`.
+- Set the claim page to **noindex** in eDealer and keep it out of the nav.
 - The inventory buttons point at `goldenmilechrysler.ca` model URLs that were assumed,
   not verified. Check each one resolves before launch.
 - The consent checkbox links to `/privacy-policy` — confirm that is the real path.
-- If this gets embedded in D2C rather than hosted standalone, it needs the usual
-  treatment: strip HTML comments, move the `<style>` block to an external stylesheet,
-  and make every asset URL absolute. See the team-page notes in the vault.
