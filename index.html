@@ -390,6 +390,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       </div>
 
       <form id="gm-form" novalidate>
+        <input type="text" name="_honey" id="gm-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="gm-selected">
           <span class="gm-selected-label">Offer selected</span>
           <span class="gm-selected-name" id="gm-selected-name">Choose an offer below</span>
@@ -571,13 +572,22 @@ fieldset.gm-field{border:0;margin:0;padding:0}
 
   /* ------------------------------------------------------------------
      CONFIG - where leads go.
-     Set FORM_ENDPOINT to a URL that accepts a JSON POST (Formspree,
-     a Zapier catch hook, your CRM/ADF bridge, a serverless function).
-     Leave it null and the form falls back to opening a prefilled email
-     to LEAD_EMAIL, so the page is never a dead end.
+
+     Every submission is emailed to LEAD_TO, with LEAD_CC copied. Delivery
+     runs through FormSubmit (formsubmit.co), which needs no account and no
+     server - but the FIRST submission sends an activation link to LEAD_TO
+     that has to be clicked before any mail is delivered. Until then
+     submissions are accepted and silently dropped.
+
+     Once activated, FormSubmit will issue a hashed alias for the address.
+     Swap LEAD_TO for that alias so these mailboxes are not sitting in
+     public HTML for scrapers to harvest:
+         var LEAD_TO = 'a1b2c3d4e5f6...';   // alias, not the raw address
+     LEAD_CC cannot be aliased, so it stays visible either way.
   ------------------------------------------------------------------ */
-  var FORM_ENDPOINT = null;
-  var LEAD_EMAIL = 'sales@goldenmilechrysler.ca';
+  var LEAD_TO = 'ejay@goldenmilechrysler.ca';
+  var LEAD_CC = 'mitch@goldenmilechrysler.ca';
+  var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
 
   var OFFERS = {
     'wrangler':         { name: '0% Financing — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'November 2, 2026' },
@@ -643,6 +653,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
     countdown.innerHTML = 'All-Out Clearout ends in <b>' + daysLeft + '</b> ' + (daysLeft === 1 ? 'day' : 'days');
   }
 
+  /* Raw form values, keyed by field name - used for the on-screen copy. */
   function collect() {
     var data = {};
     new FormData(form).forEach(function (value, key) { data[key] = value; });
@@ -650,16 +661,43 @@ fieldset.gm-field{border:0;margin:0;padding:0}
     data.offerName = offer ? offer.name : '';
     data.offerEnds = offer ? offer.ends : '';
     data.consent = form.consent.checked ? 'Yes' : 'No';
-    data.submittedAt = new Date().toISOString();
-    data.pageUrl = window.location.href;
     return data;
   }
 
-  function mailtoFallback(data) {
-    var lines = Object.keys(data).map(function (k) { return k + ': ' + data[k]; });
-    window.location.href = 'mailto:' + LEAD_EMAIL +
-      '?subject=' + encodeURIComponent('Offer request - ' + (data.offerName || 'Golden Mile')) +
-      '&body=' + encodeURIComponent(lines.join('\n'));
+  /* The email itself. Keys become the row labels in the delivered mail,
+     so they read as plain English, and empty ones are dropped. Only the
+     conditional fields belonging to the chosen offer are included. */
+  function buildEmail(data) {
+    var body = {
+      _subject: 'Offer request: ' + (data.offerName || 'Golden Mile') + ' - ' + data.firstName + ' ' + data.lastName,
+      _cc: LEAD_CC,
+      _template: 'table',
+      _captcha: 'false',
+      _honey: document.getElementById('gm-honey').value,
+      'Offer': data.offerName,
+      'Offer ends': data.offerEnds,
+      'Name': data.firstName + ' ' + data.lastName,
+      'Email': data.email,
+      'Phone': data.phone,
+      'Preferred contact': data.contactMethod,
+      'Vehicle of interest': data.vehicle,
+      'Purchase timeline': data.timeline,
+      'Trade-in': data.tradeIn,
+      'Buying method': data.financeType,
+      'Currently owns': data.loyaltyVehicle,
+      'Registered since': data.loyaltySince,
+      'First responder role': data.responderRole,
+      'Service or employer': data.responderEmployer,
+      'Accessories wanted': data.accessories,
+      'Comments': data.comments,
+      'Consent to contact': data.consent,
+      'Submitted': new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
+      'Page': window.location.href
+    };
+    Object.keys(body).forEach(function (k) {
+      if (body[k] === undefined || body[k] === null || body[k] === '') { delete body[k]; }
+    });
+    return body;
   }
 
   form.addEventListener('submit', function (event) {
@@ -689,19 +727,23 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    if (!FORM_ENDPOINT) { mailtoFallback(data); done(); return; }
-
-    fetch(FORM_ENDPOINT, {
+    fetch(MAIL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(buildEmail(data))
     }).then(function (res) {
-      if (!res.ok) { throw new Error('HTTP ' + res.status); }
-      done();
+      return res.json().catch(function () { return {}; }).then(function (json) {
+        if (!res.ok || String(json.success) === 'false') {
+          throw new Error(json.message || 'HTTP ' + res.status);
+        }
+        done();
+      });
     }).catch(function () {
       submit.disabled = false;
       submit.textContent = 'Send My Request';
-      status.textContent = 'Sorry — that did not go through. Please call 647-288-5337 or try again.';
+      status.innerHTML = 'Sorry — that did not go through. Please call ' +
+        '<a href="tel:+16472885337">647-288-5337</a> or email ' +
+        '<a href="mailto:' + LEAD_TO + '">' + LEAD_TO + '</a>, and we will pick it up from there.';
     });
   });
 })();

@@ -11,40 +11,75 @@ assets/*.png        the original banner exports, kept so the webp can be regener
 preview/            reference screenshots (desktop, mobile, form)
 ```
 
-## Where the leads go — set this before launch
+## Where the leads go
 
-The form currently has **no backend**. Open `index.html`, find the CONFIG block near the
-bottom, and set an endpoint:
+Every submission is emailed to **both**:
+
+| | |
+|---|---|
+| To | `ejay@goldenmilechrysler.ca` |
+| Cc | `mitch@goldenmilechrysler.ca` |
+
+Delivery runs through [FormSubmit](https://formsubmit.co) — no account, no server, no
+API key. The page POSTs JSON to `formsubmit.co/ajax/<address>` and FormSubmit sends the
+mail. Both addresses are set in the CONFIG block at the bottom of `index.html`:
 
 ```js
-var FORM_ENDPOINT = null;                           // <-- set this
-var LEAD_EMAIL    = 'sales@goldenmilechrysler.ca';  // <-- and confirm this
+var LEAD_TO = 'ejay@goldenmilechrysler.ca';
+var LEAD_CC = 'mitch@goldenmilechrysler.ca';
 ```
 
-`FORM_ENDPOINT` takes any URL that accepts a JSON `POST` — Formspree, a Zapier catch
-hook, a serverless function, or a bridge into the CRM. While it is `null`, submitting
-opens a prefilled email to `LEAD_EMAIL` instead, so the page is never a dead end — but
-that depends on the visitor having a mail client, so don't ship it that way for long.
+### ⚠️ One-time activation — do this before launch
 
-The JSON body looks like:
+**The first submission will not be delivered.** Instead FormSubmit emails Ejay an
+activation link. Until someone clicks it, submissions are accepted by the page (the
+visitor sees the success panel) and silently dropped.
 
-```json
-{
-  "offer": "loyalty",
-  "offerName": "Double Loyalty — up to $3,000 Savings",
-  "offerEnds": "November 2, 2026",
-  "firstName": "...", "lastName": "...", "email": "...", "phone": "...",
-  "contactMethod": "Text message",
-  "vehicle": "...", "timeline": "...", "tradeIn": "No", "financeType": "...",
-  "loyaltyVehicle": "...", "loyaltySince": "...",
-  "comments": "...", "consent": "Yes",
-  "submittedAt": "2026-10-15T...Z", "pageUrl": "..."
-}
+So before this page goes anywhere near real traffic:
+
+1. Open the page and send one test submission.
+2. Have Ejay check his inbox for the FormSubmit activation email and click the link.
+3. Send a second test submission and confirm it lands for **both** Ejay and Mitch.
+
+### ⚠️ The addresses are visible in the page source
+
+`index.html` is public, and so is this repo — both mailboxes are sitting in the markup
+where scrapers can find them. After activation, FormSubmit issues a hashed alias for the
+primary address. Swap it in:
+
+```js
+var LEAD_TO = 'a1b2c3d4e5f6...';   // the alias, not the raw address
 ```
 
-Offer-specific keys only appear when that offer is selected:
-`loyaltyVehicle` / `loyaltySince` (loyalty), `responderRole` / `responderEmployer`
-(first responders), `accessories` (accessory credit).
+`LEAD_CC` can't be aliased, so Mitch's address stays visible either way. If that matters,
+the alternative is a mail route you control (a Cloudflare Worker or Firebase Function
+holding the addresses server-side).
+
+### What the email contains
+
+Rows are plain English, and empty fields are dropped so the mail stays short:
+
+> **Offer** Double Loyalty — up to $3,000 Savings
+> **Offer ends** November 2, 2026
+> **Name** / **Email** / **Phone** / **Preferred contact**
+> **Vehicle of interest** / **Purchase timeline** / **Trade-in** / **Buying method**
+> **Comments** / **Consent to contact** / **Submitted** (Toronto time) / **Page**
+
+Offer-specific rows only appear when that offer was chosen — *Currently owns* and
+*Registered since* for loyalty, *First responder role* and *Service or employer* for
+first responders, *Accessories wanted* for the accessory credit.
+
+The subject line is `Offer request: <offer> - <name>`, so the inbox sorts itself.
+
+A hidden `_honey` honeypot field is included; bots that fill it get silently discarded by
+FormSubmit. If the POST fails, the visitor is shown the dealership phone number and
+Ejay's address rather than losing the lead.
+
+### Swapping to a different provider
+
+Point `MAIL_ENDPOINT` at any URL that accepts a JSON `POST` and treats a non-`200` or
+`{"success":"false"}` as failure. `buildEmail()` shapes the payload — change the keys
+there to match whatever the new service expects.
 
 ## Deep links
 
@@ -97,7 +132,8 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 
 ## Not done yet
 
-- `FORM_ENDPOINT` is unset — see above.
+- **FormSubmit has not been activated** — see above. Until Ejay clicks the link, nothing
+  is delivered.
 - The inventory buttons point at `goldenmilechrysler.ca` model URLs that were assumed,
   not verified. Check each one resolves before launch.
 - The consent checkbox links to `/privacy-policy` — confirm that is the real path.
