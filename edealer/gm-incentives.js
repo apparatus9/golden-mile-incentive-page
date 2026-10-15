@@ -12,10 +12,15 @@
      the "see all offers" links on the claim page, and for the link shown
      to anyone who lands on the claim page without picking an offer.
 
-     The claim page path is NOT set here - the offer cards link to it
-     directly in the offers-page markup, so the buttons still work if this
-     script ever fails to load. If eDealer gives the pages different slugs
-     than planned, update OFFERS_PATH here and the six card hrefs there.
+     CLAIM_PATH is the eDealer path of the claim page. The offer cards also
+     carry it directly in the offers-page markup, so the buttons still work
+     if this script ever fails to load. If eDealer gives the pages different
+     slugs than planned, update both paths here and the six card hrefs there.
+
+     Off eDealer - the GitHub Pages preview or a local file - those root
+     paths do not resolve, so every link to them is rewritten to the sibling
+     .html file. That keeps the pages clickable while we review them without
+     changing what gets imported.
 
      Leads are emailed to LEAD_TO with LEAD_CC copied, through FormSubmit.
      FormSubmit needs a one-time activation click sent to LEAD_TO before
@@ -23,6 +28,7 @@
      alias FormSubmit issues, so the address is not sitting in public HTML.
   ---------------------------------------------------------------- */
   var OFFERS_PATH = '/offers';
+  var CLAIM_PATH = '/offers-claim';
   var LEAD_TO = 'ejay@goldenmilechrysler.ca';
   var LEAD_CC = 'mitch@goldenmilechrysler.ca';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
@@ -36,6 +42,31 @@
     'accessories':      { name: '$1,000 No-Charge Accessories — 2026/2027 Ram', ends: 'Offer ends October 31, 2026' },
     'first-responders': { name: 'First Responder Preferred Pricing', ends: 'Ongoing program' }
   };
+
+  /* ---------- link paths ---------- */
+  /* Inside eDealer the root paths are real pages. In the GitHub Pages
+     preview or a local file they are not, so swap them for the sibling
+     files and leave the markup alone. */
+  var PREVIEW_FILES = {};
+  PREVIEW_FILES[OFFERS_PATH] = 'offers.html';
+  PREVIEW_FILES[CLAIM_PATH] = 'claim.html';
+
+  var isPreview = window.location.protocol === 'file:' ||
+    window.location.hostname.indexOf('github.io') > -1;
+
+  function resolvePath(path) {
+    return isPreview && PREVIEW_FILES[path] ? PREVIEW_FILES[path] : path;
+  }
+
+  /* The offer cards point at CLAIM_PATH with the offer key attached. Keep
+     the query string, move only the path in front of it. */
+  Array.prototype.forEach.call(
+    document.querySelectorAll('a[href^="' + CLAIM_PATH + '"]'),
+    function (a) {
+      var href = a.getAttribute('href');
+      a.setAttribute('href', resolvePath(CLAIM_PATH) + href.slice(CLAIM_PATH.length));
+    }
+  );
 
   /* ---------- offers page: countdown ---------- */
   var countdown = document.getElementById('gmi-countdown');
@@ -69,7 +100,7 @@
      usability gate, not access control - the page is public either way. */
   if (!offer) {
     Array.prototype.forEach.call(document.querySelectorAll('.gmi-offers-link'), function (a) {
-      a.setAttribute('href', OFFERS_PATH);
+      a.setAttribute('href', resolvePath(OFFERS_PATH));
     });
     if (gate) { gate.classList.add('is-on'); }
     return;
@@ -79,7 +110,7 @@
   document.getElementById('gmi-chosen-ends').textContent = offer.ends;
   document.getElementById('gmi-offer-key').value = key;
   Array.prototype.forEach.call(document.querySelectorAll('.gmi-offers-link'), function (a) {
-    a.setAttribute('href', OFFERS_PATH);
+    a.setAttribute('href', resolvePath(OFFERS_PATH));
   });
 
   /* Only the eligibility questions belonging to this offer. */
