@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Mile Incentives — Build Preview</title>
+<meta name="description" content="Review page for the All-Out Clearout incentive build before it goes into eDealer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #f4f4f5;
+    --panel: #ffffff;
+    --ink: #111113;
+    --ink-soft: #5b5b63;
+    --line: #dededf;
+    --red: #cc0000;
+    --green: #1a7f37;
+    --amber: #9a6700;
+    --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.07);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 15px/1.55 Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: Oswald, Impact, sans-serif; font-weight: 700; margin: 0; letter-spacing: .01em; }
+
+  /* ---------- masthead ---------- */
+  .top { background: #0d0d0f; color: #fff; padding: 22px 16px 20px; }
+  .top-in { max-width: 1240px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-block; background: var(--red); color: #fff;
+    font: 600 11px/1 Oswald, sans-serif; letter-spacing: .14em;
+    text-transform: uppercase; padding: 6px 10px; margin-bottom: 12px;
+  }
+  .top h1 { font-size: clamp(26px, 4.2vw, 40px); text-transform: uppercase; line-height: 1.05; }
+  .top p { color: #b4b4bb; margin: 8px 0 0; max-width: 62ch; font-size: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font: 500 12px/1 Roboto, sans-serif; color: #e6e6ea;
+    border: 1px solid #35353b; border-radius: 999px; padding: 7px 11px;
+    display: inline-flex; align-items: center; gap: 7px; background: #17171a;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .dot.ok { background: #2ea043; }
+  .dot.wait { background: #d4a72c; }
+
+  /* ---------- layout ---------- */
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 22px 16px 56px; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
+  @media (max-width: 980px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ---------- controls ---------- */
+  .bar {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    justify-content: space-between; margin-bottom: 14px;
+  }
+  .seg { display: flex; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font: 600 12px/1 Oswald, sans-serif; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-soft); padding: 11px 14px; border-right: 1px solid var(--line);
+    transition: background .12s ease, color .12s ease;
+  }
+  .seg button:last-child { border-right: 0; }
+  .seg button:hover { background: #f0f0f1; color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--red); color: #fff; }
+  .seg button:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+  .seg-label { font: 600 11px/1 Oswald, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-right: 2px; }
+  .bar-group { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+
+  /* ---------- stage ---------- */
+  .stage {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); padding: 18px; overflow: hidden;
+  }
+  .stage-head {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
+    justify-content: space-between; margin-bottom: 14px;
+  }
+  .stage-head h2 { font-size: 17px; text-transform: uppercase; }
+  .stage-url {
+    font: 400 12px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+    color: var(--ink-soft); word-break: break-all;
+  }
+  .frame-hold { display: flex; justify-content: center; }
+  .frame-hold iframe {
+    width: 100%; max-width: 100%; height: 760px; border: 1px solid var(--line);
+    background: #fff; display: block; transition: max-width .2s ease;
+  }
+  .frame-hold.w-tablet iframe { max-width: 820px; }
+  .frame-hold.w-mobile iframe { max-width: 414px; }
+  .hint { color: var(--ink-soft); font-size: 13px; margin: 12px 0 0; }
+
+  /* ---------- notes ---------- */
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); padding: 18px; margin-bottom: 18px;
+  }
+  .card h3 {
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 12px;
+  }
+  .card ul { margin: 0; padding-left: 18px; }
+  .card li { margin-bottom: 9px; }
+  .card li:last-child { margin-bottom: 0; }
+  .card p { margin: 0 0 10px; }
+  .card p:last-child { margin-bottom: 0; }
+  .kv { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 7px 10px; font-size: 14px; }
+  .kv dt { color: var(--ink-soft); }
+  .kv dd { margin: 0; word-break: break-word; }
+  code {
+    font: 400 12.5px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+    background: #f0f0f1; border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px;
+  }
+  .flag { border-left: 3px solid var(--amber); padding-left: 12px; }
+  .flag.good { border-left-color: var(--green); }
+  .linkrow { display: flex; flex-direction: column; gap: 9px; }
+  .linkrow a { color: var(--ink); font-weight: 500; }
+  a { color: var(--red); }
+  .foot { color: var(--ink-soft); font-size: 13px; margin-top: 26px; text-align: center; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <span class="eyebrow">Build Preview — Internal</span>
+    <h1>All-Out Clearout<br>Incentives Build</h1>
+    <p>The two pages below are the live files that get pasted into eDealer. This preview loads them
+       straight from GitHub Pages, so what you see here is exactly what the site will render.</p>
+    <div class="chips">
+      <span class="chip"><span class="dot ok"></span>Claim form live &amp; delivering</span>
+      <span class="chip"><span class="dot ok"></span>Leads → Ejay, cc Mitch</span>
+      <span class="chip"><span class="dot wait"></span>eDealer slugs not created yet</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <main>
+      <div class="bar">
+        <div class="bar-group">
+          <span class="seg-label">View</span>
+          <div class="seg" id="views">
+            <button type="button" data-view="offers" aria-pressed="true">Offers page</button>
+            <button type="button" data-view="claim" aria-pressed="false">Claim form</button>
+            <button type="button" data-view="gate" aria-pressed="false">Form gate</button>
+            <button type="button" data-view="single" aria-pressed="false">One-page version</button>
+          </div>
+        </div>
+        <div class="bar-group">
+          <span class="seg-label">Width</span>
+          <div class="seg" id="widths">
+            <button type="button" data-width="desktop" aria-pressed="true">Desktop</button>
+            <button type="button" data-width="tablet" aria-pressed="false">Tablet</button>
+            <button type="button" data-width="mobile" aria-pressed="false">Mobile</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="stage">
+        <div class="stage-head">
+          <h2 id="stage-title">Offers page</h2>
+          <span class="stage-url" id="stage-url"></span>
+        </div>
+        <div class="frame-hold" id="frame-hold">
+          <iframe id="frame" title="Page preview" src="edealer/offers.html"></iframe>
+        </div>
+        <p class="hint" id="stage-note">
+          Click any <strong>Claim This Offer</strong> button — it loads the claim form inside this frame
+          with that offer already attached.
+        </p>
+      </section>
+    </main>
+
+    <aside>
+      <div class="card">
+        <h3>Where leads go</h3>
+        <dl class="kv">
+          <dt>To</dt><dd>ejay@goldenmilechrysler.ca</dd>
+          <dt>Cc</dt><dd>mitch@goldenmilechrysler.ca</dd>
+          <dt>Subject</dt><dd>Offer request: &lt;offer&gt; – &lt;name&gt;</dd>
+        </dl>
+        <p class="flag good" style="margin-top:12px">
+          Activated and tested — a live test submission was delivered successfully.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Before it goes live</h3>
+        <ul>
+          <li>Create the eDealer pages at <code>/offers</code> and <code>/offers-claim</code>. Different
+              slugs are fine, but they need to be set in the script first or the claim buttons dead-end.</li>
+          <li>Click the inventory buttons once on the real site — those model URLs were assumed, not confirmed.</li>
+          <li>Keep this repo public. Both pages pull their CSS and JS from it.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Optional polish</h3>
+        <ul>
+          <li>Add <code>_replyto</code> so Reply on a lead goes to the customer, not FormSubmit.</li>
+          <li>Swap in FormSubmit's hashed alias to keep Ejay's address out of public page source.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Open directly</h3>
+        <div class="linkrow">
+          <a href="edealer/offers.html">Offers page ↗</a>
+          <a href="edealer/claim.html?offer=wrangler">Claim form, Wrangler ↗</a>
+          <a href="edealer/claim.html">Claim form, no offer ↗</a>
+          <a href="index.html">One-page version ↗</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <p class="foot">Golden Mile Chrysler Dodge Jeep Ram — internal build preview. Offers end November 2, 2026.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var VIEWS = {
+    offers: {
+      src: 'edealer/offers.html',
+      title: 'Offers page',
+      note: 'Click any <strong>Claim This Offer</strong> button — it loads the claim form inside this frame with that offer already attached.'
+    },
+    claim: {
+      src: 'edealer/claim.html?offer=wrangler',
+      title: 'Claim form — offer attached',
+      note: 'This is what a customer sees after clicking Claim This Offer. The banner at the top is filled in from the link, and only the eligibility questions for that offer are shown.'
+    },
+    gate: {
+      src: 'edealer/claim.html',
+      title: 'Claim form — no offer chosen',
+      note: 'Someone landing on the form page directly gets sent back to the offers list rather than a form with nothing attached to it.'
+    },
+    single: {
+      src: 'index.html',
+      title: 'One-page version',
+      note: 'The original single-page build — all six offers and the form on one page. Kept as a fallback if eDealer will only take one page.'
+    }
+  };
+
+  var frame = document.getElementById('frame');
+  var hold = document.getElementById('frame-hold');
+  var title = document.getElementById('stage-title');
+  var note = document.getElementById('stage-note');
+  var urlOut = document.getElementById('stage-url');
+
+  function showUrl(src) {
+    urlOut.textContent = new URL(src, window.location.href).href.replace(/^https?:\/\//, '');
+  }
+
+  function press(group, attr, value) {
+    Array.prototype.forEach.call(group.querySelectorAll('button'), function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute(attr) === value));
+    });
+  }
+
+  document.getElementById('views').addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) { return; }
+    var view = VIEWS[btn.getAttribute('data-view')];
+    if (!view) { return; }
+    press(this, 'data-view', btn.getAttribute('data-view'));
+    frame.src = view.src;
+    title.textContent = view.title;
+    note.innerHTML = view.note;
+    showUrl(view.src);
+  });
+
+  document.getElementById('widths').addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) { return; }
+    var w = btn.getAttribute('data-width');
+    press(this, 'data-width', w);
+    hold.className = 'frame-hold' + (w === 'desktop' ? '' : ' w-' + w);
+  });
+
+  /* Clicking through inside the frame changes what is on screen, so keep the
+     address line honest rather than showing the view we loaded. */
+  frame.addEventListener('load', function () {
+    try { showUrl(frame.contentWindow.location.href); } catch (err) { /* cross-origin, leave as is */ }
+  });
+
+  showUrl(frame.getAttribute('src'));
+}());
+</script>
+
+</body>
+</html>
