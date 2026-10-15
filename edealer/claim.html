@@ -1,0 +1,172 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://apparatus9.github.io/golden-mile-incentive-page/edealer/gm-incentives.css">
+
+<div class="gmi">
+<div class="gmi-wrap">
+<div class="gmi-claim">
+
+<div class="gmi-gate" id="gmi-gate">
+<h2>Choose an offer first</h2>
+<p>This form is for claiming a specific incentive, so we need to know which one you're after. Head back to the offers page and use the <strong>Claim This Offer</strong> button on the one you want &mdash; it'll bring you straight back here with everything filled in.</p>
+<a class="gmi-btn gmi-offers-link" href="/offers">See All Current Offers</a>
+</div>
+
+<div class="gmi-claimwrap" id="gmi-claimwrap">
+
+<h1>Claim Your Offer</h1>
+<p class="gmi-claim-intro">We'll confirm your eligibility, check availability and send you exact numbers &mdash; usually within one business day. No obligation.</p>
+
+<div class="gmi-formcard">
+
+<div class="gmi-success" id="gmi-success" role="status" aria-live="polite">
+<div class="gmi-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"></path></svg></div>
+<h2>Request Received</h2>
+<p id="gmi-success-msg">Thanks &mdash; a Golden Mile product advisor will be in touch shortly to confirm your offer.</p>
+<a class="gmi-btn gmi-btn-ghost" href="tel:+16472885337">Or call 647-288-5337</a>
+</div>
+
+<form id="gmi-form" novalidate>
+<input type="text" name="_honey" class="gmi-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+<input type="hidden" name="offer" id="gmi-offer-key" value="">
+
+<div class="gmi-chosen">
+<div>
+<span class="gmi-chosen-label">Offer selected</span>
+<span class="gmi-chosen-name" id="gmi-chosen-name"></span>
+<p class="gmi-chosen-ends" id="gmi-chosen-ends"></p>
+</div>
+<a class="gmi-offers-link" href="/offers">Not this one? See all offers</a>
+</div>
+
+<div class="gmi-grid">
+
+<div class="gmi-field">
+<label for="gmi-first">First name <span class="gmi-req">*</span></label>
+<input type="text" id="gmi-first" name="firstName" autocomplete="given-name" required>
+</div>
+<div class="gmi-field">
+<label for="gmi-last">Last name <span class="gmi-req">*</span></label>
+<input type="text" id="gmi-last" name="lastName" autocomplete="family-name" required>
+</div>
+<div class="gmi-field">
+<label for="gmi-email">Email <span class="gmi-req">*</span></label>
+<input type="email" id="gmi-email" name="email" autocomplete="email" required>
+</div>
+<div class="gmi-field">
+<label for="gmi-phone">Phone <span class="gmi-req">*</span></label>
+<input type="tel" id="gmi-phone" name="phone" autocomplete="tel" placeholder="416-555-0123" required>
+</div>
+
+<fieldset class="gmi-field gmi-field-full">
+<span class="gmi-legend">Preferred contact method</span>
+<div class="gmi-radios">
+<label><input type="radio" name="contactMethod" value="Phone call" checked> Phone call</label>
+<label><input type="radio" name="contactMethod" value="Text message"> Text message</label>
+<label><input type="radio" name="contactMethod" value="Email"> Email</label>
+</div>
+</fieldset>
+
+<div class="gmi-field">
+<label for="gmi-vehicle">Vehicle of interest</label>
+<input type="text" id="gmi-vehicle" name="vehicle" placeholder="Year, model and trim">
+</div>
+<div class="gmi-field">
+<label for="gmi-timeline">Purchase timeline</label>
+<select id="gmi-timeline" name="timeline">
+<option value="">Select&hellip;</option>
+<option>Before the offer ends</option>
+<option>Within 30 days</option>
+<option>1&ndash;3 months</option>
+<option>Just researching</option>
+</select>
+</div>
+<div class="gmi-field">
+<label for="gmi-trade">Do you have a trade-in?</label>
+<select id="gmi-trade" name="tradeIn">
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+</select>
+</div>
+<div class="gmi-field">
+<label for="gmi-finance">How will you be buying?</label>
+<select id="gmi-finance" name="financeType">
+<option value="">Select&hellip;</option>
+<option>Finance</option>
+<option>Lease</option>
+<option>Cash</option>
+<option>Not sure yet</option>
+</select>
+</div>
+
+<div class="gmi-conditional" data-for="loyalty">
+<p class="gmi-conditional-note"><strong>Double Loyalty eligibility.</strong> You must have a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name on or before October 1, 2026.</p>
+<div class="gmi-field">
+<label for="gmi-loyalty-vehicle">Vehicle currently registered to you</label>
+<input type="text" id="gmi-loyalty-vehicle" name="loyaltyVehicle" placeholder="e.g. 2019 Jeep Grand Cherokee">
+</div>
+<div class="gmi-field">
+<label for="gmi-loyalty-since">Registered in your name since</label>
+<input type="text" id="gmi-loyalty-since" name="loyaltySince" placeholder="Month and year">
+</div>
+</div>
+
+<div class="gmi-conditional" data-for="first-responders">
+<p class="gmi-conditional-note"><strong>First responder eligibility.</strong> Valid proof of active service or employment is required at time of purchase.</p>
+<div class="gmi-field">
+<label for="gmi-responder-role">Your role</label>
+<select id="gmi-responder-role" name="responderRole">
+<option value="">Select&hellip;</option>
+<option>Police</option>
+<option>Firefighter</option>
+<option>Paramedic / EMT</option>
+<option>Nurse</option>
+<option>Physician</option>
+<option>Other healthcare</option>
+<option>Other first responder</option>
+</select>
+</div>
+<div class="gmi-field">
+<label for="gmi-responder-employer">Service or employer</label>
+<input type="text" id="gmi-responder-employer" name="responderEmployer" placeholder="e.g. Toronto Paramedic Services">
+</div>
+</div>
+
+<div class="gmi-conditional" data-for="accessories">
+<p class="gmi-conditional-note"><strong>$1,000 Mopar accessory credit.</strong> Tell us what you'd like and we'll price it out with your Ram.</p>
+<div class="gmi-field gmi-field-full">
+<label for="gmi-accessories">Accessories you're interested in</label>
+<input type="text" id="gmi-accessories" name="accessories" placeholder="Running boards, tonneau cover, all-weather mats, bed liner&hellip;">
+</div>
+</div>
+
+<div class="gmi-field gmi-field-full">
+<label for="gmi-comments">Anything else we should know?</label>
+<textarea id="gmi-comments" name="comments" placeholder="Colour preference, must-have options, budget, questions about the offer&hellip;"></textarea>
+</div>
+
+<label class="gmi-consent">
+<input type="checkbox" id="gmi-consent" name="consent" required>
+<span>I agree to be contacted by Golden Mile Chrysler Dodge Jeep Ram about this offer by phone, text or email, and I accept the <a href="/privacy-policy">privacy policy</a>. I can unsubscribe at any time. <span class="gmi-req">*</span></span>
+</label>
+
+<p class="gmi-status" id="gmi-status" role="alert"></p>
+
+<div class="gmi-actions">
+<button type="submit" class="gmi-btn" id="gmi-submit">Send My Request</button>
+<small>Offers are subject to availability, approved credit and manufacturer program rules. Submitting this form does not reserve a vehicle.</small>
+</div>
+
+</div>
+</form>
+
+</div>
+
+<p class="gmi-legal">All offers shown are subject to change or cancellation without notice and are available on approved credit through participating retailers in Canada. Pricing excludes license, registration, insurance and applicable taxes unless otherwise stated. Manufacturer offers end November 2, 2026 unless otherwise noted; the Golden Mile accessory credit ends October 31, 2026. See dealer for complete details. Jeep, Ram, Mopar and FIAT are registered trademarks of FCA US LLC / Stellantis.</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<script src="https://apparatus9.github.io/golden-mile-incentive-page/edealer/gm-incentives.js"></script>

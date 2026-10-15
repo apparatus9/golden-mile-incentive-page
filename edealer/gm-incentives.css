@@ -1,0 +1,168 @@
+/* Golden Mile incentives - eDealer embed styles.
+   Everything is scoped under .gmi so it cannot leak into eDealer's own CSS,
+   and eDealer's CSS has a harder time leaking in. Served from GitHub Pages;
+   the eDealer pages reference it with <link rel="stylesheet">, because the
+   page editor renders the contents of an inline <style> block as body text. */
+
+.gmi{
+  --gm-red:#ca0000;
+  --gm-red-dk:#9d0000;
+  --gm-dark:#222;
+  --gm-card:#ebebeb;
+  --gm-line:#ddd;
+  --gm-muted:#5d5d5d;
+  --gm-head:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;
+  --gm-body:Arial,Helvetica,sans-serif;
+  --gm-gut:37.5px;
+  font-family:var(--gm-body);
+  color:#000;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.gmi *,.gmi *::before,.gmi *::after{box-sizing:border-box}
+.gmi img{max-width:100%;height:auto;display:block}
+
+/* The editor wraps loose block elements in its own <p> tags and leaves empty
+   ones behind. Same defence the staff page needed. */
+.gmi > p:empty{display:none}
+.gmi > br{display:none}
+
+.gmi-wrap{max-width:1440px;margin:0 auto;padding:0 83px}
+@media (max-width:1100px){.gmi-wrap{padding:0 40px}}
+@media (max-width:640px){.gmi-wrap{padding:0 20px}}
+
+/* ---------- intro ---------- */
+.gmi-intro{padding:8px 0 30px}
+.gmi-kicker{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;
+  letter-spacing:2.4px;text-transform:uppercase;color:#fff;background:var(--gm-red);
+  padding:6px 14px;margin:0 0 16px}
+.gmi h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
+  letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px;color:#000}
+.gmi-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted)}
+.gmi-countdown{margin:22px 0 0;font-family:var(--gm-head);font-size:15px;font-weight:500;
+  letter-spacing:.8px;text-transform:uppercase;color:var(--gm-dark)}
+.gmi-countdown b{color:var(--gm-red);font-size:19px;font-weight:700}
+
+/* ---------- offer cards ---------- */
+.gmi-offer{--accent:var(--gm-red);background:var(--gm-card);margin:0 0 var(--gm-gut);scroll-margin-top:24px}
+.gmi-offer-img{line-height:0;background:var(--gm-dark)}
+.gmi-offer-img img{width:100%;aspect-ratio:1920/599;object-fit:cover}
+.gmi-offer-body{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px 40px;padding:25px 25px 22px}
+.gmi-offer-main{flex:1 1 440px;min-width:0}
+.gmi-eyebrow{display:inline-block;font-family:var(--gm-head);font-size:11.5px;font-weight:600;
+  letter-spacing:1.8px;text-transform:uppercase;color:#fff;background:var(--accent);
+  padding:4px 10px;margin:0 0 10px}
+.gmi-offer h2{font-family:var(--gm-head);font-weight:600;font-size:27px;line-height:1.15;
+  letter-spacing:.2px;text-transform:uppercase;margin:0 0 4px;color:#000}
+.gmi-offer-sub{font-family:var(--gm-head);font-size:19px;font-weight:400;line-height:1.3;
+  color:var(--gm-dark);margin:0 0 14px}
+.gmi-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
+.gmi-facts li{font-size:12.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
+  background:#fff;border-left:3px solid var(--accent);padding:6px 11px;color:var(--gm-dark)}
+.gmi-offer details{border-top:1px solid #dcdcdc;margin-top:4px}
+.gmi-offer summary{cursor:pointer;list-style:none;padding:11px 0 0;font-size:13px;font-weight:bold;
+  letter-spacing:.4px;text-transform:uppercase;color:var(--gm-muted)}
+.gmi-offer summary::-webkit-details-marker{display:none}
+.gmi-offer summary::after{content:" +";color:var(--accent);font-size:15px}
+.gmi-offer details[open] summary::after{content:" \2212"}
+.gmi-offer summary:hover{color:var(--gm-red)}
+.gmi-fine{font-size:11.5px;line-height:1.6;color:#6b6b6b;margin:9px 0 12px}
+.gmi-offer-cta{flex:0 0 250px;display:flex;flex-direction:column;gap:9px}
+@media (max-width:760px){.gmi-offer-cta{flex:1 1 100%}}
+.gmi-expiry{font-size:12px;text-align:center;color:var(--gm-muted);letter-spacing:.3px;margin:2px 0 0}
+
+/* ---------- buttons ---------- */
+.gmi-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  font-family:var(--gm-head);font-size:16px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red);
+  background:var(--gm-red);color:#fff;padding:14px 18px;
+  transition:background .15s ease,border-color .15s ease,color .15s ease}
+.gmi-btn:hover,.gmi-btn:focus{background:var(--gm-red-dk);border-color:var(--gm-red-dk);color:#fff;text-decoration:none}
+.gmi-btn-ghost{background:transparent;color:var(--gm-dark);border-color:#bdbdbd;font-size:14px;padding:11px 18px}
+.gmi-btn-ghost:hover,.gmi-btn-ghost:focus{background:transparent;border-color:var(--gm-dark);color:var(--gm-dark)}
+
+/* ---------- claim page ---------- */
+.gmi-claim{padding:8px 0 40px}
+.gmi-claim h1{margin-bottom:10px}
+.gmi-claim-intro{color:var(--gm-muted);font-size:16px;margin:0 0 28px;max-width:760px}
+.gmi-formcard{background:var(--gm-card);padding:34px 36px 30px;max-width:980px}
+@media (max-width:640px){.gmi-formcard{padding:24px 20px}}
+
+/* the offer carried over from the offers page */
+.gmi-chosen{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;
+  border-left:4px solid var(--gm-red);background:#fff;padding:14px 18px;margin:0 0 26px}
+.gmi-chosen-label{display:block;font-size:11.5px;font-weight:bold;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--gm-muted)}
+.gmi-chosen-name{font-family:var(--gm-head);font-size:21px;font-weight:600;text-transform:uppercase;
+  line-height:1.2;color:#000}
+.gmi-chosen-ends{font-size:12.5px;color:var(--gm-muted);margin:2px 0 0}
+.gmi-chosen a{font-size:12.5px;color:var(--gm-dark);white-space:nowrap}
+
+/* the "you need to pick an offer first" state */
+.gmi-gate{display:none;background:var(--gm-card);border-left:4px solid var(--gm-red);
+  padding:40px 36px;max-width:780px}
+.gmi-gate.is-on{display:block}
+.gmi-gate h2{font-family:var(--gm-head);font-size:27px;font-weight:600;text-transform:uppercase;
+  margin:0 0 10px;color:#000}
+.gmi-gate p{color:var(--gm-muted);font-size:16px;margin:0 0 22px;max-width:560px}
+.gmi-gate .gmi-btn{width:auto;min-width:260px}
+.gmi-claimwrap{display:none}
+.gmi-claimwrap.is-on{display:block}
+
+/* ---------- form ---------- */
+.gmi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px}
+@media (max-width:700px){.gmi-grid{grid-template-columns:1fr}}
+.gmi-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.gmi-field-full{grid-column:1/-1}
+.gmi-field label,.gmi-legend{font-size:12px;font-weight:bold;letter-spacing:1px;
+  text-transform:uppercase;color:var(--gm-dark)}
+.gmi-req{color:var(--gm-red)}
+.gmi-field input[type=text],.gmi-field input[type=email],.gmi-field input[type=tel],
+.gmi-field select,.gmi-field textarea{
+  font-family:var(--gm-body);font-size:15px;color:#000;background:#fff;
+  border:1px solid #c4c4c4;border-radius:0;padding:11px 12px;width:100%;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.gmi-field textarea{min-height:96px;resize:vertical}
+.gmi-field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23222' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;background-size:12px 8px;padding-right:36px}
+.gmi-field :is(input,select,textarea):focus{outline:none;border-color:var(--gm-red);
+  box-shadow:0 0 0 3px rgba(202,0,0,.14)}
+.gmi-field :is(input,select,textarea):user-invalid{border-color:var(--gm-red);background:#fff8f8}
+fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
+.gmi-radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.gmi-radios label{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:normal;
+  letter-spacing:0;text-transform:none;border:1px solid #c4c4c4;background:#fff;padding:9px 14px;
+  cursor:pointer;transition:all .15s ease}
+.gmi-radios input{accent-color:var(--gm-red);margin:0}
+.gmi-radios label:has(input:checked){border-color:var(--gm-red);background:#fdf3f3}
+.gmi-conditional{grid-column:1/-1;display:none;gap:18px 24px;
+  grid-template-columns:repeat(2,minmax(0,1fr));border-left:4px solid var(--gm-red);
+  background:#fff;padding:18px 20px}
+@media (max-width:700px){.gmi-conditional{grid-template-columns:1fr}}
+.gmi-conditional.is-on{display:grid}
+.gmi-conditional-note{grid-column:1/-1;margin:0;font-size:12.5px;color:var(--gm-muted)}
+.gmi-consent{grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;margin-top:4px}
+.gmi-consent input{margin-top:3px;accent-color:var(--gm-red);width:17px;height:17px;flex:0 0 17px}
+.gmi-consent span{font-size:12.5px;line-height:1.6;color:#4a4a4a}
+.gmi-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px;
+  border-top:1px solid #d2d2d2;padding-top:22px;margin-top:6px}
+.gmi-actions .gmi-btn{width:auto;min-width:240px}
+.gmi-actions small{font-size:12px;color:var(--gm-muted);max-width:360px}
+.gmi-status{grid-column:1/-1;font-size:14px;font-weight:bold;color:var(--gm-red);margin:0}
+.gmi-status a{color:var(--gm-red)}
+.gmi-honey{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* ---------- success ---------- */
+.gmi-success{display:none;text-align:center;padding:26px 10px}
+.gmi-success.is-on{display:block}
+.gmi-success h2{font-family:var(--gm-head);font-size:30px;font-weight:600;text-transform:uppercase;
+  margin:0 0 10px;color:#000}
+.gmi-success p{font-size:16px;color:var(--gm-muted);margin:0 auto 20px;max-width:560px}
+.gmi-check{width:60px;height:60px;border-radius:50%;background:var(--gm-red);margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center}
+.gmi-check svg{width:30px;height:30px}
+.gmi-success .gmi-btn{display:inline-flex;width:auto;min-width:220px}
+
+.gmi-legal{border-top:1px solid var(--gm-line);margin-top:34px;padding-top:18px;
+  font-size:11.5px;line-height:1.65;color:#777}
+.gmi-hidden{display:none !important}
