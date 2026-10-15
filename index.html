@@ -31,45 +31,20 @@ a{color:inherit}
 @media (max-width:1100px){.gm-wrap{padding:0 40px}}
 @media (max-width:640px){.gm-wrap{padding:0 20px}}
 
-/* ---------- event bar ---------- */
-.gm-eventbar{background:var(--gm-dark);color:#fff}
-.gm-eventbar .gm-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-top:11px;padding-bottom:11px}
-.gm-eventbar strong{font-family:var(--gm-head);font-weight:600;letter-spacing:.6px;text-transform:uppercase;font-size:15px}
-.gm-eventbar .gm-rule{color:var(--gm-red);padding:0 10px}
-.gm-eventbar span{font-size:13.5px;color:#d8d8d8}
-.gm-eventbar a{color:#fff;text-decoration:none;font-weight:bold;font-size:14px;white-space:nowrap}
-.gm-eventbar a:hover{text-decoration:underline}
-@media (max-width:640px){
-  .gm-eventbar .gm-wrap{flex-direction:column;align-items:flex-start;gap:3px}
-  .gm-eventbar .gm-rule{display:none}
-  .gm-eventbar strong{display:block;font-size:14px}
-  .gm-eventbar span{font-size:12.5px}
-}
-
 /* ---------- hero ---------- */
-.gm-hero{background:#fff;border-bottom:1px solid var(--gm-line)}
-.gm-hero .gm-wrap{padding-top:44px;padding-bottom:36px}
+.gm-hero{background:#fff}
+.gm-hero .gm-wrap{padding-top:18px;padding-bottom:30px}
 .gm-kicker{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;letter-spacing:2.4px;
   text-transform:uppercase;color:#fff;background:var(--gm-red);padding:6px 14px;margin:0 0 16px}
-h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,5.2vw,58px);line-height:1.04;
+h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
   letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px}
 .gm-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted)}
-.gm-jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;padding:0;list-style:none}
-.gm-jump a{display:inline-block;font-family:var(--gm-head);font-size:13.5px;font-weight:500;letter-spacing:.8px;
-  text-transform:uppercase;text-decoration:none;color:var(--gm-dark);border:1px solid #c9c9c9;
-  padding:9px 16px;transition:all .15s ease}
-.gm-jump a:hover{border-color:var(--gm-red);color:var(--gm-red)}
-.gm-countdown{margin-top:26px;font-family:var(--gm-head);font-size:15px;font-weight:500;
+.gm-countdown{margin-top:22px;font-family:var(--gm-head);font-size:15px;font-weight:500;
   letter-spacing:.8px;text-transform:uppercase;color:var(--gm-dark)}
 .gm-countdown b{color:var(--gm-red);font-size:19px;font-weight:700}
 
 /* ---------- offers ---------- */
-.gm-offers{padding:54px 0 10px}
-.gm-sectionhead{margin:0 0 30px}
-.gm-sectionhead h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(26px,3vw,36px);line-height:1.1;
-  text-transform:uppercase;letter-spacing:.4px;margin:0 0 8px}
-.gm-sectionhead p{margin:0;color:var(--gm-muted);font-size:16px}
-
+.gm-offers{padding:0 0 10px}
 .gm-offer{--accent:var(--gm-red);background:var(--gm-card);margin-bottom:var(--gm-gut);scroll-margin-top:24px}
 .gm-offer-img{line-height:0;background:var(--gm-dark)}
 .gm-offer-img img{width:100%;aspect-ratio:1920/599;object-fit:cover}
@@ -77,7 +52,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,5.2vw,58px);l
 .gm-offer-main{flex:1 1 440px;min-width:0}
 .gm-eyebrow{display:inline-block;font-family:var(--gm-head);font-size:11.5px;font-weight:600;letter-spacing:1.8px;
   text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 10px;margin:0 0 10px}
-.gm-offer h3{font-family:var(--gm-head);font-weight:600;font-size:27px;line-height:1.15;letter-spacing:.2px;
+.gm-offer h2{font-family:var(--gm-head);font-weight:600;font-size:27px;line-height:1.15;letter-spacing:.2px;
   text-transform:uppercase;margin:0 0 4px}
 .gm-offer-sub{font-family:var(--gm-head);font-size:19px;font-weight:400;line-height:1.3;color:var(--gm-dark);margin:0 0 14px}
 .gm-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
@@ -103,15 +78,15 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,5.2vw,58px);l
 .gm-expiry{font-size:12px;text-align:center;color:var(--gm-muted);letter-spacing:.3px;margin:2px 0 0}
 
 /* ---------- form ---------- */
-.gm-claim{background:var(--gm-dark);color:#fff;padding:60px 0}
-.gm-claim h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(28px,3.4vw,40px);line-height:1.08;
+.gm-claim{background:#fff;color:var(--gm-ink);padding:14px 0 40px}
+.gm-claim h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
   text-transform:uppercase;letter-spacing:.4px;margin:0 0 10px}
-.gm-claim-intro{color:#c7c7c7;font-size:16px;margin:0 0 30px;max-width:760px}
-.gm-formcard{background:#fff;color:var(--gm-ink);padding:34px 36px 30px;max-width:980px}
-@media (max-width:640px){.gm-formcard{padding:24px 20px}.gm-claim{padding:44px 0}}
+.gm-claim-intro{color:var(--gm-muted);font-size:16px;margin:0 0 30px;max-width:760px}
+.gm-formcard{background:var(--gm-card);color:var(--gm-ink);padding:34px 36px 30px;max-width:980px}
+@media (max-width:640px){.gm-formcard{padding:24px 20px}.gm-claim{padding:10px 0 30px}}
 .gm-selected{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
-  border-left:4px solid var(--gm-red);background:#f6f6f6;padding:12px 16px;margin:0 0 26px}
-.gm-selected-label{font-size:11.5px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase;color:var(--gm-muted)}
+  border-left:4px solid var(--gm-red);background:#fff;padding:12px 16px;margin:0 0 26px}
+.gm-selected-label{display:block;width:100%;font-size:11.5px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase;color:var(--gm-muted)}
 .gm-selected-name{font-family:var(--gm-head);font-size:20px;font-weight:600;text-transform:uppercase;line-height:1.2}
 .gm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px}
 @media (max-width:700px){.gm-grid{grid-template-columns:1fr}}
@@ -131,11 +106,11 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,5.2vw,58px);l
 fieldset.gm-field{border:0;margin:0;padding:0}
 .gm-radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .gm-radios label{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:normal;
-  letter-spacing:0;text-transform:none;border:1px solid #c4c4c4;padding:9px 14px;cursor:pointer;transition:all .15s ease}
+  letter-spacing:0;text-transform:none;border:1px solid #c4c4c4;background:#fff;padding:9px 14px;cursor:pointer;transition:all .15s ease}
 .gm-radios input{accent-color:var(--gm-red);margin:0}
 .gm-radios label:has(input:checked){border-color:var(--gm-red);background:#fdf3f3}
 .gm-conditional{grid-column:1/-1;display:none;gap:18px 24px;grid-template-columns:repeat(2,minmax(0,1fr));
-  border-left:4px solid var(--gm-red);background:#f8f8f8;padding:18px 20px}
+  border-left:4px solid var(--gm-red);background:#fff;padding:18px 20px}
 @media (max-width:700px){.gm-conditional{grid-template-columns:1fr}}
 .gm-conditional.is-on{display:grid}
 .gm-conditional-note{grid-column:1/-1;margin:0;font-size:12.5px;color:var(--gm-muted)}
@@ -143,7 +118,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
 .gm-consent input{margin-top:3px;accent-color:var(--gm-red);width:17px;height:17px;flex:0 0 17px}
 .gm-consent span{font-size:12.5px;line-height:1.6;color:#4a4a4a}
 .gm-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px;
-  border-top:1px solid var(--gm-line);padding-top:22px;margin-top:6px}
+  border-top:1px solid #d2d2d2;padding-top:22px;margin-top:6px}
 .gm-actions .gm-btn{width:auto;min-width:240px}
 .gm-actions small{font-size:12px;color:var(--gm-muted);max-width:360px}
 .gm-formstatus{grid-column:1/-1;font-size:14px;font-weight:bold;color:var(--gm-red);margin:0}
@@ -171,28 +146,11 @@ fieldset.gm-field{border:0;margin:0;padding:0}
 </head>
 <body>
 
-<div class="gm-eventbar">
-  <div class="gm-wrap">
-    <div>
-      <strong>All-Out Clearout Event</strong><span class="gm-rule">|</span><span>Offers end November&nbsp;2,&nbsp;2026</span>
-    </div>
-    <a href="tel:+16472885337">Call 647-288-5337</a>
-  </div>
-</div>
-
 <header class="gm-hero">
   <div class="gm-wrap">
-    <p class="gm-kicker">Golden Mile Chrysler Dodge Jeep Ram</p>
-    <h1>Current Offers<br>&amp; Incentives</h1>
-    <p class="gm-lede">Factory rates, loyalty savings and Golden Mile exclusives on 2026 and 2027 models &mdash; all in one place. Pick the offer that fits, send us the form, and one of our product advisors will confirm your eligibility and lock it in before it ends.</p>
-    <ul class="gm-jump">
-      <li><a href="#offer-wrangler">Wrangler 0%</a></li>
-      <li><a href="#offer-ram">Ram 1500 0%</a></li>
-      <li><a href="#offer-cherokee">Cherokee 1.99%</a></li>
-      <li><a href="#offer-loyalty">$3,000 Loyalty</a></li>
-      <li><a href="#offer-accessories">$1,000 Accessories</a></li>
-      <li><a href="#offer-first-responders">First Responders</a></li>
-    </ul>
+    <p class="gm-kicker">All-Out Clearout Event</p>
+    <h1>Current Offers &amp; Incentives</h1>
+    <p class="gm-lede">Factory rates, loyalty savings and Golden Mile exclusives on 2026 and 2027 models &mdash; all in one place. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in before it ends.</p>
     <p class="gm-countdown" id="gm-countdown"></p>
   </div>
 </header>
@@ -200,11 +158,6 @@ fieldset.gm-field{border:0;margin:0;padding:0}
 <main>
 <section class="gm-offers">
   <div class="gm-wrap">
-    <div class="gm-sectionhead">
-      <h2>This Month's Offers</h2>
-      <p>Six live incentives. Every one can be claimed from this page.</p>
-    </div>
-
     <article class="gm-offer" id="offer-wrangler" style="--accent:#6fae1e">
       <div class="gm-offer-img">
         <img src="assets/offer-wrangler.webp" width="1920" height="599" alt="All-Out Clearout Event: finance the 2026 Jeep Wrangler 4-Door Rubicon from 0% for up to 84 months. Offer ends November 2, 2026.">
@@ -212,7 +165,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       <div class="gm-offer-body">
         <div class="gm-offer-main">
           <p class="gm-eyebrow">Finance Offer</p>
-          <h3>0% Financing for up to 84 Months</h3>
+          <h2>0% Financing for up to 84 Months</h2>
           <p class="gm-offer-sub">2026 Jeep Wrangler 4-Door Rubicon</p>
           <ul class="gm-facts">
             <li>0% APR</li>
@@ -240,7 +193,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       <div class="gm-offer-body">
         <div class="gm-offer-main">
           <p class="gm-eyebrow">Finance Offer</p>
-          <h3>0% Financing for up to 84 Months</h3>
+          <h2>0% Financing for up to 84 Months</h2>
           <p class="gm-offer-sub">2026 Ram 1500 Big Horn Crew Cab 4x4</p>
           <ul class="gm-facts">
             <li>0% APR</li>
@@ -268,7 +221,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       <div class="gm-offer-body">
         <div class="gm-offer-main">
           <p class="gm-eyebrow">Lease Offer</p>
-          <h3>Lease from 1.99% for up to 24 Months</h3>
+          <h2>Lease from 1.99% for up to 24 Months</h2>
           <p class="gm-offer-sub">Most 2026 Jeep Cherokee models</p>
           <ul class="gm-facts">
             <li>1.99% lease rate</li>
@@ -296,7 +249,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       <div class="gm-offer-body">
         <div class="gm-offer-main">
           <p class="gm-eyebrow">Loyalty Bonus</p>
-          <h3>Double Loyalty &mdash; up to $3,000 Savings</h3>
+          <h2>Double Loyalty &mdash; up to $3,000 Savings</h2>
           <p class="gm-offer-sub">2026 Jeep Wrangler &amp; Grand Cherokee</p>
           <ul class="gm-facts">
             <li>$1,500 doubled to $3,000</li>
@@ -323,7 +276,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       <div class="gm-offer-body">
         <div class="gm-offer-main">
           <p class="gm-eyebrow">Golden Mile Exclusive</p>
-          <h3>$1,000 No-Charge Accessories</h3>
+          <h2>$1,000 No-Charge Accessories</h2>
           <p class="gm-offer-sub">2026 &amp; 2027 Ram models</p>
           <ul class="gm-facts">
             <li>$1,000 value</li>
@@ -351,7 +304,7 @@ fieldset.gm-field{border:0;margin:0;padding:0}
       <div class="gm-offer-body">
         <div class="gm-offer-main">
           <p class="gm-eyebrow">Preferred Pricing</p>
-          <h3>First Responder Pricing</h3>
+          <h2>First Responder Pricing</h2>
           <p class="gm-offer-sub">Police, fire, paramedic, nurses &amp; healthcare &mdash; on select models</p>
           <ul class="gm-facts">
             <li>Preferred pricing</li>
