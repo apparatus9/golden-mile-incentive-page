@@ -25,6 +25,18 @@ Leads are emailed through FormSubmit. There is no server-side handling and
 nothing is stored in the database, so the plugin adds no tables, no options
 and no admin screens.
 
+== No-install alternative ==
+
+If you cannot install a plugin, `wordpress/paste/` in the project repo holds
+the same two pages as self-contained blocks you paste into a Custom HTML
+block. Same markup, same stylesheet, same script, all inlined. You still
+need an Administrator login, because WordPress strips style and script tags
+from that block for anyone without `unfiltered_html`.
+
+The plugin is the better of the two where you can use it: it holds the
+offers as data rather than markup, so the cards, the form's offer list and
+the lead email cannot drift apart.
+
 == Installation ==
 
 1. Copy the `golden-mile-incentives` folder into `wp-content/plugins/`, or

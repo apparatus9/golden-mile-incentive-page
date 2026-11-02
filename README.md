@@ -15,11 +15,12 @@ edealer/claim.html      custom pages. See "Importing into eDealer" below.
 edealer/gm-incentives.css   served from GitHub Pages, referenced by both
 edealer/gm-incentives.js    served from GitHub Pages, referenced by both
 
-wordpress/golden-mile-incentives/   WORDPRESS — a plugin giving two
-                        shortcodes, [gm_offers] and [gm_claim]. Self
-                        contained: it carries its own copy of the CSS, the
-                        script and the creatives. See "WordPress" below.
-wordpress/sync-from-edealer.js      keeps that copy in step with edealer/
+wordpress/paste/offers-block.html   WORDPRESS, no install — paste each into
+wordpress/paste/claim-block.html    a Custom HTML block. CSS and JS inlined.
+wordpress/golden-mile-incentives/   WORDPRESS, as a plugin — two shortcodes,
+                        [gm_offers] and [gm_claim], offers held as data.
+wordpress/build-paste.js            regenerates the two paste blocks
+wordpress/sync-from-edealer.js      keeps the plugin's assets in step
 
 assets/*.webp       the five creatives, optimized — these are what the pages load
 assets/*.png/.jpg   the original exports, kept so the webp can be regenerated
@@ -105,15 +106,67 @@ problem that forced the staff page onto Netlify does not apply here.
 
 ## WordPress
 
-`wordpress/golden-mile-incentives/` is a plugin. It gives two shortcodes and
-nothing else: no admin screens, no database tables, no options rows.
+Two ways in. Pick on access, not on taste: if you can install a plugin, the
+plugin is better; if all you have is an editor login, paste the blocks.
+
+| | Paste the blocks | Install the plugin |
+|---|---|---|
+| Needs | an Administrator login | FTP, or Plugins → Add New |
+| Setup | paste, edit two lines, publish | upload, activate, one filter |
+| Offers live in | the pasted markup | `offers.php`, as data |
+| Updating offers | re-paste both pages | edit one array |
+| Images | GitHub Pages, or your Media Library | bundled with the plugin |
+| Survives a theme change | yes | yes |
+
+### Option A — paste the blocks
+
+`wordpress/paste/` holds two files. Each is one self-contained block: the
+stylesheet and the script are inlined, so there is nothing to upload.
+
+1. Edit the offers page, add a **Custom HTML** block, paste
+   `offers-block.html` into it.
+2. Do the same on the claim page with `claim-block.html`.
+3. In each, near the bottom of the script, set the two permalinks:
+
+   ```js
+   var OFFERS_URL = '/offers/';        /* the page holding the offer cards */
+   var CLAIM_URL  = '/offers-claim/';  /* the page holding the claim form  */
+   ```
+
+   Those two lines are the only thing that must change. Every link on the
+   page is rewritten from them.
+4. Publish, and set the claim page to **noindex** in your SEO plugin.
+
+**You must be an Administrator.** WordPress strips style and script tags out
+of a Custom HTML block for anyone without the `unfiltered_html` capability,
+and on multisite only Super Admins have it. An unstyled page means exactly
+that — use the plugin instead.
+
+The creatives are served from GitHub Pages. To serve them from your own
+Media Library, upload the five `.webp` files and replace every
+`https://apparatus9.github.io/golden-mile-incentive-page/assets` with the
+Media Library URL — one find-and-replace, they all share the prefix.
+
+Regenerate the blocks after any change to the eDealer build:
+
+```bash
+node wordpress/build-paste.js
+```
+
+The blocks are generated. Never edit them directly; edit `edealer/` and
+re-run that.
+
+### Option B — install the plugin
+
+`wordpress/golden-mile-incentives/` gives two shortcodes and nothing else:
+no admin screens, no database tables, no options rows.
 
 | Shortcode | Put it on |
 |---|---|
 | `[gm_offers]` | the offers page |
 | `[gm_claim]` | the claim page |
 
-### Installing
+#### Installing
 
 Zip the `golden-mile-incentives` folder and upload it under **Plugins → Add
 New → Upload Plugin**, or drop the folder straight into `wp-content/plugins/`.
@@ -133,12 +186,10 @@ add_filter( 'gmi_settings', function ( $s ) {
 `readme.txt` inside the plugin lists every setting. The claim page is set to
 `noindex` automatically — still keep it out of the menu.
 
-### Why a plugin and not a pasted page
+#### Why the plugin is the better of the two
 
-The eDealer build exists because that editor mangles anything but plain
-markup. WordPress has no such problem, so you *could* paste
-`edealer/offers.html` into a Custom HTML block and it would work. The plugin
-is better for three reasons, and they are the reasons to prefer it:
+Both routes render the same page. The plugin is worth the install for three
+reasons:
 
 - **The offers are data, not markup.** `offers.php` is one array; the cards,
   the claim form's offer list and the lead email all read it, so they cannot
@@ -151,7 +202,7 @@ is better for three reasons, and they are the reasons to prefer it:
   on pages that use a shortcode, and a theme change does not take the offers
   page with it.
 
-### Keeping the plugin in step with eDealer
+#### Keeping the plugin in step with eDealer
 
 The stylesheet, the script and the creatives are shared. `sync-from-edealer.js`
 copies them across, rewriting the script's config block — eDealer hardcodes
@@ -183,6 +234,16 @@ was written on. Before it goes near the live site, activate it on a staging
 copy and check: both pages render, the Claim buttons carry `?offer=` across,
 the form's eligibility questions appear for Wrangler and Grand Cherokee, and
 one test lead arrives.
+
+The **paste blocks** need no PHP, so those were tested properly: both were
+loaded inside a deliberately hostile theme — content-box sizing, pink
+underlined links, rounded shadowed images, bulleted lists, a serif heading
+face, dashed borders on `details`, and the stray `<p>` and `<br>` that
+`wpautop` leaves behind — and checked both ways: nothing of the theme reached
+the block, and nothing of the block reached the theme's own copy. Two leaks
+turned up that way and are fixed: the theme's image shadow, and its link
+colour winning on the buttons, which needed a doubled `.gmi.gmi` class to
+outrank `.entry-content a` without `!important`.
 
 ## Keeping the builds in sync
 
@@ -316,7 +377,9 @@ of sync with the cards. Standalone:
 3. the `OFFERS` object in `claim.html` (the name and end date shown back to the customer),
 4. the `data-for` list on any eligibility block the offer should reveal.
 
-WordPress is one place instead of four — `offers.php`, which every part reads:
+WordPress, as a plugin, is one place instead of four — `offers.php`, which
+every part reads. (Pasted blocks are markup like the other builds, and are
+regenerated with `node wordpress/build-paste.js` rather than edited.)
 
 ```php
 array(
@@ -410,6 +473,10 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 - **The loyalty ownership cutoff is unstated.** The previous copy required a vehicle
   registered on or before October 1, 2026. The new creatives only say "for eligible
   owners", so the cutoff was dropped from the copy and the form note. Put the real one back.
+- **The paste blocks point at GitHub Pages for images,** which only resolves
+  once this branch reaches `main`. Until then the creatives 404. Either push
+  to `main` or swap in Media Library URLs — one find-and-replace, see
+  "WordPress" above.
 - **The WordPress plugin has not been run inside WordPress.** There is no PHP on
   the machine it was written on, so it was verified by parsing rather than by
   executing. Activate it on staging first — see "What was not tested" above.
