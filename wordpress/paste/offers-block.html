@@ -126,6 +126,36 @@
   .gmi-motion .gmi-rise,.gmi-motion .gmi-rise.is-in{opacity:1;transform:none;transition:none}
   .gmi-btn:active{transform:none}
 }
+/* ---------- host-page defences ----------
+   These matter wherever the fragment is pasted into someone else's page:
+   WordPress wraps loose markup in its own <p> tags, and themes style every
+   link, image and list in the content area. Scoped to .gmi, so none of it
+   reaches the host page.
+
+   The doubled .gmi.gmi is deliberate: a theme rule like '.entry-content a'
+   has two classes and outranks a single .gmi, which turns every button's
+   text the theme's link colour - red on red on the primary button, i.e.
+   invisible. Doubling the class wins that without !important. */
+.gmi p:empty{display:none}
+.gmi br:only-child{display:none}
+.gmi ul,.gmi ol{list-style:none;margin:0;padding:0}
+.gmi li{margin:0;padding:0}
+.gmi h1,.gmi h2,.gmi h3{padding:0}
+.gmi img{max-width:100%;height:auto;display:block;border-radius:0;box-shadow:none;border:0}
+.gmi a,.gmi button{box-shadow:none}
+.gmi details{border:0;padding:0;background:none}
+.gmi details>summary{display:inline-block;background:none}
+.gmi details>summary::marker,.gmi details>summary::-webkit-details-marker{display:none;content:""}
+.gmi input,.gmi select,.gmi textarea,.gmi button{border-radius:0;box-shadow:none}
+.gmi.gmi a:not(.gmi-btn){color:inherit}
+.gmi.gmi .gmi-btn{color:#fff;text-decoration:none}
+.gmi.gmi .gmi-btn-ghost{color:#000}
+.gmi.gmi .gmi-btn:hover{color:#fff}
+.gmi.gmi .gmi-btn-ghost:hover{color:#000}
+.gmi.gmi .gmi-status,.gmi.gmi .gmi-status a,.gmi.gmi .gmi-req{color:var(--gm-red)}
+.gmi.gmi .gmi-count-n{color:var(--gm-red)}
+.gmi.gmi .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
+
 /* ---------- claim page ---------- */
 .gmi-claim{padding:8px 0 40px}
 .gmi-claim h1{margin-bottom:10px}
@@ -211,35 +241,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi-legal{margin:56px 0 0;font-size:15px;line-height:1.7;color:#4a4a4a;max-width:86ch}
 .gmi-hidden{display:none !important}
 
-/* ---------- WordPress ----------
-   The editor wraps loose markup in its own <p> tags, themes put margins on
-   everything, and some themes underline every link in content. Scoped to
-   .gmi so none of this reaches the rest of the site. */
-.gmi p:empty{display:none}
-.gmi br:only-child{display:none}
-.gmi *{box-sizing:border-box}
-.gmi ul,.gmi ol{list-style:none;margin:0;padding:0}
-.gmi li{margin:0;padding:0}
-.gmi a,.gmi button{box-shadow:none}
-.gmi .gmi-btn{text-decoration:none}
-.gmi img{max-width:100%;height:auto;display:block;border-radius:0;box-shadow:none;border:0}
-.gmi h1,.gmi h2,.gmi h3{padding:0}
-.gmi details{border:0;padding:0;background:none}
-.gmi details>summary{display:inline-block;background:none}
-.gmi details>summary::marker,.gmi details>summary::-webkit-details-marker{display:none;content:""}
-.gmi input,.gmi select,.gmi textarea,.gmi button{border-radius:0;box-shadow:none}
-
-/* Themes colour every link in the content area, and '.entry-content a'
-   outranks a single '.gmi' class. The doubled class wins that without
-   resorting to !important. */
-.gmi.gmi a:not(.gmi-btn){color:inherit}
-.gmi.gmi .gmi-btn{color:#fff;text-decoration:none}
-.gmi.gmi .gmi-btn-ghost{color:#000}
-.gmi.gmi .gmi-btn:hover{color:#fff}
-.gmi.gmi .gmi-btn-ghost:hover{color:#000}
-.gmi.gmi .gmi-status,.gmi.gmi .gmi-status a,.gmi.gmi .gmi-req{color:var(--gm-red)}
-.gmi.gmi .gmi-count-n{color:var(--gm-red)}
-.gmi .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)}
+/* host-page defences live in the shared stylesheet above */
 </style>
 
 <div class="gmi">

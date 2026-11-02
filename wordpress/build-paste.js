@@ -160,35 +160,7 @@ function build(fragmentName, outName, label) {
 <style>
 ${css.trim()}
 
-/* ---------- WordPress ----------
-   The editor wraps loose markup in its own <p> tags, themes put margins on
-   everything, and some themes underline every link in content. Scoped to
-   .gmi so none of this reaches the rest of the site. */
-.gmi p:empty{display:none}
-.gmi br:only-child{display:none}
-.gmi *{box-sizing:border-box}
-.gmi ul,.gmi ol{list-style:none;margin:0;padding:0}
-.gmi li{margin:0;padding:0}
-.gmi a,.gmi button{box-shadow:none}
-.gmi .gmi-btn{text-decoration:none}
-.gmi img{max-width:100%;height:auto;display:block;border-radius:0;box-shadow:none;border:0}
-.gmi h1,.gmi h2,.gmi h3{padding:0}
-.gmi details{border:0;padding:0;background:none}
-.gmi details>summary{display:inline-block;background:none}
-.gmi details>summary::marker,.gmi details>summary::-webkit-details-marker{display:none;content:""}
-.gmi input,.gmi select,.gmi textarea,.gmi button{border-radius:0;box-shadow:none}
-
-/* Themes colour every link in the content area, and '.entry-content a'
-   outranks a single '.gmi' class. The doubled class wins that without
-   resorting to !important. */
-.gmi.gmi a:not(.gmi-btn){color:inherit}
-.gmi.gmi .gmi-btn{color:#fff;text-decoration:none}
-.gmi.gmi .gmi-btn-ghost{color:#000}
-.gmi.gmi .gmi-btn:hover{color:#fff}
-.gmi.gmi .gmi-btn-ghost:hover{color:#000}
-.gmi.gmi .gmi-status,.gmi.gmi .gmi-status a,.gmi.gmi .gmi-req{color:var(--gm-red)}
-.gmi.gmi .gmi-count-n{color:var(--gm-red)}
-.gmi .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)}
+/* host-page defences live in the shared stylesheet above */
 </style>
 
 ${frag}
