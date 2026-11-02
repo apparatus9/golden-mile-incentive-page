@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Current Offers &amp; Incentives | Golden Mile Chrysler Dodge Jeep Ram</title>
-<meta name="description" content="All-Out Clearout Event offers at Golden Mile Chrysler Dodge Jeep Ram in Toronto. 0% financing, lease rates, loyalty savings, no-charge accessories and first responder pricing. Claim your offer online.">
+<meta name="description" content="Current offers at Golden Mile Chrysler Dodge Jeep Ram in Toronto. Up to $10,000 in total incentives on the 2026 Dodge Durango, up to $7,500 on the Jeep Compass, 0% financing plus $1,500 loyalty bonus cash on Wrangler and Grand Cherokee, and 1.99% leasing on the Cherokee Hybrid. Claim your offer online.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,56 +27,77 @@ html,body{overscroll-behavior:none}
 body{margin:0;font-family:var(--gm-body);color:var(--gm-ink);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.55}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
-.gm-wrap{max-width:1440px;margin:0 auto;padding:0 83px}
+.gm-wrap{max-width:1440px;margin:0 auto;padding:0 48px}
 @media (max-width:1100px){.gm-wrap{padding:0 40px}}
 @media (max-width:640px){.gm-wrap{padding:0 20px}}
 
 /* ---------- hero ---------- */
-.gm-hero{background:#fff}
-.gm-hero .gm-wrap{padding-top:18px;padding-bottom:30px}
-.gm-kicker{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;letter-spacing:2.4px;
-  text-transform:uppercase;color:#fff;background:var(--gm-red);padding:6px 14px;margin:0 0 16px}
-h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
-  letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px}
-.gm-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted)}
-.gm-countdown{margin-top:22px;font-family:var(--gm-head);font-size:15px;font-weight:500;
-  letter-spacing:.8px;text-transform:uppercase;color:var(--gm-dark)}
-.gm-countdown b{color:var(--gm-red);font-size:19px;font-weight:700}
+.gm-hero .gm-wrap{padding-top:52px;padding-bottom:58px;
+  display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:36px 56px;align-items:end}
+@media (max-width:900px){.gm-hero .gm-wrap{grid-template-columns:1fr;align-items:start;gap:30px}}
+.gm-hero-main{min-width:0}
+.gm-hero-side{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:22px}
+.gm-hero-side .gm-btn{width:100%}
+h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
+  letter-spacing:-.015em;text-transform:uppercase;margin:0 0 26px}
+.gm-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.55;color:var(--gm-ink,#000)}
+.gm-countdown{margin:0;font-family:var(--gm-head);line-height:.95;color:var(--gm-dark)}
+.gm-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
+  letter-spacing:-.02em;color:var(--gm-red)}
+.gm-count-l{display:block;margin-top:10px;font-size:19px;font-weight:500;
+  line-height:1.3;text-wrap:balance;color:var(--gm-dark)}
 
 /* ---------- offers ---------- */
 .gm-offers{padding:0 0 10px}
-.gm-offer{--accent:var(--gm-red);background:var(--gm-card);margin-bottom:var(--gm-gut);scroll-margin-top:24px}
-.gm-offer-img{line-height:0;background:var(--gm-dark)}
-.gm-offer-img img{width:100%;aspect-ratio:1920/599;object-fit:cover}
-.gm-offer-body{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px 40px;padding:25px 25px 22px}
-.gm-offer-main{flex:1 1 440px;min-width:0}
-.gm-eyebrow{display:inline-block;font-family:var(--gm-head);font-size:11.5px;font-weight:600;letter-spacing:1.8px;
-  text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 10px;margin:0 0 10px}
-.gm-offer h2{font-family:var(--gm-head);font-weight:600;font-size:27px;line-height:1.15;letter-spacing:.2px;
-  text-transform:uppercase;margin:0 0 4px}
-.gm-offer-sub{font-family:var(--gm-head);font-size:19px;font-weight:400;line-height:1.3;color:var(--gm-dark);margin:0 0 14px}
-.gm-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
-.gm-facts li{font-size:12.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
-  background:#fff;border-left:3px solid var(--accent);padding:6px 11px;color:var(--gm-dark)}
-.gm-offer details{border-top:1px solid #dcdcdc;margin-top:4px}
-.gm-offer summary{cursor:pointer;list-style:none;padding:11px 0 0;font-size:13px;font-weight:bold;
-  letter-spacing:.4px;text-transform:uppercase;color:var(--gm-muted)}
+.gm-offer{display:flex;flex-wrap:wrap;align-items:flex-start;
+  background:var(--gm-card);margin-bottom:var(--gm-gut);scroll-margin-top:24px}
+.gm-offer-img{flex:0 0 400px;line-height:0}
+.gm-offer-img img{width:100%;height:auto}
+.gm-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
+  align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
+.gm-offer-main{flex:1 1 280px;min-width:0}
+.gm-offer h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,3.7vw,56px);
+  line-height:.98;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 10px;color:#000}
+.gm-offer-sub{font-size:19px;line-height:1.45;color:var(--gm-ink,#000);margin:0 0 18px;max-width:40ch}
+.gm-facts{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0 0 22px;padding:0}
+.gm-facts li{font-size:15px;line-height:1.5;color:var(--gm-dark)}
+.gm-facts li+li::before{content:"\00b7";color:#9a9a9a;margin-right:18px}
+.gm-offer details{margin:0}
+.gm-offer summary{cursor:pointer;list-style:none;display:inline-block;font-size:15px;
+  color:var(--gm-muted);text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:#bcbcbc;transition:color .15s ease}
 .gm-offer summary::-webkit-details-marker{display:none}
-.gm-offer summary::after{content:" +";color:var(--accent);font-size:15px}
-.gm-offer details[open] summary::after{content:" \2212"}
-.gm-offer summary:hover{color:var(--gm-red)}
-.gm-fine{font-size:11.5px;line-height:1.6;color:#6b6b6b;margin:9px 0 12px}
-.gm-offer-cta{flex:0 0 250px;display:flex;flex-direction:column;gap:9px}
-@media (max-width:760px){.gm-offer-cta{flex:1 1 100%}}
+.gm-offer summary:hover,.gm-offer summary:focus-visible{color:var(--gm-red)}
+.gm-fine{font-size:16px;line-height:1.6;color:#4a4a4a;margin:16px 0 0;max-width:72ch}
+.gm-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){
+  .gm-offer-img{flex:1 1 100%;max-width:460px;margin:0 auto}
+  .gm-offer-cta{flex:1 1 100%}
+}
 .gm-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
-  font-family:var(--gm-head);font-size:16px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  font-family:var(--gm-head);font-size:17px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
   text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red);
-  background:var(--gm-red);color:#fff;padding:14px 18px;transition:background .15s ease,border-color .15s ease,color .15s ease}
+  background:var(--gm-red);color:#fff;padding:15px 18px;
+  transition:background .15s ease,border-color .15s ease,color .15s ease,transform .12s ease}
 .gm-btn:hover{background:var(--gm-red-dk);border-color:var(--gm-red-dk)}
-.gm-btn-ghost{background:transparent;color:var(--gm-dark);border-color:#bdbdbd;font-size:14px;padding:11px 18px}
-.gm-btn-ghost:hover{background:transparent;border-color:var(--gm-dark);color:var(--gm-dark)}
-.gm-expiry{font-size:12px;text-align:center;color:var(--gm-muted);letter-spacing:.3px;margin:2px 0 0}
+.gm-btn:active{transform:translateY(1px)}
+.gm-btn-ghost{background:transparent;color:#000;border-color:#c4c4c4;font-size:15px;padding:12px 18px}
+.gm-btn-ghost:hover{background:transparent;border-color:#000;color:#000}
+.gm-expiry{font-size:14px;text-align:right;color:var(--gm-muted);margin:4px 0 0}
 
+/* ---------- motion ----------
+   The .gm-motion flag is set by script, so if the script never runs
+   nothing is hidden. Stagger delays are set per element by that script. */
+.gm-motion .gm-rise{opacity:0;transform:translateY(22px)}
+.gm-motion .gm-rise.is-in{opacity:1;transform:none;
+  transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+@media print{
+  .gm-motion .gm-rise{opacity:1 !important;transform:none !important}
+}
+@media (prefers-reduced-motion:reduce){
+  .gm-motion .gm-rise,.gm-motion .gm-rise.is-in{opacity:1;transform:none;transition:none}
+  .gm-btn:active{transform:none}
+}
 /* ---------- footer ---------- */
 .gm-foot{background:#fff;border-top:3px solid var(--gm-red);padding:42px 0 50px}
 .gm-foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px 40px}
@@ -87,41 +108,92 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
 .gm-foot li{display:flex;justify-content:space-between;gap:18px;max-width:280px}
 .gm-foot a{color:var(--gm-dark);text-decoration:none;font-weight:bold}
 .gm-foot a:hover{color:var(--gm-red);text-decoration:underline}
-.gm-legal{border-top:1px solid var(--gm-line);margin-top:34px;padding-top:18px;font-size:11.5px;line-height:1.65;color:#777}
+.gm-legal{margin:56px 0 0;font-size:15px;line-height:1.7;color:#4a4a4a;max-width:86ch}
 </style>
 </head>
 <body>
 
 <header class="gm-hero">
   <div class="gm-wrap">
-    <p class="gm-kicker">All-Out Clearout Event</p>
-    <h1>Current Offers &amp; Incentives</h1>
-    <p class="gm-lede">Factory rates, loyalty savings and Golden Mile exclusives on 2026 and 2027 models &mdash; all in one place. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in before it ends.</p>
-    <p class="gm-countdown" id="gm-countdown"></p>
+    <div class="gm-hero-main">
+      <h1>Current Offers &amp; Incentives</h1>
+      <p class="gm-lede">The All-Out Clearout Event: total incentives, factory rates and loyalty bonus cash on 2026 Jeep and Dodge models. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in.</p>
+    </div>
+    <div class="gm-hero-side">
+      <p class="gm-countdown" id="gm-countdown"></p>
+      <a class="gm-btn" href="#offer-durango">See all five offers</a>
+    </div>
   </div>
 </header>
 
 <main>
 <section class="gm-offers">
   <div class="gm-wrap">
-    <article class="gm-offer" id="offer-wrangler" style="--accent:#6fae1e">
+    <article class="gm-offer" id="offer-durango">
       <div class="gm-offer-img">
-        <img src="assets/offer-wrangler.webp" width="1920" height="599" alt="All-Out Clearout Event: finance the 2026 Jeep Wrangler 4-Door Rubicon from 0% for up to 84 months. Offer ends November 2, 2026.">
+        <img src="assets/offer-durango.webp" width="1080" height="1045" alt="Up to $10,000 in total incentives on all 2026 Dodge Durango models at Golden Mile Chrysler Dodge Jeep Ram.">
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <p class="gm-eyebrow">Finance Offer</p>
-          <h2>0% Financing for up to 84 Months</h2>
-          <p class="gm-offer-sub">2026 Jeep Wrangler 4-Door Rubicon</p>
+          <h2>Up to $10,000</h2>
+          <p class="gm-offer-sub">In total incentives on every 2026 Dodge Durango</p>
           <ul class="gm-facts">
-            <li>0% APR</li>
-            <li>Up to 84 months</li>
-            <li>$0 down payment</li>
-            <li>From $854/month</li>
+            <li>All 2026 Durango models</li>
           </ul>
           <details>
             <summary>Offer details</summary>
-            <p class="gm-fine">Financing from 0% for up to 84 months on new and previously unregistered 2026 Jeep Wrangler 4-Door Rubicon models, at participating retailers in Canada until November 2, 2026, on approved credit. Example: 2026 Jeep Wrangler 4-Door Rubicon with an OFFER PRICE OF $71,709 with a $0 down payment, financed at 0% for 84 months equals 84 monthly payments of $854 with a cost of borrowing of $0 and a total obligation of $71,709. The price represents the Manufacturer's Suggested Retail Price ("MSRP"), freight, federal A/C surcharge, applicable green levies, Luxury Tax surcharges (if applicable), Lien registration fee (up to $219, including registering agent fee, where applicable) and all other fees, levies, and duties (all of which may vary by region and retailer), minus current Manufacturer Discounts (and any applicable dealer contributions), which allow the dealer to sell for less. License, registration, insurance, specific duty on new tires (up to $15, in Quebec only), and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable, but may not be available in all cases). Dealers may sell for less. See dealer for complete details. All other Trims/Models are excluded. Ends November 2, 2026.</p>
+            <p class="gm-fine">Up to $10,000 in total incentives on new and previously unregistered 2026 Dodge Durango models at participating retailers in Canada, on approved credit. The amount shown is the maximum available and combines current Manufacturer Discounts, bonus cash and any applicable program incentives (and any applicable dealer contributions), which allow the dealer to sell for less. The total varies by model, trim and configuration, and not every customer or vehicle qualifies for every component. License, registration, insurance and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable, but may not be available in all cases). Dealers may sell for less. See dealer for complete details.</p>
+          </details>
+        </div>
+        <div class="gm-offer-cta">
+          <a class="gm-btn" href="claim.html?offer=durango">Claim This Offer</a>
+          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Dodge/Durango" target="_blank" rel="noopener">View Durango Inventory</a>
+          <p class="gm-expiry">Offer ends November 2, 2026</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="gm-offer" id="offer-compass">
+      <div class="gm-offer-img">
+        <img src="assets/offer-compass.webp" width="1080" height="1080" loading="lazy" alt="All-Out Clearout Event: up to $7,500 in total incentives on all 2026 Jeep Compass models. Limited inventory.">
+      </div>
+      <div class="gm-offer-body">
+        <div class="gm-offer-main">
+          <h2>Up to $7,500</h2>
+          <p class="gm-offer-sub">In total incentives on every 2026 Jeep Compass</p>
+          <ul class="gm-facts">
+            <li>All 2026 Compass models</li>
+            <li>Limited inventory</li>
+          </ul>
+          <details>
+            <summary>Offer details</summary>
+            <p class="gm-fine">Up to $7,500 in total incentives on new and previously unregistered 2026 Jeep Compass models at participating retailers in Canada, on approved credit. The amount shown is the maximum available and combines current Manufacturer Discounts, bonus cash and any applicable program incentives (and any applicable dealer contributions), which allow the dealer to sell for less. The total varies by model, trim and configuration, and not every customer or vehicle qualifies for every component. License, registration, insurance and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable, but may not be available in all cases). Dealers may sell for less. See dealer for complete details. Limited inventory &mdash; offer applies while quantities last.</p>
+          </details>
+        </div>
+        <div class="gm-offer-cta">
+          <a class="gm-btn" href="claim.html?offer=compass">Claim This Offer</a>
+          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Jeep/Compass" target="_blank" rel="noopener">View Compass Inventory</a>
+          <p class="gm-expiry">Offer ends November 2, 2026</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="gm-offer" id="offer-wrangler">
+      <div class="gm-offer-img">
+        <img src="assets/offer-wrangler-rubicon.webp" width="1080" height="1080" loading="lazy" alt="All-Out Clearout Event: 0% financing for 84 months plus $1,500 loyalty bonus cash on the 2026 Jeep Wrangler 4-Door Rubicon 2.0L.">
+      </div>
+      <div class="gm-offer-body">
+        <div class="gm-offer-main">
+          <h2>0% for 84 months</h2>
+          <p class="gm-offer-sub">Financing on the 2026 Jeep Wrangler 4-Door Rubicon 2.0L</p>
+          <ul class="gm-facts">
+            <li>Plus $1,500 loyalty bonus cash</li>
+            <li>For eligible owners</li>
+          </ul>
+          <details>
+            <summary>Offer details</summary>
+            <p class="gm-fine">Financing from 0% for up to 84 months on new and previously unregistered 2026 Jeep Wrangler 4-Door Rubicon models, at participating retailers in Canada until November 2, 2026, on approved credit. The price represents the Manufacturer’s Suggested Retail Price ("MSRP"), freight, federal A/C surcharge, applicable green levies, Luxury Tax surcharges (if applicable), Lien registration fee (up to $219, including registering agent fee, where applicable) and all other fees, levies, and duties (all of which may vary by region and retailer), minus current Manufacturer Discounts (and any applicable dealer contributions), which allow the dealer to sell for less. License, registration, insurance, specific duty on new tires (up to $15, in Quebec only), and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable, but may not be available in all cases). Dealers may sell for less. See dealer for complete details. All other Trims/Models are excluded. Ends November 2, 2026.</p>
+            <p class="gm-fine">$1,500 Loyalty Bonus Cash is available to eligible owners only: you must have a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name. The loyalty bonus can be combined with the finance rate shown. Proof of ownership is required at time of purchase. Offer cannot be combined with certain other pricing programs. See dealer for complete details.</p>
           </details>
         </div>
         <div class="gm-offer-cta">
@@ -132,140 +204,53 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-ram" style="--accent:#c8102e">
+    <article class="gm-offer" id="offer-grand-cherokee">
       <div class="gm-offer-img">
-        <img src="assets/offer-ram.webp" width="1920" height="599" loading="lazy" alt="All-Out Clearout Event: finance the 2026 Ram 1500 Big Horn Crew Cab 4x4 from 0% for up to 84 months. Offer ends November 2, 2026.">
+        <img src="assets/offer-grand-cherokee.webp" width="1080" height="1080" loading="lazy" alt="All-Out Clearout Event: 0% financing for up to 72 months plus $1,500 loyalty bonus cash on the 2026 Jeep Grand Cherokee Summit.">
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <p class="gm-eyebrow">Finance Offer</p>
-          <h2>0% Financing for up to 84 Months</h2>
-          <p class="gm-offer-sub">2026 Ram 1500 Big Horn Crew Cab 4x4</p>
+          <h2>0% for up to 72 months</h2>
+          <p class="gm-offer-sub">Financing on the 2026 Jeep Grand Cherokee Summit</p>
           <ul class="gm-facts">
-            <li>0% APR</li>
-            <li>Up to 84 months</li>
-            <li>$0 down payment</li>
-            <li>From $901/month</li>
+            <li>Plus $1,500 loyalty bonus cash</li>
+            <li>For eligible owners</li>
           </ul>
           <details>
             <summary>Offer details</summary>
-            <p class="gm-fine">Financing from 0% for up to 84 months on new and previously unregistered 2026 Ram 1500 Big Horn Crew Cab 4x4 models, at participating retailers in Canada until November 2, 2026, on approved credit. Example: 2026 Ram 1500 Big Horn Crew Cab 4x4 with an OFFER PRICE OF $75,604 with a $0 down payment, financed at 0% for 84 months equals 84 monthly payments of $901 with a cost of borrowing of $0 and a total obligation of $75,604. The price represents the Manufacturer's Suggested Retail Price ("MSRP"), freight, federal A/C surcharge, applicable green levies, Luxury Tax surcharges (if applicable), Lien registration fee (up to $219, including registering agent fee, where applicable) and all other fees, levies, and duties (all of which may vary by region and retailer), minus current Manufacturer Discounts (and any applicable dealer contributions), which allow the dealer to sell for less. License, registration, insurance, specific duty on new tires (up to $15, in Quebec only), and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable, but may not be available in all cases). Dealers may sell for less. See dealer for complete details. Ends November 2, 2026.</p>
+            <p class="gm-fine">Financing from 0% for up to 72 months on new and previously unregistered 2026 Jeep Grand Cherokee models, at participating retailers in Canada until November 2, 2026, on approved credit. The price represents the Manufacturer’s Suggested Retail Price ("MSRP"), freight, federal A/C surcharge, applicable green levies, Luxury Tax surcharges (if applicable), Lien registration fee (up to $219, including registering agent fee, where applicable) and all other fees, levies, and duties (all of which may vary by region and retailer), minus current Manufacturer Discounts (and any applicable dealer contributions), which allow the dealer to sell for less. License, registration, insurance, specific duty on new tires (up to $15, in Quebec only), and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable, but may not be available in all cases). Dealers may sell for less. See dealer for complete details. Ends November 2, 2026.</p>
+            <p class="gm-fine">$1,500 Loyalty Bonus Cash is available to eligible owners only: you must have a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name. The loyalty bonus can be combined with the finance rate shown. Proof of ownership is required at time of purchase. Offer cannot be combined with certain other pricing programs. See dealer for complete details.</p>
           </details>
         </div>
         <div class="gm-offer-cta">
-          <a class="gm-btn" href="claim.html?offer=ram">Claim This Offer</a>
-          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Ram/1500" target="_blank" rel="noopener">View Ram 1500 Inventory</a>
+          <a class="gm-btn" href="claim.html?offer=grand-cherokee">Claim This Offer</a>
+          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Jeep/Grand-Cherokee" target="_blank" rel="noopener">View Grand Cherokee Inventory</a>
           <p class="gm-expiry">Offer ends November 2, 2026</p>
         </div>
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-cherokee" style="--accent:#8c8f23">
+    <article class="gm-offer" id="offer-cherokee">
       <div class="gm-offer-img">
-        <img src="assets/offer-cherokee.webp" width="1920" height="599" loading="lazy" alt="All-Out Clearout Event: lease most 2026 Jeep Cherokee models from 1.99% for up to 24 months. Offer ends November 2, 2026.">
+        <img src="assets/offer-cherokee-hybrid.webp" width="1080" height="1080" loading="lazy" alt="All-Out Clearout Event: lease most all-new 2026 Jeep Cherokee Hybrid models from 1.99% for up to 24 months.">
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <p class="gm-eyebrow">Lease Offer</p>
-          <h2>Lease from 1.99% for up to 24 Months</h2>
-          <p class="gm-offer-sub">Most 2026 Jeep Cherokee models</p>
+          <h2>1.99% lease</h2>
+          <p class="gm-offer-sub">On most All-New 2026 Jeep Cherokee Hybrid models</p>
           <ul class="gm-facts">
-            <li>1.99% lease rate</li>
-            <li>24 months</li>
-            <li>$0 down payment</li>
-            <li>16,000 km/year</li>
+            <li>Up to 24 months</li>
+            <li>Hybrid powertrain</li>
           </ul>
           <details>
             <summary>Offer details</summary>
-            <p class="gm-fine">Limited time lease offer provided through SCI Lease Corp on most new and previously unregistered 2026 Jeep Cherokee models (except (KMJL74) (8.99%)), at participating retailers in Canada until November 2, 2026, on approved credit. Example: 2026 Jeep Cherokee Overland with a RETAIL VALUE OF $57,020, leased at 1.99% for up to 24 months with $0 down payment, equals 24 monthly payments of $1,063. $0 down payment, $1,063 security deposit and first monthly payment due at lease inception. Total obligation is $25,528. Kilometre allowance 16,000/year. Cost of $0.16 per excess kilometre plus applicable taxes at lease termination. The Lease price represents the Manufacturer's Suggested Retail Price ("MSRP"), freight, federal A/C surcharge, applicable green levies, Luxury Tax surcharges (if applicable), Lien registration fee (up to $130, including registering agent fee, where applicable), and all other fees, levies, and duties (all of which may vary by region and retailer), minus current Manufacturer Discounts (and any applicable dealer contributions), which allow the dealer to sell for less. License, registration, insurance, specific duty on new tires (up to $15, in Quebec only), and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable), but may not be available in all cases. Dealers may sell or lease for less. See your retailer for complete details. Ends November 2, 2026.</p>
+            <p class="gm-fine">Limited time lease offer provided through SCI Lease Corp on most new and previously unregistered 2026 Jeep Cherokee models (except (KMJL74) (8.99%)), at participating retailers in Canada until November 2, 2026, on approved credit. Example: 2026 Jeep Cherokee Overland with a RETAIL VALUE OF $57,020, leased at 1.99% for up to 24 months with $0 down payment, equals 24 monthly payments of $1,063. $0 down payment, $1,063 security deposit and first monthly payment due at lease inception. Total obligation is $25,528. Kilometre allowance 16,000/year. Cost of $0.16 per excess kilometre plus applicable taxes at lease termination. The Lease price represents the Manufacturer’s Suggested Retail Price ("MSRP"), freight, federal A/C surcharge, applicable green levies, Luxury Tax surcharges (if applicable), Lien registration fee (up to $130, including registering agent fee, where applicable), and all other fees, levies, and duties (all of which may vary by region and retailer), minus current Manufacturer Discounts (and any applicable dealer contributions), which allow the dealer to sell for less. License, registration, insurance, specific duty on new tires (up to $15, in Quebec only), and applicable taxes are extra and will be due at signing. Offer may be modified or terminated without notice. A deposit may be required. Dealer trade may be necessary (where applicable), but may not be available in all cases. Dealers may sell or lease for less. See your retailer for complete details. Ends November 2, 2026.</p>
           </details>
         </div>
         <div class="gm-offer-cta">
           <a class="gm-btn" href="claim.html?offer=cherokee">Claim This Offer</a>
           <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Jeep/Cherokee" target="_blank" rel="noopener">View Cherokee Inventory</a>
           <p class="gm-expiry">Offer ends November 2, 2026</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="gm-offer" id="offer-loyalty" style="--accent:#0b3d91">
-      <div class="gm-offer-img">
-        <img src="assets/offer-loyalty.webp" width="1920" height="599" loading="lazy" alt="Golden Mile All Out Clearout Event: Double Loyalty, up to $3,000 total loyalty savings on the 2026 Jeep Wrangler and Grand Cherokee. Ends November 2, 2026.">
-      </div>
-      <div class="gm-offer-body">
-        <div class="gm-offer-main">
-          <p class="gm-eyebrow">Loyalty Bonus</p>
-          <h2>Double Loyalty &mdash; up to $3,000 Savings</h2>
-          <p class="gm-offer-sub">2026 Jeep Wrangler &amp; Grand Cherokee</p>
-          <ul class="gm-facts">
-            <li>$1,500 doubled to $3,000</li>
-            <li>Stacks with finance &amp; lease</li>
-            <li>Existing CDJR/FIAT owners</li>
-          </ul>
-          <details>
-            <summary>Offer details</summary>
-            <p class="gm-fine">We are doubling the original $1,500 offer. You can now get up to $3,000 on all 2026 Wrangler and Grand Cherokee models. Offer cannot be combined with other pricing programs. Eligible customers must have a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in their name on or before October 1st, 2026. This offer can be combined with all finance and lease deals. Offer ends November 2, 2026.</p>
-          </details>
-        </div>
-        <div class="gm-offer-cta">
-          <a class="gm-btn" href="claim.html?offer=loyalty">Claim This Offer</a>
-          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new" target="_blank" rel="noopener">View Eligible Models</a>
-          <p class="gm-expiry">Offer ends November 2, 2026</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="gm-offer" id="offer-accessories" style="--accent:#b8860b">
-      <div class="gm-offer-img">
-        <img src="assets/offer-accessories.webp" width="1920" height="599" loading="lazy" alt="Golden Mile Exclusive: $1,000 in no-charge Mopar accessories on 2026 and 2027 Ram models. Ends October 31.">
-      </div>
-      <div class="gm-offer-body">
-        <div class="gm-offer-main">
-          <p class="gm-eyebrow">Golden Mile Exclusive</p>
-          <h2>$1,000 No-Charge Accessories</h2>
-          <p class="gm-offer-sub">2026 &amp; 2027 Ram models</p>
-          <ul class="gm-facts">
-            <li>$1,000 value</li>
-            <li>Genuine Mopar parts</li>
-            <li>New or demo</li>
-            <li>Purchase or lease</li>
-          </ul>
-          <details>
-            <summary>Offer details</summary>
-            <p class="gm-fine">Available on original Mopar accessories with new/demo purchase or lease of a 2026 or 2027 Ram. Accessory credit has no cash value and cannot be applied to the purchase price, taxes or fees. Installation by Golden Mile Chrysler Dodge Jeep Ram required. Cannot be combined with other accessory promotions. See dealer for complete details. Ends October 31st.</p>
-          </details>
-        </div>
-        <div class="gm-offer-cta">
-          <a class="gm-btn" href="claim.html?offer=accessories">Claim This Offer</a>
-          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new/Ram" target="_blank" rel="noopener">View Ram Inventory</a>
-          <p class="gm-expiry">Offer ends October 31, 2026</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="gm-offer" id="offer-first-responders" style="--accent:#1565d8">
-      <div class="gm-offer-img">
-        <img src="assets/offer-first-responders.webp" width="1920" height="599" loading="lazy" alt="Thank you, first responders: preferred pricing for first responders on select models at Golden Mile Chrysler Dodge Jeep Ram.">
-      </div>
-      <div class="gm-offer-body">
-        <div class="gm-offer-main">
-          <p class="gm-eyebrow">Preferred Pricing</p>
-          <h2>First Responder Pricing</h2>
-          <p class="gm-offer-sub">Police, fire, paramedic, nurses &amp; healthcare &mdash; on select models</p>
-          <ul class="gm-facts">
-            <li>Preferred pricing</li>
-            <li>Select models</li>
-            <li>Proof of service required</li>
-          </ul>
-          <details>
-            <summary>Offer details</summary>
-            <p class="gm-fine">Preferred pricing for first responders on select models. Eligibility requires valid proof of active service or employment (badge, employment ID or letter of employment) presented at time of purchase. Some conditions apply. Cannot be combined with certain other pricing programs. See dealer for complete details.</p>
-          </details>
-        </div>
-        <div class="gm-offer-cta">
-          <a class="gm-btn" href="claim.html?offer=first-responders">See If You Qualify</a>
-          <a class="gm-btn gm-btn-ghost" href="https://www.goldenmilechrysler.ca/new" target="_blank" rel="noopener">View New Inventory</a>
-          <p class="gm-expiry">Ongoing program</p>
         </div>
       </div>
     </article>
@@ -304,7 +289,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
         <p><a href="https://www.goldenmilechrysler.ca/finance" target="_blank" rel="noopener">Get pre-approved</a></p>
       </div>
     </div>
-    <p class="gm-legal">All offers shown are subject to change or cancellation without notice and are available on approved credit through participating retailers in Canada. Vehicles shown may not be exactly as illustrated and may include optional equipment at extra cost. Pricing excludes license, registration, insurance and applicable taxes unless otherwise stated. Manufacturer offers end November 2, 2026 unless otherwise noted; the Golden Mile accessory credit ends October 31, 2026. See dealer for complete details. Jeep, Ram, Mopar and FIAT are registered trademarks of FCA US LLC / Stellantis.</p>
+    <p class="gm-legal">All offers shown are subject to change or cancellation without notice and are available on approved credit through participating retailers in Canada. Vehicles shown may not be exactly as illustrated and may include optional equipment at extra cost. Total incentive amounts are maximums: they vary by model, trim and configuration, and not all customers or vehicles qualify for every component. Loyalty bonus cash is available to eligible owners only and requires proof of ownership. Pricing excludes license, registration, insurance and applicable taxes unless otherwise stated. Manufacturer offers end November 2, 2026 unless otherwise noted. See dealer for complete details. Jeep, Dodge, Ram, Mopar and FIAT are registered trademarks of FCA US LLC / Stellantis.</p>
   </div>
 </footer>
 
@@ -320,8 +305,71 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
   var endsAt = new Date('2026-11-02T23:59:59-04:00');
   var daysLeft = Math.ceil((endsAt - new Date()) / 86400000);
   if (daysLeft > 0) {
-    countdown.innerHTML = 'All-Out Clearout ends in <b>' + daysLeft + '</b> ' +
-      (daysLeft === 1 ? 'day' : 'days');
+    countdown.innerHTML = '<span class="gm-count-n">' + daysLeft + '</span>' +
+      '<span class="gm-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
+      ' left in the All-Out Clearout</span>';
+  }
+
+  /* ---------- motion ----------
+     Nothing is hidden until the flag is set, so a failed script leaves a
+     complete page. Parts of each section rise in on their own short delay;
+     the observer disconnects once everything has appeared. */
+  var motionRoot = document.documentElement;
+  if (motionRoot && 'IntersectionObserver' in window &&
+      motionRoot.querySelector('.gm-offer')) {
+    motionRoot.classList.add('gm-motion');
+
+    var groups = [];
+    var intro = motionRoot.querySelector('.gm-intro, .gm-hero');
+    if (intro) {
+      groups.push(intro.querySelectorAll('h1, .gm-lede, .gm-countdown'));
+    }
+    Array.prototype.forEach.call(motionRoot.querySelectorAll('.gm-offer'), function (card) {
+      groups.push([
+        card.querySelector('.gm-offer-img'),
+        card.querySelector('.gm-offer-main'),
+        card.querySelector('.gm-offer-cta')
+      ]);
+    });
+
+    var watched = [];
+    groups.forEach(function (group) {
+      var step = 0;
+      Array.prototype.forEach.call(group, function (el) {
+        if (!el) { return; }
+        el.classList.add('gm-rise');
+        el.style.transitionDelay = (step * 0.09).toFixed(2) + 's';
+        watched.push(el);
+        step++;
+      });
+    });
+
+    var seen = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+        if (++seen >= watched.length) { io.disconnect(); }
+      });
+    }, { rootMargin: '0px', threshold: 0.01 });
+
+    watched.forEach(function (el) { io.observe(el); });
+
+    /* Safety net: reveal whatever is on screen now and on every scroll,
+       so nothing is left invisible if the observer never fires for it
+       (a short page can leave its last elements untriggered). */
+    function sweep() {
+      var pending = 0;
+      watched.forEach(function (el) {
+        if (el.classList.contains('is-in')) { return; }
+        if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('is-in'); }
+        else { pending++; }
+      });
+      if (!pending) { window.removeEventListener('scroll', sweep); }
+    }
+    requestAnimationFrame(sweep);
+    window.addEventListener('scroll', sweep, { passive: true });
   }
 }());
 </script>

@@ -5,6 +5,68 @@
 (function () {
   'use strict';
 
+  /* ---------- motion ----------
+     Nothing is hidden until the flag is set, so a failed script leaves a
+     complete page. Parts of each section rise in on their own short delay;
+     the observer disconnects once everything has appeared. */
+  var motionRoot = document.querySelector('.gmi');
+  if (motionRoot && 'IntersectionObserver' in window &&
+      motionRoot.querySelector('.gmi-offer')) {
+    motionRoot.classList.add('gmi-motion');
+
+    var groups = [];
+    var intro = motionRoot.querySelector('.gmi-intro, .gmi-hero');
+    if (intro) {
+      groups.push(intro.querySelectorAll('h1, .gmi-lede, .gmi-countdown'));
+    }
+    Array.prototype.forEach.call(motionRoot.querySelectorAll('.gmi-offer'), function (card) {
+      groups.push([
+        card.querySelector('.gmi-offer-img'),
+        card.querySelector('.gmi-offer-main'),
+        card.querySelector('.gmi-offer-cta')
+      ]);
+    });
+
+    var watched = [];
+    groups.forEach(function (group) {
+      var step = 0;
+      Array.prototype.forEach.call(group, function (el) {
+        if (!el) { return; }
+        el.classList.add('gmi-rise');
+        el.style.transitionDelay = (step * 0.09).toFixed(2) + 's';
+        watched.push(el);
+        step++;
+      });
+    });
+
+    var seen = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+        if (++seen >= watched.length) { io.disconnect(); }
+      });
+    }, { rootMargin: '0px', threshold: 0.01 });
+
+    watched.forEach(function (el) { io.observe(el); });
+
+    /* Safety net: reveal whatever is on screen now and on every scroll,
+       so nothing is left invisible if the observer never fires for it
+       (a short page can leave its last elements untriggered). */
+    function sweep() {
+      var pending = 0;
+      watched.forEach(function (el) {
+        if (el.classList.contains('is-in')) { return; }
+        if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('is-in'); }
+        else { pending++; }
+      });
+      if (!pending) { window.removeEventListener('scroll', sweep); }
+    }
+    requestAnimationFrame(sweep);
+    window.addEventListener('scroll', sweep, { passive: true });
+  }
+
   /* ----------------------------------------------------------------
      CONFIG
 
@@ -35,12 +97,11 @@
   var EVENT_ENDS = '2026-11-02T23:59:59-04:00';
 
   var OFFERS = {
-    'wrangler':         { name: '0% Financing — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'Offer ends November 2, 2026' },
-    'ram':              { name: '0% Financing — 2026 Ram 1500 Big Horn Crew Cab 4x4', ends: 'Offer ends November 2, 2026' },
-    'cherokee':         { name: '1.99% Lease — 2026 Jeep Cherokee', ends: 'Offer ends November 2, 2026' },
-    'loyalty':          { name: 'Double Loyalty — up to $3,000 Savings', ends: 'Offer ends November 2, 2026' },
-    'accessories':      { name: '$1,000 No-Charge Accessories — 2026/2027 Ram', ends: 'Offer ends October 31, 2026' },
-    'first-responders': { name: 'First Responder Preferred Pricing', ends: 'Ongoing program' }
+    'durango':          { name: 'Up to $10,000 in Total Incentives — 2026 Dodge Durango', ends: 'Offer ends November 2, 2026' },
+    'compass':          { name: 'Up to $7,500 in Total Incentives — 2026 Jeep Compass', ends: 'Offer ends November 2, 2026' },
+    'wrangler':         { name: '0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'Offer ends November 2, 2026' },
+    'grand-cherokee':   { name: '0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit', ends: 'Offer ends November 2, 2026' },
+    'cherokee':         { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 2, 2026' }
   };
 
   /* ---------- link paths ---------- */
@@ -73,8 +134,9 @@
   if (countdown) {
     var daysLeft = Math.ceil((new Date(EVENT_ENDS) - new Date()) / 86400000);
     if (daysLeft > 0) {
-      countdown.innerHTML = 'All-Out Clearout ends in <b>' + daysLeft + '</b> ' +
-        (daysLeft === 1 ? 'day' : 'days');
+      countdown.innerHTML = '<span class="gmi-count-n">' + daysLeft + '</span>' +
+        '<span class="gmi-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
+        ' left in the All-Out Clearout</span>';
     }
   }
 
@@ -115,7 +177,8 @@
 
   /* Only the eligibility questions belonging to this offer. */
   Array.prototype.forEach.call(document.querySelectorAll('.gmi-conditional'), function (block) {
-    block.classList.toggle('is-on', block.getAttribute('data-for') === key);
+    var owners = (block.getAttribute('data-for') || '').split(/\s+/);
+    block.classList.toggle('is-on', owners.indexOf(key) > -1);
   });
 
   if (claimwrap) { claimwrap.classList.add('is-on'); }
@@ -148,9 +211,6 @@
       'Buying method': data.financeType,
       'Currently owns': data.loyaltyVehicle,
       'Registered since': data.loyaltySince,
-      'First responder role': data.responderRole,
-      'Service or employer': data.responderEmployer,
-      'Accessories wanted': data.accessories,
       'Comments': data.comments,
       'Consent to contact': form.consent.checked ? 'Yes' : 'No',
       'Submitted': new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
