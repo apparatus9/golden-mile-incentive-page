@@ -356,6 +356,31 @@ if (wrappers !== 1) {
 
 const target = path.join(OUT, 'one-page-block.html');
 fs.writeFileSync(target, out);
+
+/* A viewable copy of exactly the same block, as a whole HTML page, so it
+   can be opened on GitHub Pages. This is the reference: if the live
+   WordPress page does not look like this, the difference is on the
+   WordPress side - a stale cache, a partial paste, or a theme rule - and
+   not in the block. Nothing here styles the block; the wrapper only
+   supplies a page for it to sit in. */
+const preview = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Golden Mile incentives - what the WordPress block should look like</title>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+${out}
+</body>
+</html>
+`;
+const previewTarget = path.join(ROOT, 'wordpress-preview.html');
+fs.writeFileSync(previewTarget, preview);
+
 console.log('wordpress/paste/');
 console.log('  one-page-block.html   ' + (Buffer.byteLength(out, 'utf8') / 1024).toFixed(0) + ' KB');
+console.log('wordpress-preview.html  the same block as a viewable page');
 console.log('\nOne Custom HTML block, one page, nothing to configure.');
