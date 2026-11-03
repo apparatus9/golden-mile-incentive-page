@@ -57,9 +57,17 @@ function offersSection() {
   // the legal note belongs once, at the very bottom, under the form
   s = s.replace(/<p class="gmi-legal">[\s\S]*?<\/p>\n?/, '');
 
-  // unwrap: we re-wrap the whole page ourselves
-  s = s.replace(/^<div class="gmi">\s*<div class="gmi-wrap">\s*/, '')
-       .replace(/\s*<\/div>\s*<\/div>\s*$/, '');
+  // Unwrap: we re-wrap the whole page ourselves. Trim first — stripping the
+  // <link> tags above leaves a leading newline, and an anchored regex then
+  // quietly fails to match, leaving a second .gmi wrapper nested inside ours
+  // and the div count unbalanced. Assert rather than silently skip.
+  s = s.trim();
+  const opened = /^<div class="gmi">\s*<div class="gmi-wrap">\s*/;
+  const closed = /\s*<\/div>\s*<\/div>$/;
+  if (!opened.test(s) || !closed.test(s)) {
+    throw new Error('offers.html wrapper is not where expected — check edealer/offers.html');
+  }
+  s = s.replace(opened, '').replace(closed, '');
 
   return s.trim();
 }
@@ -79,7 +87,11 @@ function formSection(offers) {
   const close = s.indexOf('<p class="gmi-legal">');
   if (close === -1) throw new Error('legal note not found');
   s = s.slice(0, close);
-  s = s.replace(/<\/div>\s*$/, '').trim();
+  // The slice already balances: .gmi-claimwrap is closed after the legal
+  // note, not before it, so everything opened inside this slice is also
+  // closed inside it. Stripping a trailing </div> here would remove the one
+  // that closes .gmi-formcard.
+  s = s.trim();
 
   // the page already carries an h1
   s = s.replace('<h1>Claim Your Offer</h1>', '<h2>Claim Your Offer</h2>');
@@ -304,6 +316,26 @@ ${legal}
 ${script(offers)}
 </script>
 `;
+
+/* Unbalanced markup is the one failure that presents as a styling bug: the
+   WordPress editor silently rebalances broken HTML, moving or dropping
+   nodes, and the page renders with the .gmi wrapper — and therefore every
+   CSS custom property defined on it — no longer around the content. The
+   result is a page with the layout applied but no colours and no card
+   backgrounds. Fail the build instead of shipping that. */
+const checkMarkup = out
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/<style>[\s\S]*?<\/style>/g, '')
+  .replace(/<script>[\s\S]*?<\/script>/g, '');
+const opens = (checkMarkup.match(/<div\b/g) || []).length;
+const closes = (checkMarkup.match(/<\/div>/g) || []).length;
+if (opens !== closes) {
+  throw new Error('unbalanced markup: ' + opens + ' <div> vs ' + closes + ' </div>');
+}
+const wrappers = (checkMarkup.match(/<div class="gmi">/g) || []).length;
+if (wrappers !== 1) {
+  throw new Error('expected exactly one .gmi wrapper, found ' + wrappers);
+}
 
 const target = path.join(OUT, 'one-page-block.html');
 fs.writeFileSync(target, out);
