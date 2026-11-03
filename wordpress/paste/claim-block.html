@@ -33,6 +33,8 @@
    page editor renders the contents of an inline <style> block as body text. */
 
 .gmi{
+  background:#fff;
+  scroll-behavior:smooth;
   --gm-red:#ca0000;
   --gm-red-dk:#9d0000;
   --gm-dark:#222;
@@ -70,18 +72,18 @@
    red buttons turn into white text on white, borders vanish and the
    headings fall back to the body face. Every var() above therefore
    carries its own fallback, and these two rules restore the measure. */
-.gmi-intro,.gmi-offer,.gmi-claim,.gmi-legal,.gmi-foot{max-width:1344px;margin-left:auto;margin-right:auto}
+.gmi-intro,.gmi-offer,.gmi-claim,.gmi-legal{max-width:1344px;margin-left:auto;margin-right:auto}
 /* and the side gutter, but only when the wrapper really is missing, so the
    cards stay flush inside it. Dropped whole by browsers too old for a
    complex :not(), which leaves them exactly as they are today. */
 .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
-.gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *),.gmi-foot:not(.gmi-wrap *){width:min(1344px,100% - 96px)}
+.gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 96px)}
 @media (max-width:1100px){
   .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
-  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *),.gmi-foot:not(.gmi-wrap *){width:min(1344px,100% - 80px)}}
+  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 80px)}}
 @media (max-width:640px){
   .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
-  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *),.gmi-foot:not(.gmi-wrap *){width:min(1344px,100% - 40px)}}
+  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 40px)}}
 @media (max-width:1100px){.gmi-wrap{padding:0 40px}}
 @media (max-width:640px){.gmi-wrap{padding:0 20px}}
 
@@ -111,7 +113,7 @@
 .gmi details,
 [class*="gmi-"] details{border:0;padding:0;background:none}
 .gmi details>summary,
-[class*="gmi-"] details>summary{display:inline-block;background:none}
+[class*="gmi-"] details>summary{background:none}
 .gmi details>summary::marker,.gmi details>summary::-webkit-details-marker,
 [class*="gmi-"] details>summary::marker,[class*="gmi-"] details>summary::-webkit-details-marker{display:none;content:""}
 .gmi input,.gmi select,.gmi textarea,.gmi button,
@@ -217,7 +219,12 @@
    it: the eDealer pages sit inside eDealer's own site chrome, which already
    has them. Most WordPress themes have a footer of their own too, so the
    generated block marks this section off clearly in case you want it gone. */
-.gmi-foot{background:#fff;border-top:3px solid var(--gm-red,#ca0000);padding:42px 0 10px;margin-top:10px}
+.gmi-foot{background:#fff;border-top:3px solid var(--gm-red,#ca0000);
+  padding:42px 48px 50px;margin:0 -48px}
+@media (max-width:1100px){.gmi-foot{padding-left:40px;padding-right:40px;margin:0 -40px}}
+@media (max-width:640px){.gmi-foot{padding-left:20px;padding-right:20px;margin:0 -20px}}
+/* with no wrapper there is no gutter to cancel, so drop the pull-out */
+.gmi-foot:not(.gmi-wrap *){margin-left:0;margin-right:0}
 .gmi-foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px 40px}
 .gmi-foot h4{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:16px;font-weight:600;letter-spacing:1px;
   text-transform:uppercase;margin:0 0 12px;color:#000}
