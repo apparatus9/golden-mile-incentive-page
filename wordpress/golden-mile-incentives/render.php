@@ -67,10 +67,6 @@ function gmi_render_offers( $atts ) {
 <<?php echo esc_html( $h ); ?>><?php echo wp_kses( $atts['title'], gmi_allowed_html() ); ?></<?php echo esc_html( $h ); ?>>
 <p class="gmi-lede"><?php echo wp_kses( $atts['lede'], gmi_allowed_html() ); ?></p>
 </div>
-<div class="gmi-hero-side">
-<p class="gmi-countdown" id="gmi-countdown"></p>
-<a class="gmi-btn" href="#offer-<?php echo esc_attr( $offers[0]['key'] ); ?>">See all <?php echo esc_html( gmi_number_word( count( $offers ) ) ); ?> offers</a>
-</div>
 </div>
 
 	<?php foreach ( $offers as $i => $offer ) : ?>
