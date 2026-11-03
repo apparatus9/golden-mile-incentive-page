@@ -49,26 +49,31 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
 
 /* ---------- offers ---------- */
 .gm-offers{padding:0 0 10px}
-.gm-offer{display:flex;flex-wrap:wrap;align-items:flex-start;
+.gm-offer{display:flex;flex-wrap:wrap;align-items:flex-start;--accent:var(--gm-red);
   background:var(--gm-card);margin-bottom:var(--gm-gut);scroll-margin-top:24px}
 .gm-offer-img{flex:0 0 400px;line-height:0}
 .gm-offer-img img{width:100%;height:auto}
 .gm-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gm-offer-main{flex:1 1 280px;min-width:0}
-.gm-offer h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,3.7vw,56px);
-  line-height:.98;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 10px;color:#000}
-.gm-offer-sub{font-size:19px;line-height:1.45;color:var(--gm-ink,#000);margin:0 0 18px;max-width:40ch}
-.gm-facts{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0 0 22px;padding:0}
-.gm-facts li{font-size:15px;line-height:1.5;color:var(--gm-dark)}
-.gm-facts li+li::before{content:"\00b7";color:#9a9a9a;margin-right:18px}
-.gm-offer details{margin:0}
-.gm-offer summary{cursor:pointer;list-style:none;display:inline-block;font-size:15px;
-  color:var(--gm-muted);text-decoration:underline;text-underline-offset:3px;
-  text-decoration-color:#bcbcbc;transition:color .15s ease}
+.gm-eyebrow{display:inline-block;font-family:var(--gm-head);font-size:11.5px;font-weight:600;
+  letter-spacing:1.8px;text-transform:uppercase;color:#fff;background:var(--accent);
+  padding:4px 10px;margin:0 0 10px}
+.gm-offer h2{font-family:var(--gm-head);font-weight:600;font-size:27px;line-height:1.15;
+  letter-spacing:.2px;text-transform:uppercase;margin:0 0 4px;color:#000}
+.gm-offer-sub{font-family:var(--gm-head);font-size:19px;font-weight:400;line-height:1.3;
+  color:var(--gm-dark);margin:0 0 14px}
+.gm-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
+.gm-facts li{font-size:12.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
+  background:#fff;border-left:3px solid var(--accent);padding:6px 11px;color:var(--gm-dark)}
+.gm-offer details{border-top:1px solid #dcdcdc;margin-top:4px}
+.gm-offer summary{cursor:pointer;list-style:none;padding:11px 0 0;font-size:13px;font-weight:bold;
+  letter-spacing:.4px;text-transform:uppercase;color:var(--gm-muted)}
 .gm-offer summary::-webkit-details-marker{display:none}
+.gm-offer summary::after{content:" +";color:var(--accent);font-size:15px}
+.gm-offer details[open] summary::after{content:" \2212"}
 .gm-offer summary:hover,.gm-offer summary:focus-visible{color:var(--gm-red)}
-.gm-fine{font-size:16px;line-height:1.6;color:#4a4a4a;margin:16px 0 0;max-width:72ch}
+.gm-fine{font-size:11.5px;line-height:1.6;color:#6b6b6b;margin:9px 0 12px}
 .gm-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
 @media (max-width:1040px){
   .gm-offer-img{flex:1 1 100%;max-width:460px;margin:0 auto}
@@ -135,9 +140,11 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <h2>Up to $10,000</h2>
-          <p class="gm-offer-sub">In total incentives on every 2026 Dodge Durango</p>
+          <p class="gm-eyebrow">Total Incentives</p>
+          <h2>Up to $10,000 in Total Incentives</h2>
+          <p class="gm-offer-sub">2026 Dodge Durango &mdash; all models</p>
           <ul class="gm-facts">
+            <li>Up to $10,000</li>
             <li>All 2026 Durango models</li>
           </ul>
           <details>
@@ -159,9 +166,11 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <h2>Up to $7,500</h2>
-          <p class="gm-offer-sub">In total incentives on every 2026 Jeep Compass</p>
+          <p class="gm-eyebrow">Total Incentives</p>
+          <h2>Up to $7,500 in Total Incentives</h2>
+          <p class="gm-offer-sub">2026 Jeep Compass &mdash; all models</p>
           <ul class="gm-facts">
+            <li>Up to $7,500</li>
             <li>All 2026 Compass models</li>
             <li>Limited inventory</li>
           </ul>
@@ -184,11 +193,14 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <h2>0% for 84 months</h2>
-          <p class="gm-offer-sub">Financing on the 2026 Jeep Wrangler 4-Door Rubicon 2.0L</p>
+          <p class="gm-eyebrow">Finance &amp; Loyalty</p>
+          <h2>0% Financing for 84 Months + $1,500 Loyalty Bonus</h2>
+          <p class="gm-offer-sub">2026 Jeep Wrangler 4-Door Rubicon 2.0L</p>
           <ul class="gm-facts">
-            <li>Plus $1,500 loyalty bonus cash</li>
-            <li>For eligible owners</li>
+            <li>0% APR</li>
+            <li>84 months</li>
+            <li>+ $1,500 loyalty bonus cash</li>
+            <li>Eligible owners</li>
           </ul>
           <details>
             <summary>Offer details</summary>
@@ -210,11 +222,14 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <h2>0% for up to 72 months</h2>
-          <p class="gm-offer-sub">Financing on the 2026 Jeep Grand Cherokee Summit</p>
+          <p class="gm-eyebrow">Finance &amp; Loyalty</p>
+          <h2>0% Financing for up to 72 Months + $1,500 Loyalty Bonus</h2>
+          <p class="gm-offer-sub">2026 Jeep Grand Cherokee Summit</p>
           <ul class="gm-facts">
-            <li>Plus $1,500 loyalty bonus cash</li>
-            <li>For eligible owners</li>
+            <li>0% APR</li>
+            <li>Up to 72 months</li>
+            <li>+ $1,500 loyalty bonus cash</li>
+            <li>Eligible owners</li>
           </ul>
           <details>
             <summary>Offer details</summary>
@@ -236,11 +251,14 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
       </div>
       <div class="gm-offer-body">
         <div class="gm-offer-main">
-          <h2>1.99% lease</h2>
-          <p class="gm-offer-sub">On most All-New 2026 Jeep Cherokee Hybrid models</p>
+          <p class="gm-eyebrow">Lease Offer</p>
+          <h2>Leasing from 1.99% for up to 24 Months</h2>
+          <p class="gm-offer-sub">All-New 2026 Jeep Cherokee Hybrid</p>
           <ul class="gm-facts">
+            <li>1.99% lease rate</li>
             <li>Up to 24 months</li>
-            <li>Hybrid powertrain</li>
+            <li>Most models</li>
+            <li>Hybrid</li>
           </ul>
           <details>
             <summary>Offer details</summary>

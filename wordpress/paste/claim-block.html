@@ -85,74 +85,6 @@
 @media (max-width:1100px){.gmi-wrap{padding:0 40px}}
 @media (max-width:640px){.gmi-wrap{padding:0 20px}}
 
-/* ---------- hero ---------- */
-.gmi-intro{padding-top:52px;padding-bottom:58px;
-  display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:36px 56px;align-items:end}
-@media (max-width:900px){.gmi-intro{grid-template-columns:1fr;align-items:start;gap:30px}}
-.gmi-hero-main{min-width:0}
-.gmi-hero-side{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:22px}
-.gmi-hero-side .gmi-btn{width:100%}
-.gmi h1,
-[class*="gmi-"] h1{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
-  letter-spacing:-.015em;text-transform:uppercase;margin:0 0 26px}
-.gmi-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.55;color:var(--gm-ink,#000)}
-.gmi-countdown{margin:0;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);line-height:.95;color:var(--gm-dark,#222)}
-.gmi-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
-  letter-spacing:-.02em;color:var(--gm-red,#ca0000)}
-.gmi-count-l{display:block;margin-top:10px;font-size:19px;font-weight:500;
-  line-height:1.3;text-wrap:balance;color:var(--gm-dark,#222)}
-
-/* ---------- offers ---------- */
-.gmi-offers{padding:0 0 10px}
-.gmi-offer{display:flex;flex-wrap:wrap;align-items:flex-start;
-  background:var(--gm-card,#ebebeb);margin-bottom:var(--gm-gut,37.5px);scroll-margin-top:24px}
-.gmi-offer-img{flex:0 0 400px;line-height:0}
-.gmi-offer-img img{width:100%;height:auto}
-.gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
-  align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
-.gmi-offer-main{flex:1 1 280px;min-width:0}
-.gmi-offer h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(34px,3.7vw,56px);
-  line-height:.98;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 10px;color:#000}
-.gmi-offer-sub{font-size:19px;line-height:1.45;color:var(--gm-ink,#000);margin:0 0 18px;max-width:40ch}
-.gmi-facts{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0 0 22px;padding:0}
-.gmi-facts li{font-size:15px;line-height:1.5;color:var(--gm-dark,#222)}
-.gmi-facts li+li::before{content:"\00b7";color:#9a9a9a;margin-right:18px}
-.gmi-offer details{margin:0}
-.gmi-offer summary{cursor:pointer;list-style:none;display:inline-block;font-size:15px;
-  color:var(--gm-muted,#5d5d5d);text-decoration:underline;text-underline-offset:3px;
-  text-decoration-color:#bcbcbc;transition:color .15s ease}
-.gmi-offer summary::-webkit-details-marker{display:none}
-.gmi-offer summary:hover,.gmi-offer summary:focus-visible{color:var(--gm-red,#ca0000)}
-.gmi-fine{font-size:16px;line-height:1.6;color:#4a4a4a;margin:16px 0 0;max-width:72ch}
-.gmi-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
-@media (max-width:1040px){
-  .gmi-offer-img{flex:1 1 100%;max-width:460px;margin:0 auto}
-  .gmi-offer-cta{flex:1 1 100%}
-}
-.gmi-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
-  font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:17px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
-  text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red,#ca0000);
-  background:var(--gm-red,#ca0000);color:#fff;padding:15px 18px;
-  transition:background .15s ease,border-color .15s ease,color .15s ease,transform .12s ease}
-.gmi-btn:hover{background:var(--gm-red-dk,#9d0000);border-color:var(--gm-red-dk,#9d0000)}
-.gmi-btn:active{transform:translateY(1px)}
-.gmi-btn-ghost{background:transparent;color:#000;border-color:#c4c4c4;font-size:15px;padding:12px 18px}
-.gmi-btn-ghost:hover{background:transparent;border-color:#000;color:#000}
-.gmi-expiry{font-size:14px;text-align:right;color:var(--gm-muted,#5d5d5d);margin:4px 0 0}
-
-/* ---------- motion ----------
-   The .gmi-motion flag is set by script, so if the script never runs
-   nothing is hidden. Stagger delays are set per element by that script. */
-.gmi-motion .gmi-rise{opacity:0;transform:translateY(22px)}
-.gmi-motion .gmi-rise.is-in{opacity:1;transform:none;
-  transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
-@media print{
-  .gmi-motion .gmi-rise{opacity:1 !important;transform:none !important}
-}
-@media (prefers-reduced-motion:reduce){
-  .gmi-motion .gmi-rise,.gmi-motion .gmi-rise.is-in{opacity:1;transform:none;transition:none}
-  .gmi-btn:active{transform:none}
-}
 /* ---------- host-page defences ----------
    These matter wherever the fragment is pasted into someone else's page:
    WordPress wraps loose markup in its own <p> tags, and themes style every
@@ -199,8 +131,82 @@
 .gmi.gmi .gmi-count-n,
 [class*="gmi-"] .gmi-count-n{color:var(--gm-red,#ca0000)}
 .gmi.gmi .gmi-field :is(input,select,textarea):focus,
-[class*="gmi-"] .gmi-field :is(input{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
+[class*="gmi-"] .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
 
+/* ---------- hero ---------- */
+.gmi-intro{padding-top:52px;padding-bottom:58px;
+  display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:36px 56px;align-items:end}
+@media (max-width:900px){.gmi-intro{grid-template-columns:1fr;align-items:start;gap:30px}}
+.gmi-hero-main{min-width:0}
+.gmi-hero-side{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:22px}
+.gmi-hero-side .gmi-btn{width:100%}
+.gmi h1,
+[class*="gmi-"] h1{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
+  letter-spacing:-.015em;text-transform:uppercase;margin:0 0 26px}
+.gmi-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.55;color:var(--gm-ink,#000)}
+.gmi-countdown{margin:0;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);line-height:.95;color:var(--gm-dark,#222)}
+.gmi-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
+  letter-spacing:-.02em;color:var(--gm-red,#ca0000)}
+.gmi-count-l{display:block;margin-top:10px;font-size:19px;font-weight:500;
+  line-height:1.3;text-wrap:balance;color:var(--gm-dark,#222)}
+
+/* ---------- offers ---------- */
+.gmi-offers{padding:0 0 10px}
+.gmi-offer{display:flex;flex-wrap:wrap;align-items:flex-start;--accent:var(--gm-red,#ca0000);
+  background:var(--gm-card,#ebebeb);margin-bottom:var(--gm-gut,37.5px);scroll-margin-top:24px}
+.gmi-offer-img{flex:0 0 400px;line-height:0}
+.gmi-offer-img img{width:100%;height:auto}
+.gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
+  align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
+.gmi-offer-main{flex:1 1 280px;min-width:0}
+.gmi-eyebrow{display:inline-block;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:11.5px;font-weight:600;
+  letter-spacing:1.8px;text-transform:uppercase;color:#fff;background:var(--accent,#ca0000);
+  padding:4px 10px;margin:0 0 10px}
+.gmi-offer h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:27px;line-height:1.15;
+  letter-spacing:.2px;text-transform:uppercase;margin:0 0 4px;color:#000}
+.gmi-offer-sub{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:19px;font-weight:400;line-height:1.3;
+  color:var(--gm-dark,#222);margin:0 0 14px}
+.gmi-facts.gmi-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
+.gmi-facts li{font-size:12.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
+  background:#fff;border-left:3px solid var(--accent,#ca0000);padding:6px 11px;
+  color:var(--gm-dark,#222)}
+.gmi-offer details{border-top:1px solid #dcdcdc;margin-top:4px}
+.gmi-offer summary{cursor:pointer;list-style:none;padding:11px 0 0;font-size:13px;font-weight:bold;
+  letter-spacing:.4px;text-transform:uppercase;color:var(--gm-muted,#5d5d5d)}
+.gmi-offer summary::-webkit-details-marker{display:none}
+.gmi-offer summary::after{content:" +";color:var(--accent,#ca0000);font-size:15px}
+.gmi-offer details[open] summary::after{content:" \2212"}
+.gmi-offer summary:hover,.gmi-offer summary:focus-visible{color:var(--gm-red,#ca0000)}
+.gmi-fine{font-size:11.5px;line-height:1.6;color:#6b6b6b;margin:9px 0 12px}
+.gmi-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){
+  .gmi-offer-img{flex:1 1 100%;max-width:460px;margin:0 auto}
+  .gmi-offer-cta{flex:1 1 100%}
+}
+.gmi-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:17px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+  text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red,#ca0000);
+  background:var(--gm-red,#ca0000);color:#fff;padding:15px 18px;
+  transition:background .15s ease,border-color .15s ease,color .15s ease,transform .12s ease}
+.gmi-btn:hover{background:var(--gm-red-dk,#9d0000);border-color:var(--gm-red-dk,#9d0000)}
+.gmi-btn:active{transform:translateY(1px)}
+.gmi-btn-ghost{background:transparent;color:#000;border-color:#c4c4c4;font-size:15px;padding:12px 18px}
+.gmi-btn-ghost:hover{background:transparent;border-color:#000;color:#000}
+.gmi-expiry{font-size:14px;text-align:right;color:var(--gm-muted,#5d5d5d);margin:4px 0 0}
+
+/* ---------- motion ----------
+   The .gmi-motion flag is set by script, so if the script never runs
+   nothing is hidden. Stagger delays are set per element by that script. */
+.gmi-motion .gmi-rise{opacity:0;transform:translateY(22px)}
+.gmi-motion .gmi-rise.is-in{opacity:1;transform:none;
+  transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+@media print{
+  .gmi-motion .gmi-rise{opacity:1 !important;transform:none !important}
+}
+@media (prefers-reduced-motion:reduce){
+  .gmi-motion .gmi-rise,.gmi-motion .gmi-rise.is-in{opacity:1;transform:none;transition:none}
+  .gmi-btn:active{transform:none}
+}
 /* ---------- claim page ---------- */
 .gmi-claim{padding:8px 0 40px}
 .gmi-claim h1{margin-bottom:10px}

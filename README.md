@@ -406,9 +406,10 @@ regenerated with `node wordpress/build-paste.js` rather than edited.)
 ```php
 array(
     'key'     => 'durango',          // the ?offer= slug
-    'amount'  => 'Up to $10,000',    // the figure, the card's display type
-    'sub'     => 'In total incentives on every 2026 Dodge Durango',
-    'facts'   => array( 'All 2026 Durango models' ),
+    'eyebrow' => 'Total Incentives', // the filled badge above the headline
+    'amount'  => 'Up to $10,000 in Total Incentives',   // the headline
+    'sub'     => '2026 Dodge Durango — all models',     // the model line
+    'facts'   => array( 'Up to $10,000', 'All 2026 Durango models' ), // the chips
     'fine'    => array( '…' ),       // one entry per paragraph
     'name'    => '…',                // how it reads back to the customer
     'loyalty' => false,              // true reveals the ownership questions
@@ -460,6 +461,20 @@ Two rules it is built around, both easy to break:
   full-page screenshot never scrolls.
 
 `prefers-reduced-motion: reduce` drops the travel and shows everything at once.
+
+## The card design
+
+Each card carries, in order: a filled **eyebrow** naming the offer type, the
+**headline**, the **model line**, the terms as **chips**, and `OFFER DETAILS +`.
+
+This was briefly simplified — eyebrow and chips removed, the headline cut back
+to just the figure — on the reasoning that the creative already shouts the
+offer. The dealership asked for it back, and they were right: the eyebrow is
+the only thing that says what *kind* of offer it is, and the chips carry the
+terms without the visitor opening anything. Do not strip them again.
+
+The accent colour comes from `--accent` on `.gmi-offer`, which defaults to the
+house red. Setting it per card is possible but all five are deliberately red.
 
 ## Dates
 

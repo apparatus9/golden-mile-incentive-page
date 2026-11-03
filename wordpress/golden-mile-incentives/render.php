@@ -78,6 +78,7 @@ function gmi_render_offers( $atts ) {
 <div class="gmi-offer-img"><img src="<?php echo esc_url( GMI_URL . 'assets/' . $offer['image'] ); ?>" width="<?php echo (int) $offer['width']; ?>" height="<?php echo (int) $offer['height']; ?>"<?php echo $i > 0 ? ' loading="lazy"' : ''; ?> alt="<?php echo esc_attr( $offer['alt'] ); ?>"></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
+<?php if ( ! empty( $offer['eyebrow'] ) ) : ?><p class="gmi-eyebrow"><?php echo esc_html( $offer['eyebrow'] ); ?></p><?php endif; ?>
 <h2><?php echo esc_html( $offer['amount'] ); ?></h2>
 <p class="gmi-offer-sub"><?php echo wp_kses( $offer['sub'], gmi_allowed_html() ); ?></p>
 <ul class="gmi-facts"><?php foreach ( $offer['facts'] as $fact ) : ?><li><?php echo esc_html( $fact ); ?></li><?php endforeach; ?></ul>
