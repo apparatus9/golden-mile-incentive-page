@@ -474,8 +474,24 @@ offer. The dealership asked for it back, and they were right: the eyebrow is
 the only thing that says what *kind* of offer it is, and the chips carry the
 terms without the visitor opening anything. Do not strip them again.
 
-The accent colour comes from `--accent` on `.gmi-offer`, which defaults to the
-house red. Setting it per card is possible but all five are deliberately red.
+Each card sets its own `--accent`, keyed to the vehicle in its creative, the
+way the original page did. It colours the eyebrow, the left edge of each chip,
+and the + on OFFER DETAILS.
+
+| offer | accent | taken from |
+|---|---|---|
+| Durango | `#c8102e` | Dodge red, off the badge in the creative — the vehicle is white |
+| Compass | `#e4601c` | the orange paint |
+| Wrangler | `#c9a227` | the gold paint |
+| Grand Cherokee | `#44607a` | the slate of the bridge — the vehicle is white |
+| Cherokee | `#2461db` | the blue paint |
+
+Orange and gold cannot carry white text at 4.5:1 without turning brown, which
+is what made two of them read as the same colour on the first attempt. So each
+card also sets `--accent-ink`, and those two take near-black text instead.
+If you change an accent, keep its badge above 4.5:1 and keep it at least 60
+apart in RGB from the others — `wordpress/build-onepage.js` does not check
+this, but the script that set them did.
 
 ## Dates
 
