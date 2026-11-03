@@ -14,20 +14,46 @@
   --gm-head:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;
   --gm-body:Arial,Helvetica,sans-serif;
   --gm-gut:37.5px;
-  font-family:var(--gm-body);
+  font-family:var(--gm-body,Arial,Helvetica,sans-serif);
   color:#000;
   line-height:1.55;
   -webkit-font-smoothing:antialiased;
 }
-.gmi *,.gmi *::before,.gmi *::after{box-sizing:border-box}
-.gmi img{max-width:100%;height:auto;display:block}
+.gmi *,.gmi *::before,.gmi *::after,
+[class*="gmi-"] *,[class*="gmi-"] *::before,[class*="gmi-"] *::after{box-sizing:border-box}
+[class*="gmi-"],[class*="gmi-"] *,[class*="gmi-"]::before,[class*="gmi-"]::after,
+[class*="gmi-"] *::before,[class*="gmi-"] *::after{box-sizing:border-box}
+.gmi img,
+[class*="gmi-"] img{max-width:100%;height:auto;display:block}
 
 /* The editor wraps loose block elements in its own <p> tags and leaves empty
    ones behind. Same defence the staff page needed. */
 .gmi > p:empty{display:none}
-.gmi > br{display:none}
+.gmi > br,
+[class*="gmi-"] > br{display:none}
 
 .gmi-wrap{max-width:1440px;margin:0 auto;padding:0 48px}
+
+/* ---------- surviving a host editor that drops the wrappers ----------
+   Every colour, face and measure is declared on .gmi, and the page gutter
+   on .gmi-wrap. A WordPress block editor or page builder that re-parses
+   the pasted markup can re-parent the content out of both, which leaves
+   the layout intact but every var() unresolved: grey cards turn white,
+   red buttons turn into white text on white, borders vanish and the
+   headings fall back to the body face. Every var() above therefore
+   carries its own fallback, and these two rules restore the measure. */
+.gmi-intro,.gmi-offer,.gmi-claim,.gmi-legal{max-width:1344px;margin-left:auto;margin-right:auto}
+/* and the side gutter, but only when the wrapper really is missing, so the
+   cards stay flush inside it. Dropped whole by browsers too old for a
+   complex :not(), which leaves them exactly as they are today. */
+.gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
+.gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 96px)}
+@media (max-width:1100px){
+  .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
+  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 80px)}}
+@media (max-width:640px){
+  .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
+  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 40px)}}
 @media (max-width:1100px){.gmi-wrap{padding:0 40px}}
 @media (max-width:640px){.gmi-wrap{padding:0 20px}}
 
@@ -38,36 +64,37 @@
 .gmi-hero-main{min-width:0}
 .gmi-hero-side{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:22px}
 .gmi-hero-side .gmi-btn{width:100%}
-.gmi h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
+.gmi h1,
+[class*="gmi-"] h1{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
   letter-spacing:-.015em;text-transform:uppercase;margin:0 0 26px}
 .gmi-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.55;color:var(--gm-ink,#000)}
-.gmi-countdown{margin:0;font-family:var(--gm-head);line-height:.95;color:var(--gm-dark)}
+.gmi-countdown{margin:0;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);line-height:.95;color:var(--gm-dark,#222)}
 .gmi-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
-  letter-spacing:-.02em;color:var(--gm-red)}
+  letter-spacing:-.02em;color:var(--gm-red,#ca0000)}
 .gmi-count-l{display:block;margin-top:10px;font-size:19px;font-weight:500;
-  line-height:1.3;text-wrap:balance;color:var(--gm-dark)}
+  line-height:1.3;text-wrap:balance;color:var(--gm-dark,#222)}
 
 /* ---------- offers ---------- */
 .gmi-offers{padding:0 0 10px}
 .gmi-offer{display:flex;flex-wrap:wrap;align-items:flex-start;
-  background:var(--gm-card);margin-bottom:var(--gm-gut);scroll-margin-top:24px}
+  background:var(--gm-card,#ebebeb);margin-bottom:var(--gm-gut,37.5px);scroll-margin-top:24px}
 .gmi-offer-img{flex:0 0 400px;line-height:0}
 .gmi-offer-img img{width:100%;height:auto}
 .gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gmi-offer-main{flex:1 1 280px;min-width:0}
-.gmi-offer h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(34px,3.7vw,56px);
+.gmi-offer h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(34px,3.7vw,56px);
   line-height:.98;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 10px;color:#000}
 .gmi-offer-sub{font-size:19px;line-height:1.45;color:var(--gm-ink,#000);margin:0 0 18px;max-width:40ch}
 .gmi-facts{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0 0 22px;padding:0}
-.gmi-facts li{font-size:15px;line-height:1.5;color:var(--gm-dark)}
+.gmi-facts li{font-size:15px;line-height:1.5;color:var(--gm-dark,#222)}
 .gmi-facts li+li::before{content:"\00b7";color:#9a9a9a;margin-right:18px}
 .gmi-offer details{margin:0}
 .gmi-offer summary{cursor:pointer;list-style:none;display:inline-block;font-size:15px;
-  color:var(--gm-muted);text-decoration:underline;text-underline-offset:3px;
+  color:var(--gm-muted,#5d5d5d);text-decoration:underline;text-underline-offset:3px;
   text-decoration-color:#bcbcbc;transition:color .15s ease}
 .gmi-offer summary::-webkit-details-marker{display:none}
-.gmi-offer summary:hover,.gmi-offer summary:focus-visible{color:var(--gm-red)}
+.gmi-offer summary:hover,.gmi-offer summary:focus-visible{color:var(--gm-red,#ca0000)}
 .gmi-fine{font-size:16px;line-height:1.6;color:#4a4a4a;margin:16px 0 0;max-width:72ch}
 .gmi-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
 @media (max-width:1040px){
@@ -75,15 +102,15 @@
   .gmi-offer-cta{flex:1 1 100%}
 }
 .gmi-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
-  font-family:var(--gm-head);font-size:17px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
-  text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red);
-  background:var(--gm-red);color:#fff;padding:15px 18px;
+  font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:17px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+  text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red,#ca0000);
+  background:var(--gm-red,#ca0000);color:#fff;padding:15px 18px;
   transition:background .15s ease,border-color .15s ease,color .15s ease,transform .12s ease}
-.gmi-btn:hover{background:var(--gm-red-dk);border-color:var(--gm-red-dk)}
+.gmi-btn:hover{background:var(--gm-red-dk,#9d0000);border-color:var(--gm-red-dk,#9d0000)}
 .gmi-btn:active{transform:translateY(1px)}
 .gmi-btn-ghost{background:transparent;color:#000;border-color:#c4c4c4;font-size:15px;padding:12px 18px}
 .gmi-btn-ghost:hover{background:transparent;border-color:#000;color:#000}
-.gmi-expiry{font-size:14px;text-align:right;color:var(--gm-muted);margin:4px 0 0}
+.gmi-expiry{font-size:14px;text-align:right;color:var(--gm-muted,#5d5d5d);margin:4px 0 0}
 
 /* ---------- motion ----------
    The .gmi-motion flag is set by script, so if the script never runs
@@ -109,49 +136,67 @@
    text the theme's link colour - red on red on the primary button, i.e.
    invisible. Doubling the class wins that without !important. */
 .gmi p:empty{display:none}
-.gmi br:only-child{display:none}
-.gmi ul,.gmi ol{list-style:none;margin:0;padding:0}
-.gmi li{margin:0;padding:0}
-.gmi h1,.gmi h2,.gmi h3{padding:0}
-.gmi img{max-width:100%;height:auto;display:block;border-radius:0;box-shadow:none;border:0}
-.gmi a,.gmi button{box-shadow:none}
-.gmi details{border:0;padding:0;background:none}
-.gmi details>summary{display:inline-block;background:none}
-.gmi details>summary::marker,.gmi details>summary::-webkit-details-marker{display:none;content:""}
-.gmi input,.gmi select,.gmi textarea,.gmi button{border-radius:0;box-shadow:none}
-.gmi.gmi a:not(.gmi-btn){color:inherit}
-.gmi.gmi .gmi-btn{color:#fff;text-decoration:none}
-.gmi.gmi .gmi-btn-ghost{color:#000}
-.gmi.gmi .gmi-btn:hover{color:#fff}
-.gmi.gmi .gmi-btn-ghost:hover{color:#000}
-.gmi.gmi .gmi-status,.gmi.gmi .gmi-status a,.gmi.gmi .gmi-req{color:var(--gm-red)}
-.gmi.gmi .gmi-count-n{color:var(--gm-red)}
-.gmi.gmi .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
+.gmi br:only-child,
+[class*="gmi-"] br:only-child{display:none}
+.gmi ul,.gmi ol,
+[class*="gmi-"] ul,[class*="gmi-"] ol{list-style:none;margin:0;padding:0}
+.gmi li,
+[class*="gmi-"] li{margin:0;padding:0}
+.gmi h1,.gmi h2,.gmi h3,
+[class*="gmi-"] h1,[class*="gmi-"] h2,[class*="gmi-"] h3{padding:0}
+.gmi img,
+[class*="gmi-"] img{max-width:100%;height:auto;display:block;border-radius:0;box-shadow:none;border:0}
+.gmi a,.gmi button,
+[class*="gmi-"] a,[class*="gmi-"] button{box-shadow:none}
+.gmi details,
+[class*="gmi-"] details{border:0;padding:0;background:none}
+.gmi details>summary,
+[class*="gmi-"] details>summary{display:inline-block;background:none}
+.gmi details>summary::marker,.gmi details>summary::-webkit-details-marker,
+[class*="gmi-"] details>summary::marker,[class*="gmi-"] details>summary::-webkit-details-marker{display:none;content:""}
+.gmi input,.gmi select,.gmi textarea,.gmi button,
+[class*="gmi-"] input,[class*="gmi-"] select,[class*="gmi-"] textarea,[class*="gmi-"] button{border-radius:0;box-shadow:none}
+.gmi.gmi a:not(.gmi-btn),
+[class*="gmi-"] a:not(.gmi-btn){color:inherit}
+.gmi.gmi .gmi-btn,
+[class*="gmi-"] .gmi-btn{color:#fff;text-decoration:none}
+.gmi.gmi .gmi-btn-ghost,
+[class*="gmi-"] .gmi-btn-ghost{color:#000}
+.gmi.gmi .gmi-btn:hover,
+[class*="gmi-"] .gmi-btn:hover{color:#fff}
+.gmi.gmi .gmi-btn-ghost:hover,
+[class*="gmi-"] .gmi-btn-ghost:hover{color:#000}
+.gmi.gmi .gmi-status,.gmi.gmi .gmi-status a,.gmi.gmi .gmi-req,
+[class*="gmi-"] .gmi-status,[class*="gmi-"] .gmi-status a,[class*="gmi-"] .gmi-req{color:var(--gm-red,#ca0000)}
+.gmi.gmi .gmi-count-n,
+[class*="gmi-"] .gmi-count-n{color:var(--gm-red,#ca0000)}
+.gmi.gmi .gmi-field :is(input,select,textarea):focus,
+[class*="gmi-"] .gmi-field :is(input{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
 
 /* ---------- claim page ---------- */
 .gmi-claim{padding:8px 0 40px}
 .gmi-claim h1{margin-bottom:10px}
-.gmi-claim-intro{color:var(--gm-muted);font-size:16px;margin:0 0 28px;max-width:760px}
-.gmi-formcard{background:var(--gm-card);padding:34px 36px 30px;max-width:980px}
+.gmi-claim-intro{color:var(--gm-muted,#5d5d5d);font-size:16px;margin:0 0 28px;max-width:760px}
+.gmi-formcard{background:var(--gm-card,#ebebeb);padding:34px 36px 30px;max-width:980px}
 @media (max-width:640px){.gmi-formcard{padding:24px 20px}}
 
 /* the offer carried over from the offers page */
 .gmi-chosen{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;
-  border-left:4px solid var(--gm-red);background:#fff;padding:14px 18px;margin:0 0 26px}
+  border-left:4px solid var(--gm-red,#ca0000);background:#fff;padding:14px 18px;margin:0 0 26px}
 .gmi-chosen-label{display:block;font-size:11.5px;font-weight:bold;letter-spacing:1.4px;
-  text-transform:uppercase;color:var(--gm-muted)}
-.gmi-chosen-name{font-family:var(--gm-head);font-size:21px;font-weight:600;text-transform:uppercase;
+  text-transform:uppercase;color:var(--gm-muted,#5d5d5d)}
+.gmi-chosen-name{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:21px;font-weight:600;text-transform:uppercase;
   line-height:1.2;color:#000}
-.gmi-chosen-ends{font-size:12.5px;color:var(--gm-muted);margin:2px 0 0}
-.gmi-chosen a{font-size:12.5px;color:var(--gm-dark);white-space:nowrap}
+.gmi-chosen-ends{font-size:12.5px;color:var(--gm-muted,#5d5d5d);margin:2px 0 0}
+.gmi-chosen a{font-size:12.5px;color:var(--gm-dark,#222);white-space:nowrap}
 
 /* the "you need to pick an offer first" state */
-.gmi-gate{display:none;background:var(--gm-card);border-left:4px solid var(--gm-red);
+.gmi-gate{display:none;background:var(--gm-card,#ebebeb);border-left:4px solid var(--gm-red,#ca0000);
   padding:40px 36px;max-width:780px}
 .gmi-gate.is-on{display:block}
-.gmi-gate h2{font-family:var(--gm-head);font-size:27px;font-weight:600;text-transform:uppercase;
+.gmi-gate h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:27px;font-weight:600;text-transform:uppercase;
   margin:0 0 10px;color:#000}
-.gmi-gate p{color:var(--gm-muted);font-size:16px;margin:0 0 22px;max-width:560px}
+.gmi-gate p{color:var(--gm-muted,#5d5d5d);font-size:16px;margin:0 0 22px;max-width:560px}
 .gmi-gate .gmi-btn{width:auto;min-width:260px}
 .gmi-claimwrap{display:none}
 .gmi-claimwrap.is-on{display:block}
@@ -162,50 +207,50 @@
 .gmi-field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .gmi-field-full{grid-column:1/-1}
 .gmi-field label,.gmi-legend{font-size:12px;font-weight:bold;letter-spacing:1px;
-  text-transform:uppercase;color:var(--gm-dark)}
-.gmi-req{color:var(--gm-red)}
+  text-transform:uppercase;color:var(--gm-dark,#222)}
+.gmi-req{color:var(--gm-red,#ca0000)}
 .gmi-field input[type=text],.gmi-field input[type=email],.gmi-field input[type=tel],
 .gmi-field select,.gmi-field textarea{
-  font-family:var(--gm-body);font-size:15px;color:#000;background:#fff;
+  font-family:var(--gm-body,Arial,Helvetica,sans-serif);font-size:15px;color:#000;background:#fff;
   border:1px solid #c4c4c4;border-radius:0;padding:11px 12px;width:100%;
   transition:border-color .15s ease,box-shadow .15s ease}
 .gmi-field textarea{min-height:96px;resize:vertical}
 .gmi-field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23222' stroke-width='1.6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 13px center;background-size:12px 8px;padding-right:36px}
-.gmi-field :is(input,select,textarea):focus{outline:none;border-color:var(--gm-red);
+.gmi-field :is(input,select,textarea):focus{outline:none;border-color:var(--gm-red,#ca0000);
   box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
-.gmi-field :is(input,select,textarea):user-invalid{border-color:var(--gm-red);background:#fff8f8}
+.gmi-field :is(input,select,textarea):user-invalid{border-color:var(--gm-red,#ca0000);background:#fff8f8}
 fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi-radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .gmi-radios label{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:normal;
   letter-spacing:0;text-transform:none;border:1px solid #c4c4c4;background:#fff;padding:9px 14px;
   cursor:pointer;transition:border-color .15s ease,background .15s ease}
-.gmi-radios input{accent-color:var(--gm-red);margin:0}
-.gmi-radios label:has(input:checked){border-color:var(--gm-red);background:#fdf3f3}
+.gmi-radios input{accent-color:var(--gm-red,#ca0000);margin:0}
+.gmi-radios label:has(input:checked){border-color:var(--gm-red,#ca0000);background:#fdf3f3}
 .gmi-conditional{grid-column:1/-1;display:none;gap:18px 24px;
-  grid-template-columns:repeat(2,minmax(0,1fr));border-left:4px solid var(--gm-red);
+  grid-template-columns:repeat(2,minmax(0,1fr));border-left:4px solid var(--gm-red,#ca0000);
   background:#fff;padding:18px 20px}
 @media (max-width:700px){.gmi-conditional{grid-template-columns:1fr}}
 .gmi-conditional.is-on{display:grid}
-.gmi-conditional-note{grid-column:1/-1;margin:0;font-size:12.5px;color:var(--gm-muted)}
+.gmi-conditional-note{grid-column:1/-1;margin:0;font-size:12.5px;color:var(--gm-muted,#5d5d5d)}
 .gmi-consent{grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;margin-top:4px}
-.gmi-consent input{margin-top:3px;accent-color:var(--gm-red);width:17px;height:17px;flex:0 0 17px}
+.gmi-consent input{margin-top:3px;accent-color:var(--gm-red,#ca0000);width:17px;height:17px;flex:0 0 17px}
 .gmi-consent span{font-size:12.5px;line-height:1.6;color:#4a4a4a}
 .gmi-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px;
   margin-top:26px}
 .gmi-actions .gmi-btn{width:auto;min-width:240px}
-.gmi-actions small{font-size:12px;color:var(--gm-muted);max-width:360px}
-.gmi-status{grid-column:1/-1;font-size:14px;font-weight:bold;color:var(--gm-red);margin:0}
-.gmi-status a{color:var(--gm-red)}
+.gmi-actions small{font-size:12px;color:var(--gm-muted,#5d5d5d);max-width:360px}
+.gmi-status{grid-column:1/-1;font-size:14px;font-weight:bold;color:var(--gm-red,#ca0000);margin:0}
+.gmi-status a{color:var(--gm-red,#ca0000)}
 .gmi-honey{position:absolute;left:-9999px;width:1px;height:1px;opacity:0} /* taste-skill-ignore: off-screen honeypot */
 
 /* ---------- success ---------- */
 .gmi-success{display:none;text-align:center;padding:26px 10px}
 .gmi-success.is-on{display:block}
-.gmi-success h2{font-family:var(--gm-head);font-size:30px;font-weight:600;text-transform:uppercase;
+.gmi-success h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:30px;font-weight:600;text-transform:uppercase;
   margin:0 0 10px;color:#000}
-.gmi-success p{font-size:16px;color:var(--gm-muted);margin:0 auto 20px;max-width:560px}
-.gmi-check{width:60px;height:60px;border-radius:50%;background:var(--gm-red);margin:0 auto 18px;
+.gmi-success p{font-size:16px;color:var(--gm-muted,#5d5d5d);margin:0 auto 20px;max-width:560px}
+.gmi-check{width:60px;height:60px;border-radius:50%;background:var(--gm-red,#ca0000);margin:0 auto 18px;
   display:flex;align-items:center;justify-content:center}
 .gmi-check svg{width:30px;height:30px}
 .gmi-success .gmi-btn{display:inline-flex;width:auto;min-width:220px}
