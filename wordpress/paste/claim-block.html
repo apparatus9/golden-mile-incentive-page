@@ -140,16 +140,15 @@
 [class*="gmi-"] .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
 
 /* ---------- hero ---------- */
-.gmi-intro{padding-top:52px;padding-bottom:58px;
-  display:grid;grid-template-columns:minmax(0,1fr);gap:36px 56px;align-items:end}
-@media (max-width:900px){.gmi-intro{grid-template-columns:1fr;align-items:start;gap:30px}}
+.gmi-intro{padding-top:18px;padding-bottom:30px}
 .gmi-hero-main{min-width:0}
-.gmi-hero-side{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:22px}
-.gmi-hero-side .gmi-btn{width:100%}
+.gmi-kicker{display:inline-block;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:13px;font-weight:600;
+  letter-spacing:2.4px;text-transform:uppercase;color:#fff;background:var(--gm-red,#ca0000);
+  padding:6px 14px;margin:0 0 16px}
 .gmi h1,
-[class*="gmi-"] h1{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
-  letter-spacing:-.015em;text-transform:uppercase;margin:0 0 26px}
-.gmi-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.55;color:var(--gm-ink,#000)}
+[class*="gmi-"] h1{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(32px,4.6vw,52px);
+  line-height:1.05;letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px}
+.gmi-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted,#5d5d5d)}
 .gmi-countdown{margin:0;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);line-height:.95;color:var(--gm-dark,#222)}
 .gmi-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
   letter-spacing:-.02em;color:var(--gm-red,#ca0000)}

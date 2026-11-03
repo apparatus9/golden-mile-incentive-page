@@ -64,6 +64,7 @@ function gmi_render_offers( $atts ) {
 
 <div class="gmi-intro">
 <div class="gmi-hero-main">
+<?php if ( ! empty( $atts['kicker'] ) ) : ?><p class="gmi-kicker"><?php echo esc_html( $atts['kicker'] ); ?></p><?php endif; ?>
 <<?php echo esc_html( $h ); ?>><?php echo wp_kses( $atts['title'], gmi_allowed_html() ); ?></<?php echo esc_html( $h ); ?>>
 <p class="gmi-lede"><?php echo wp_kses( $atts['lede'], gmi_allowed_html() ); ?></p>
 </div>

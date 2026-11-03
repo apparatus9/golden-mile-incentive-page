@@ -32,15 +32,15 @@ a{color:inherit}
 @media (max-width:640px){.gm-wrap{padding:0 20px}}
 
 /* ---------- hero ---------- */
-.gm-hero .gm-wrap{padding-top:52px;padding-bottom:58px;
-  display:grid;grid-template-columns:minmax(0,1fr);gap:36px 56px;align-items:end}
-@media (max-width:900px){.gm-hero .gm-wrap{grid-template-columns:1fr;align-items:start;gap:30px}}
+.gm-hero{background:#fff}
+.gm-hero .gm-wrap{padding-top:18px;padding-bottom:30px}
 .gm-hero-main{min-width:0}
-.gm-hero-side{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:22px}
-.gm-hero-side .gm-btn{width:100%}
-h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);line-height:.95;
-  letter-spacing:-.015em;text-transform:uppercase;margin:0 0 26px}
-.gm-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.55;color:var(--gm-ink,#000)}
+.gm-kicker{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;
+  letter-spacing:2.4px;text-transform:uppercase;color:#fff;background:var(--gm-red);
+  padding:6px 14px;margin:0 0 16px}
+h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
+  letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px}
+.gm-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted)}
 .gm-countdown{margin:0;font-family:var(--gm-head);line-height:.95;color:var(--gm-dark)}
 .gm-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
   letter-spacing:-.02em;color:var(--gm-red)}
@@ -121,6 +121,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(40px,6.4vw,92px);l
 <header class="gm-hero">
   <div class="gm-wrap">
     <div class="gm-hero-main">
+      <p class="gm-kicker">All-Out Clearout Event</p>
       <h1>Current Offers &amp; Incentives</h1>
       <p class="gm-lede">The All-Out Clearout Event: total incentives, factory rates and loyalty bonus cash on 2026 Jeep and Dodge models. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in.</p>
     </div>
