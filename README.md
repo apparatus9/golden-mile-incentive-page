@@ -21,6 +21,7 @@ wordpress/paste/offers-block.html   WORDPRESS, no install, two pages — only
 wordpress/paste/claim-block.html    if you want the form on its own URL.
 wordpress/golden-mile-incentives/   WORDPRESS, as a plugin — two shortcodes,
                         [gm_offers] and [gm_claim], offers held as data.
+edealer/footer.html                 the dealership block, shared source
 wordpress/build-paste.js            regenerates the two paste blocks
 wordpress/sync-from-edealer.js      keeps the plugin's assets in step
 

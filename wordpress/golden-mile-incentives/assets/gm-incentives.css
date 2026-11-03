@@ -42,18 +42,18 @@
    red buttons turn into white text on white, borders vanish and the
    headings fall back to the body face. Every var() above therefore
    carries its own fallback, and these two rules restore the measure. */
-.gmi-intro,.gmi-offer,.gmi-claim,.gmi-legal{max-width:1344px;margin-left:auto;margin-right:auto}
+.gmi-intro,.gmi-offer,.gmi-claim,.gmi-legal,.gmi-foot{max-width:1344px;margin-left:auto;margin-right:auto}
 /* and the side gutter, but only when the wrapper really is missing, so the
    cards stay flush inside it. Dropped whole by browsers too old for a
    complex :not(), which leaves them exactly as they are today. */
 .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
-.gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 96px)}
+.gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *),.gmi-foot:not(.gmi-wrap *){width:min(1344px,100% - 96px)}
 @media (max-width:1100px){
   .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
-  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 80px)}}
+  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *),.gmi-foot:not(.gmi-wrap *){width:min(1344px,100% - 80px)}}
 @media (max-width:640px){
   .gmi-intro:not(.gmi-wrap *),.gmi-offer:not(.gmi-wrap *),
-  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 40px)}}
+  .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *),.gmi-foot:not(.gmi-wrap *){width:min(1344px,100% - 40px)}}
 @media (max-width:1100px){.gmi-wrap{padding:0 40px}}
 @media (max-width:640px){.gmi-wrap{padding:0 20px}}
 
@@ -68,8 +68,8 @@
    text the theme's link colour - red on red on the primary button, i.e.
    invisible. Doubling the class wins that without !important. */
 .gmi p:empty{display:none}
-.gmi br:only-child,
-[class*="gmi-"] br:only-child{display:none}
+.gmi > p > br:only-child,
+[class*="gmi-"] > p > br:only-child{display:none}
 .gmi ul,.gmi ol,
 [class*="gmi-"] ul,[class*="gmi-"] ol{list-style:none;margin:0;padding:0}
 .gmi li,
@@ -98,6 +98,10 @@
 [class*="gmi-"] .gmi-btn:hover{color:#fff}
 .gmi.gmi .gmi-btn-ghost:hover,
 [class*="gmi-"] .gmi-btn-ghost:hover{color:#000}
+.gmi.gmi .gmi-foot a,
+[class*="gmi-"] .gmi-foot a{color:var(--gm-dark,#222)}
+.gmi.gmi .gmi-foot a:hover,
+[class*="gmi-"] .gmi-foot a:hover{color:var(--gm-red,#ca0000);text-decoration:underline}
 .gmi.gmi .gmi-status,.gmi.gmi .gmi-status a,.gmi.gmi .gmi-req,
 [class*="gmi-"] .gmi-status,[class*="gmi-"] .gmi-status a,[class*="gmi-"] .gmi-req{color:var(--gm-red,#ca0000)}
 .gmi.gmi .gmi-count-n,
@@ -179,6 +183,21 @@
   .gmi-motion .gmi-rise,.gmi-motion .gmi-rise.is-in{opacity:1;transform:none;transition:none}
   .gmi-btn:active{transform:none}
 }
+/* ---------- footer ----------
+   Ported from the standalone index.html, which carries the dealership
+   details at the foot of the page. Only the WordPress one-page build uses
+   it: the eDealer pages sit inside eDealer's own site chrome, which already
+   has them. Most WordPress themes have a footer of their own too, so the
+   generated block marks this section off clearly in case you want it gone. */
+.gmi-foot{background:#fff;border-top:3px solid var(--gm-red,#ca0000);padding:42px 0 10px;margin-top:10px}
+.gmi-foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px 40px}
+.gmi-foot h4{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:16px;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;margin:0 0 12px;color:#000}
+.gmi-foot p,.gmi-foot li{font-size:14px;color:var(--gm-muted,#5d5d5d);margin:0 0 5px}
+.gmi-foot ul{list-style:none;margin:0;padding:0}
+.gmi-foot li{display:flex;justify-content:space-between;gap:18px;max-width:280px}
+.gmi-foot a{text-decoration:none;font-weight:bold}
+
 /* ---------- claim page ---------- */
 .gmi-claim{padding:8px 0 40px}
 .gmi-claim h1{margin-bottom:10px}

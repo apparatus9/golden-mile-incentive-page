@@ -39,6 +39,15 @@ function offerMap() {
 }
 
 /* ---------- the cards ---------- */
+/* The dealership block from the standalone page. Kept in its own fragment
+   so the standalone, this build and any future one share a single copy. */
+function footerSection() {
+  const f = fs.readFileSync(path.join(SRC, 'footer.html'), 'utf8').trim();
+  const o = f.split('<div').length - 1, c = f.split('</div>').length - 1;
+  if (o !== c) throw new Error('footer.html is unbalanced: ' + o + ' vs ' + c);
+  return f;
+}
+
 function offersSection() {
   let s = fs.readFileSync(path.join(SRC, 'offers.html'), 'utf8');
 
@@ -306,6 +315,12 @@ ${offersSection()}
 <div class="gmi-claim" id="gmi-claim">
 ${formSection(offers)}
 </div>
+
+<!-- DEALERSHIP DETAILS. Most WordPress themes already show the address,
+     phone and hours in their own footer. If yours does, delete from this
+     comment down to the matching END comment - nothing else depends on it. -->
+${footerSection()}
+<!-- END DEALERSHIP DETAILS -->
 
 ${legal}
 
