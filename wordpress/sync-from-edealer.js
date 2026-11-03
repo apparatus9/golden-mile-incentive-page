@@ -116,7 +116,7 @@ function buildScript() {
     `        '<a href="tel:' + PHONE_HREF + '">' + PHONE + '</a> or email ' +`
   );
 
-  const leftovers = ['PREVIEW_FILES', 'resolvePath', 'CLAIM_PATH', 'isPreview', 'github.io', 'ejay@', '2026-11-02T']
+  const leftovers = ['PREVIEW_FILES', 'resolvePath', 'CLAIM_PATH', 'isPreview', 'github.io', 'ejay@', 'T23:59:59']
     .filter((t) => s.includes(t));
   if (leftovers.length) {
     throw new Error('eDealer-specific code left in the generated script: ' + leftovers.join(', '));

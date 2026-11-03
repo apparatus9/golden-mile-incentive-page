@@ -329,7 +329,7 @@ holding the addresses server-side).
 Rows are plain English, and empty fields are dropped so the mail stays short:
 
 > **Offer** Double Loyalty — up to $3,000 Savings
-> **Offer ends** November 2, 2026
+> **Offer ends** November 30, 2026
 > **Name** / **Email** / **Phone** / **Preferred contact**
 > **Vehicle of interest** / **Purchase timeline** / **Trade-in** / **Buying method**
 > **Comments** / **Consent to contact** / **Submitted** (Toronto time) / **Page**
@@ -463,15 +463,30 @@ Two rules it is built around, both easy to break:
 
 ## Dates
 
-Offer end dates are hardcoded in three places: each card's `.gm-expiry` line, the
-`OFFERS` object, and the legal footer. The hero countdown reads `endsAt` in the script
-(`2026-11-02`, and `EVENT_ENDS` in `gm-incentives.js`) and hides itself once that date
-passes. All five offers currently carry the same date.
+All five offers carry the same end date, currently **November 30, 2026**. It appears
+in four kinds of place:
 
-> **These dates are stale.** The creatives are the *October 2026* program and the date
-> carried over from the previous offer set is **November 2, 2026**. Nothing in the
-> creatives states an end date, so it was not changed. Confirm the November program
-> dates and update all four places before this goes live.
+| Where | What |
+|---|---|
+| each card | the `.gm-expiry` / `.gmi-expiry` line |
+| the `OFFERS` map | `ends:`, which the claim form and the lead email read back |
+| the fine print | "until …" inside each offer's own paragraph, and the legal footer |
+| the countdown | `EVENT_ENDS` (`2026-11-30T23:59:59-05:00`), which hides itself once passed |
+
+Note the offset: `-05:00`, not `-04:00`. Daylight time ends on 1 November 2026, so a
+date later in that month is EST. Getting this wrong shifts the countdown by an hour,
+which only shows on the final day.
+
+Change them all at once rather than by hand — there are 61 of them across twelve
+files. In the plugin, the date lives in `offers.php` and the `event_ends` setting
+only, so those two are the whole job there.
+
+> **This date is an assumption, not a program date.** The creatives are the *October
+> 2026* program and state no end date anywhere. The previous offer set said November 2,
+> which had already passed by the time the page was built, so it was moved to the end
+> of the month to stop the page advertising expired offers. **Confirm the real November
+> program dates with the manufacturer and change it before this goes public**, along
+> with the unsourced fine print noted below.
 
 ## Local preview
 

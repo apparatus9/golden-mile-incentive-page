@@ -64,7 +64,7 @@ function gmi_settings() {
 
 				// When the event ends. Drives the hero countdown, which hides
 				// itself once the date has passed. ISO 8601 with offset.
-				'event_ends'    => '2026-11-02T23:59:59-04:00',
+				'event_ends'    => '2026-11-30T23:59:59-05:00',
 
 				// Keep the claim page out of search results.
 				'claim_noindex' => true,

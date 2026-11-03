@@ -63,7 +63,7 @@ Everything is set with one filter. Put this in your child theme's
         $s['privacy_url']   = home_url( '/privacy-policy/' );
         $s['lead_to']       = 'ejay@goldenmilechrysler.ca';
         $s['lead_cc']       = 'mitch@goldenmilechrysler.ca';
-        $s['event_ends']    = '2026-11-02T23:59:59-04:00';
+        $s['event_ends']    = '2026-11-30T23:59:59-05:00';
         return $s;
     } );
 

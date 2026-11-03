@@ -94,14 +94,14 @@
   var LEAD_TO = 'ejay@goldenmilechrysler.ca';
   var LEAD_CC = 'mitch@goldenmilechrysler.ca';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
-  var EVENT_ENDS = '2026-11-02T23:59:59-04:00';
+  var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
 
   var OFFERS = {
-    'durango':          { name: 'Up to $10,000 in Total Incentives — 2026 Dodge Durango', ends: 'Offer ends November 2, 2026' },
-    'compass':          { name: 'Up to $7,500 in Total Incentives — 2026 Jeep Compass', ends: 'Offer ends November 2, 2026' },
-    'wrangler':         { name: '0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'Offer ends November 2, 2026' },
-    'grand-cherokee':   { name: '0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit', ends: 'Offer ends November 2, 2026' },
-    'cherokee':         { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 2, 2026' }
+    'durango':          { name: 'Up to $10,000 in Total Incentives — 2026 Dodge Durango', ends: 'Offer ends November 30, 2026' },
+    'compass':          { name: 'Up to $7,500 in Total Incentives — 2026 Jeep Compass', ends: 'Offer ends November 30, 2026' },
+    'wrangler':         { name: '0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'Offer ends November 30, 2026' },
+    'grand-cherokee':   { name: '0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit', ends: 'Offer ends November 30, 2026' },
+    'cherokee':         { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 30, 2026' }
   };
 
   /* ---------- link paths ---------- */

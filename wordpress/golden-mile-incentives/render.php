@@ -286,7 +286,7 @@ function gmi_legal_text() {
 		. 'maximums: they vary by model, trim and configuration, and not all customers or vehicles '
 		. 'qualify for every component. Loyalty bonus cash is available to eligible owners only and '
 		. 'requires proof of ownership. Pricing excludes license, registration, insurance and applicable '
-		. 'taxes unless otherwise stated. Manufacturer offers end November 2, 2026 unless otherwise '
+		. 'taxes unless otherwise stated. Manufacturer offers end November 30, 2026 unless otherwise '
 		. 'noted. See dealer for complete details. Jeep, Dodge, Ram, Mopar and FIAT are registered '
 		. 'trademarks of FCA US LLC / Stellantis.'
 	);

@@ -173,7 +173,7 @@ ${motion}
   var PHONE = '647-288-5337';
   var PHONE_HREF = '+16472885337';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
-  var EVENT_ENDS = '2026-11-02T23:59:59-04:00';
+  var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
 
   var OFFERS = ${JSON.stringify(offers, null, 4).replace(/\n/g, '\n  ')};
 

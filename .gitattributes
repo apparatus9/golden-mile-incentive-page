@@ -1,0 +1,15 @@
+# Line endings are pinned to LF.
+#
+# The build scripts (wordpress/build-paste.js, build-onepage.js,
+# sync-from-edealer.js) work by matching multi-line string literals in the
+# eDealer sources. Git's core.autocrlf restored those files as CRLF twice
+# during this project, which made every one of those matches fail silently:
+# the generated output came out subtly wrong rather than erroring. Pinning
+# LF removes that failure mode.
+* text=auto eol=lf
+
+# ...except the creatives, which must never be touched.
+*.webp binary
+*.jpg  binary
+*.jpeg binary
+*.png  binary
