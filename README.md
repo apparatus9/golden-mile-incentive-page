@@ -510,18 +510,29 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 - **The loyalty ownership cutoff is unstated.** The previous copy required a vehicle
   registered on or before October 1, 2026. The new creatives only say "for eligible
   owners", so the cutoff was dropped from the copy and the form note. Put the real one back.
-- **FormSubmit is the only thing standing between a filled-in form and a
-  lead in the inbox,** and it has never been activated. The page will
-  cheerfully show the success panel and drop the lead until it is.
-- **The paste blocks point at GitHub Pages for images,** which only resolves
-  once this branch reaches `main`. Until then the creatives 404. Either push
-  to `main` or swap in Media Library URLs — one find-and-replace, see
-  "WordPress" above.
+- **FormSubmit has never been activated, and this is the one blocker that
+  loses enquiries.** Until the address is confirmed, FormSubmit delivers
+  nothing. The submit handler does check the response — it treats
+  `success: "false"` as a failure and shows the visitor the dealership phone
+  number instead of the success panel — but **whether an unactivated address
+  actually returns that, rather than a cheerful success, has not been
+  tested**, so assume the lead is lost until proven otherwise. Fixing it takes
+  about two minutes: send one submission, have the recipient click the
+  activation link FormSubmit emails them, then send a second and confirm it
+  arrives at both `lead_to` and `lead_cc`. Do this before the page is linked
+  anywhere.
+- ~~The paste blocks point at GitHub Pages for images~~ — **done.** `main` now
+  carries the creatives and Pages serves all five (verified 200, and verified
+  loading in a browser from the real URLs). The blocks work as pasted, with no
+  upload step. Moving them to the Media Library is still the more robust
+  option, since it drops the GitHub dependency: upload the five `.webp` and
+  find-and-replace the shared prefix, as "WordPress" above describes.
 - **The WordPress plugin has not been run inside WordPress.** There is no PHP on
   the machine it was written on, so it was verified by parsing rather than by
   executing. Activate it on staging first — see "What was not tested" above.
-- **FormSubmit has not been activated** — see above. Until Ejay clicks the link, nothing
-  is delivered.
+- **The November 30 end date is an assumption.** The creatives state no end date;
+  the previous set's November 2 had already passed. Confirm the real program dates
+  and change them as "Dates" above describes.
 - The eDealer page paths (`/offers`, `/offers-claim`) are assumed — confirm the real
   slugs and update the five card hrefs plus `OFFERS_PATH`.
 - Set the claim page to **noindex** in eDealer and keep it out of the nav.
