@@ -15,8 +15,10 @@ edealer/claim.html      custom pages. See "Importing into eDealer" below.
 edealer/gm-incentives.css   served from GitHub Pages, referenced by both
 edealer/gm-incentives.js    served from GitHub Pages, referenced by both
 
-wordpress/paste/offers-block.html   WORDPRESS, no install — paste each into
-wordpress/paste/claim-block.html    a Custom HTML block. CSS and JS inlined.
+wordpress/paste/one-page-block.html WORDPRESS, no install, ONE page — cards
+                        and form together. Nothing to configure. Start here.
+wordpress/paste/offers-block.html   WORDPRESS, no install, two pages — only
+wordpress/paste/claim-block.html    if you want the form on its own URL.
 wordpress/golden-mile-incentives/   WORDPRESS, as a plugin — two shortcodes,
                         [gm_offers] and [gm_claim], offers held as data.
 wordpress/build-paste.js            regenerates the two paste blocks
@@ -118,10 +120,30 @@ plugin is better; if all you have is an editor login, paste the blocks.
 | Images | GitHub Pages, or your Media Library | bundled with the plugin |
 | Survives a theme change | yes | yes |
 
-### Option A — paste the blocks
+### Option A — paste one block, one page
 
-`wordpress/paste/` holds two files. Each is one self-contained block: the
-stylesheet and the script are inlined, so there is nothing to upload.
+`wordpress/paste/one-page-block.html` is the whole thing: the five cards,
+and the claim form at the bottom of the same page. Each **Claim This Offer**
+button scrolls down to the form and selects that offer on the way.
+
+1. Edit the page, add a **Custom HTML** block, paste the file in.
+2. Publish.
+
+That is all of it. No second page, no permalinks to set, nothing to mark
+`noindex`, nothing to configure. `?offer=<key>` still works for an ad or an
+email pointed at one offer, and the buttons are real anchors to `#gmi-claim`,
+so they work with the script disabled.
+
+Regenerate after any change to the eDealer build:
+
+```bash
+node wordpress/build-onepage.js
+```
+
+### Option A2 — paste two blocks, two pages
+
+Only worth it if the form has to live on its own URL. Two self-contained
+blocks, stylesheet and script inlined.
 
 1. Edit the offers page, add a **Custom HTML** block, paste
    `offers-block.html` into it.
@@ -473,6 +495,9 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 - **The loyalty ownership cutoff is unstated.** The previous copy required a vehicle
   registered on or before October 1, 2026. The new creatives only say "for eligible
   owners", so the cutoff was dropped from the copy and the form note. Put the real one back.
+- **FormSubmit is the only thing standing between a filled-in form and a
+  lead in the inbox,** and it has never been activated. The page will
+  cheerfully show the success panel and drop the lead until it is.
 - **The paste blocks point at GitHub Pages for images,** which only resolves
   once this branch reaches `main`. Until then the creatives 404. Either push
   to `main` or swap in Media Library URLs — one find-and-replace, see
