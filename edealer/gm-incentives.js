@@ -100,8 +100,10 @@
     'durango':          { name: 'Up to $10,000 in Total Incentives — 2026 Dodge Durango', ends: 'Offer ends November 30, 2026' },
     'compass':          { name: 'Up to $7,500 in Total Incentives — 2026 Jeep Compass', ends: 'Offer ends November 30, 2026' },
     'wrangler':         { name: '0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'Offer ends November 30, 2026' },
+    'wrangler-loyalty':   { name: 'Up to $1,500 Loyalty Bonus Cash — 2026 Jeep Wrangler', ends: 'Offer ends November 30, 2026' },
     'grand-cherokee':   { name: '0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit', ends: 'Offer ends November 30, 2026' },
-    'cherokee':         { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 30, 2026' }
+    'cherokee':         { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 30, 2026' },
+    'ram-3500':           { name: 'Up to $11,000 Cash Discount — 2026 Ram 3500 6.7L Cummins HO Diesel', ends: 'Offer ends November 30, 2026' }
   };
 
   /* ---------- link paths ---------- */

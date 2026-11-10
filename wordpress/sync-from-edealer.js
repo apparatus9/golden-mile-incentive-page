@@ -30,6 +30,8 @@ const IMAGES = [
   'offer-wrangler-rubicon.webp',
   'offer-grand-cherokee.webp',
   'offer-cherokee-hybrid.webp',
+  'offer-wrangler-loyalty.webp',
+  'offer-ram-3500.webp',
 ];
 
 let drift = 0;

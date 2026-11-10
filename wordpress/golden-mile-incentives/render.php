@@ -71,7 +71,7 @@ function gmi_render_offers( $atts ) {
 </div>
 
 	<?php foreach ( $offers as $i => $offer ) : ?>
-<div class="gmi-offer" id="offer-<?php echo esc_attr( $offer['key'] ); ?>"<?php if ( ! empty( $offer['accent'] ) ) : ?> style="--accent:<?php echo esc_attr( $offer['accent'] ); ?>;--accent-ink:<?php echo esc_attr( isset( $offer['accent_ink'] ) ? $offer['accent_ink'] : '#ffffff' ); ?>"<?php endif; ?>>
+<div class="gmi-offer<?php echo empty( $offer['wide'] ) ? '' : ' gmi-offer-wide'; ?>" id="offer-<?php echo esc_attr( $offer['key'] ); ?>"<?php if ( ! empty( $offer['accent'] ) ) : ?> style="--accent:<?php echo esc_attr( $offer['accent'] ); ?>;--accent-ink:<?php echo esc_attr( isset( $offer['accent_ink'] ) ? $offer['accent_ink'] : '#ffffff' ); ?>"<?php endif; ?>>
 <div class="gmi-offer-img"><img src="<?php echo esc_url( GMI_URL . 'assets/' . $offer['image'] ); ?>" width="<?php echo (int) $offer['width']; ?>" height="<?php echo (int) $offer['height']; ?>"<?php echo $i > 0 ? ' loading="lazy"' : ''; ?> alt="<?php echo esc_attr( $offer['alt'] ); ?>"></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">

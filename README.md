@@ -1,7 +1,7 @@
 # Golden Mile — Incentive Page
 
 A single-page offers/incentives landing page for Golden Mile Chrysler Dodge Jeep Ram.
-Five live offers, each with a "Claim This Offer" button that drops the visitor into one
+Seven live offers, each with a "Claim This Offer" button that drops the visitor into one
 form with that offer already selected and the eligibility questions for it revealed.
 
 There are **three builds** of the same thing:
@@ -25,7 +25,7 @@ edealer/footer.html                 the dealership block, shared source
 wordpress/build-paste.js            regenerates the two paste blocks
 wordpress/sync-from-edealer.js      keeps the plugin's assets in step
 
-assets/*.webp       the five creatives, optimized — these are what the pages load
+assets/*.webp       the seven creatives, optimized — these are what the pages load
 assets/*.png/.jpg   the original exports, kept so the webp can be regenerated
                     (retired 1920x599 banners from the previous offer set are still
                      in assets/ but nothing references them)
@@ -123,7 +123,7 @@ plugin is better; if all you have is an editor login, paste the blocks.
 
 ### Option A — paste one block, one page
 
-`wordpress/paste/one-page-block.html` is the whole thing: the five cards,
+`wordpress/paste/one-page-block.html` is the whole thing: the seven cards,
 and the claim form at the bottom of the same page. Each **Claim This Offer**
 button scrolls down to the form and selects that offer on the way.
 
@@ -166,7 +166,7 @@ and on multisite only Super Admins have it. An unstyled page means exactly
 that — use the plugin instead.
 
 The creatives are served from GitHub Pages. To serve them from your own
-Media Library, upload the five `.webp` files and replace every
+Media Library, upload the seven `.webp` files and replace every
 `https://apparatus9.github.io/golden-mile-incentive-page/assets` with the
 Media Library URL — one find-and-replace, they all share the prefix.
 
@@ -273,7 +273,7 @@ outrank `.entry-content a` without `!important`.
 `index.html`, the `edealer/` pair and `wordpress/.../offers.php` each hold the offer
 content separately. A change to one does not reach the others. When offers change,
 update all three, or retire the builds you are not using. The duplicated parts are the
-five offer blocks, the `OFFERS` object and the legal footer.
+seven offer blocks, the `OFFERS` object and the legal footer.
 
 The WordPress build is the only one where the offers are data rather than markup, so if
 you are picking one to keep, keep that one.
@@ -440,9 +440,21 @@ with: width 1080, quality 82):
 node -e "require('sharp')('assets/offer-NAME.png').resize({width:1080,withoutEnlargement:true}).webp({quality:82}).toFile('assets/offer-NAME.webp')"
 ```
 
-This took the five creatives from 6.5 MB to 519 KB. Keep the `width`/`height`
+This took the original five creatives from 6.5 MB to 519 KB. Keep the `width`/`height`
 attributes on each `<img>` in step with the source so the page does not shift as the
-images load — the Durango export is 1080x1045, the other four are 1080x1080.
+images load — the Durango export is 1080x1045, the other three squares are 1080x1080,
+and the two banners are 1024x320.
+
+### Square creatives and banner creatives
+
+Five of the creatives are 1080px squares and sit in the card's 400px side column.
+Two — the Wrangler loyalty bonus and the Ram 3500 Cummins — were supplied as
+1024x320 banners instead. Those cards carry `gm-offer-wide` / `gmi-offer-wide`,
+which runs the picture the full width of the card with the copy underneath. The
+alternative was a square crop, which throws the price lockup away and then upscales
+what is left 3.4x. In the plugin the modifier comes from `'wide' => true` on the
+offer. If a square version of either creative turns up, drop the flag and the card
+goes back to the side-column layout with no other change.
 
 ## Motion
 
@@ -485,6 +497,8 @@ and the + on OFFER DETAILS.
 | Wrangler | `#c9a227` | the gold paint |
 | Grand Cherokee | `#44607a` | the slate of the bridge — the vehicle is white |
 | Cherokee | `#2461db` | the blue paint |
+| Wrangler loyalty | `#08383e` | the deep teal panel the offer sits on — the vehicle is sand |
+| Ram 3500 | `#c9783c` | the orange of the rules and the CASH DISCOUNT type — the truck is white |
 
 Orange and gold cannot carry white text at 4.5:1 without turning brown, which
 is what made two of them read as the same colour on the first attempt. So each
@@ -495,7 +509,7 @@ this, but the script that set them did.
 
 ## Dates
 
-All five offers carry the same end date, currently **November 30, 2026**. It appears
+All seven offers carry the same end date, currently **November 30, 2026**. It appears
 in four kinds of place:
 
 | Where | What |
@@ -528,20 +542,25 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 
 ## Not done yet
 
-- **A sixth offer is missing.** Five creatives were supplied
-  (`October_2026_MY26_*_1080x1080_ViewOffers`): Durango, Compass, Wrangler Rubicon,
-  Grand Cherokee and Cherokee. A sixth was expected — most likely a Ram, since the
-  previous set had one. Drop the file in and add it in the four places listed under
-  "Updating the offers".
+- **The Ram 3500 and Wrangler loyalty offers have no end date of their own.** Both
+  creatives state a program code (2618F4 and 2646M1) but no expiry, so both cards
+  carry the page-wide November 30, 2026. Confirm against the program sheet.
+- **The sixth square creative never arrived.** The October set
+  (`October_2026_MY26_*_1080x1080_ViewOffers`) supplied five: Durango, Compass,
+  Wrangler Rubicon, Grand Cherokee and Cherokee. The two banners added since are a
+  different format, not that sixth square. If it turns up, add it in the four places
+  listed under "Updating the offers".
 - **Three offers have unverified fine print.** The Wrangler rate paragraph and the
   Cherokee lease paragraph were carried over from the previous verified set. The
   **Durango**, **Compass** and **Grand Cherokee** paragraphs, and the shared **$1,500
   loyalty** paragraph, were written from what the creative states plus the standard
   Stellantis boilerplate — no payment examples were invented, but they are not the
   manufacturer's own legal copy. Replace them from the program sheet before launch.
-- **The loyalty ownership cutoff is unstated.** The previous copy required a vehicle
-  registered on or before October 1, 2026. The new creatives only say "for eligible
-  owners", so the cutoff was dropped from the copy and the form note. Put the real one back.
+- **The loyalty ownership cutoff is unstated on four of the five loyalty mentions.**
+  Only the Wrangler loyalty banner gives one: registered on or before **November 3,
+  2026**. The square creatives say "for eligible owners" and nothing more, so the
+  cutoff is absent from the Wrangler Rubicon and Grand Cherokee paragraphs and from
+  the form note. Confirm whether November 3 applies to all of them and put it back.
 - **FormSubmit has never been activated, and this is the one blocker that
   loses enquiries.** Until the address is confirmed, FormSubmit delivers
   nothing. The submit handler does check the response — it treats
@@ -554,10 +573,10 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   arrives at both `lead_to` and `lead_cc`. Do this before the page is linked
   anywhere.
 - ~~The paste blocks point at GitHub Pages for images~~ — **done.** `main` now
-  carries the creatives and Pages serves all five (verified 200, and verified
+  carries the creatives and Pages serves all seven (verified 200, and verified
   loading in a browser from the real URLs). The blocks work as pasted, with no
   upload step. Moving them to the Media Library is still the more robust
-  option, since it drops the GitHub dependency: upload the five `.webp` and
+  option, since it drops the GitHub dependency: upload the seven `.webp` and
   find-and-replace the shared prefix, as "WordPress" above describes.
 - **The WordPress plugin has not been run inside WordPress.** There is no PHP on
   the machine it was written on, so it was verified by parsing rather than by
@@ -566,7 +585,7 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   the previous set's November 2 had already passed. Confirm the real program dates
   and change them as "Dates" above describes.
 - The eDealer page paths (`/offers`, `/offers-claim`) are assumed — confirm the real
-  slugs and update the five card hrefs plus `OFFERS_PATH`.
+  slugs and update the seven card hrefs plus `OFFERS_PATH`.
 - Set the claim page to **noindex** in eDealer and keep it out of the nav.
 - The inventory buttons point at `goldenmilechrysler.ca` model URLs that were assumed,
   not verified. Check each one resolves before launch — `/new/Dodge/Durango`,

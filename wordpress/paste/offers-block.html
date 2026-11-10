@@ -161,6 +161,12 @@
   background:var(--gm-card,#ebebeb);margin-bottom:var(--gm-gut,37.5px);scroll-margin-top:24px}
 .gmi-offer-img{flex:0 0 400px;line-height:0}
 .gmi-offer-img img{width:100%;height:auto}
+/* Two of the creatives are 1024x320 banners rather than squares. Those
+   cards run the picture the full width of the card instead of in the 400px
+   side column: a square crop would throw the price lockup away and then
+   upscale what was left more than three times. The doubled class outranks
+   both .gmi-offer-img and its narrow-screen rule whatever the order. */
+.gmi-offer-wide .gmi-offer-img{flex:1 1 100%;max-width:none;margin:0}
 .gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gmi-offer-main{flex:1 1 280px;min-width:0}
@@ -392,6 +398,26 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
+<div class="gmi-offer gmi-offer-wide" id="offer-wrangler-loyalty" style="--accent:#08383e;--accent-ink:#ffffff">
+<div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-wrangler-loyalty.webp" width="1024" height="320" loading="lazy" alt="Up to $1,500 loyalty bonus cash on the 2026 Jeep Wrangler at Golden Mile Chrysler Dodge Jeep Ram."></div>
+<div class="gmi-offer-body">
+<div class="gmi-offer-main">
+<p class="gmi-eyebrow">Loyalty Bonus Cash</p>
+<h2>Up to $1,500 Loyalty Bonus Cash</h2>
+<p class="gmi-offer-sub">2026 Jeep Wrangler &mdash; eligible owners</p>
+<ul class="gmi-facts"><li>Up to $1,500</li><li>After tax</li><li>Eligible 2026 Wrangler models</li><li>Current CDJR or FIAT owners</li></ul>
+<details><summary>Offer details</summary>
+<p class="gmi-fine">Loyalty Bonus Cash of $1,500 (after tax) available on eligible new 2026 Jeep&reg; Wrangler models on purchase, lease or finance at participating retailers in Canada. Available to individuals who have bought/leased and still own a Chrysler, Dodge, Jeep&reg;, Ram or FIAT&reg; vehicle registered in their name on or before November 3, 2026. Program code 2646M1. Proof of ownership required. Offer may be modified or terminated without notice. See dealer for complete details.</p>
+</details>
+</div>
+<div class="gmi-offer-cta">
+<a class="gmi-btn" href="/offers-claim?offer=wrangler-loyalty">Claim This Offer</a>
+<a class="gmi-btn gmi-btn-ghost" href="/new/Jeep/Wrangler">View Wrangler Inventory</a>
+<p class="gmi-expiry">Offer ends November 30, 2026</p>
+</div>
+</div>
+</div>
+
 <div class="gmi-offer" id="offer-grand-cherokee" style="--accent:#44607a;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-grand-cherokee.webp" width="1080" height="1080" loading="lazy" alt="All-Out Clearout Event: 0% financing for up to 72 months plus $1,500 loyalty bonus cash on the 2026 Jeep Grand Cherokee Summit."></div>
 <div class="gmi-offer-body">
@@ -428,6 +454,26 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 <div class="gmi-offer-cta">
 <a class="gmi-btn" href="/offers-claim?offer=cherokee">Claim This Offer</a>
 <a class="gmi-btn gmi-btn-ghost" href="/new/Jeep/Cherokee">View Cherokee Inventory</a>
+<p class="gmi-expiry">Offer ends November 30, 2026</p>
+</div>
+</div>
+</div>
+
+<div class="gmi-offer gmi-offer-wide" id="offer-ram-3500" style="--accent:#c9783c;--accent-ink:#141414">
+<div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-ram-3500.webp" width="1024" height="320" loading="lazy" alt="Up to $11,000 cash discount on the 2026 Ram 3500 Heavy Duty with the 6.7L Cummins HO Turbo Diesel at Golden Mile Chrysler Dodge Jeep Ram."></div>
+<div class="gmi-offer-body">
+<div class="gmi-offer-main">
+<p class="gmi-eyebrow">Cash Discount</p>
+<h2>Up to $11,000 Cash Discount</h2>
+<p class="gmi-offer-sub">2026 Ram 3500 Heavy Duty &mdash; 6.7L Cummins HO Turbo Diesel</p>
+<ul class="gmi-facts"><li>Up to $11,000</li><li>6.7L Cummins HO Turbo Diesel</li><li>Excludes Chassis Cab</li></ul>
+<details><summary>Offer details</summary>
+<p class="gmi-fine">Consumer cash discount of $11,000 available on eligible new 2026 Ram 3500 equipped with the 6.7L Cummins HO Turbo Diesel engine (ETM) on purchase, lease or finance at participating retailers in Canada. Excludes Chassis Cab models. Program code 2618F4. See dealer for complete details.</p>
+</details>
+</div>
+<div class="gmi-offer-cta">
+<a class="gmi-btn" href="/offers-claim?offer=ram-3500">Claim This Offer</a>
+<a class="gmi-btn gmi-btn-ghost" href="/new/Ram/3500">View Ram 3500 Inventory</a>
 <p class="gmi-expiry">Offer ends November 30, 2026</p>
 </div>
 </div>
@@ -545,12 +591,20 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
           "name": "0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon",
           "ends": "Offer ends November 30, 2026"
       },
+      "wrangler-loyalty": {
+          "name": "Up to $1,500 Loyalty Bonus Cash — 2026 Jeep Wrangler",
+          "ends": "Offer ends November 30, 2026"
+      },
       "grand-cherokee": {
           "name": "0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit",
           "ends": "Offer ends November 30, 2026"
       },
       "cherokee": {
           "name": "1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid",
+          "ends": "Offer ends November 30, 2026"
+      },
+      "ram-3500": {
+          "name": "Up to $11,000 Cash Discount — 2026 Ram 3500 6.7L Cummins HO Diesel",
           "ends": "Offer ends November 30, 2026"
       }
   };

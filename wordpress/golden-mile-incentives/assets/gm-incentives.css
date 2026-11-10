@@ -133,6 +133,12 @@
   background:var(--gm-card,#ebebeb);margin-bottom:var(--gm-gut,37.5px);scroll-margin-top:24px}
 .gmi-offer-img{flex:0 0 400px;line-height:0}
 .gmi-offer-img img{width:100%;height:auto}
+/* Two of the creatives are 1024x320 banners rather than squares. Those
+   cards run the picture the full width of the card instead of in the 400px
+   side column: a square crop would throw the price lockup away and then
+   upscale what was left more than three times. The doubled class outranks
+   both .gmi-offer-img and its narrow-screen rule whatever the order. */
+.gmi-offer-wide .gmi-offer-img{flex:1 1 100%;max-width:none;margin:0}
 .gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gmi-offer-main{flex:1 1 280px;min-width:0}

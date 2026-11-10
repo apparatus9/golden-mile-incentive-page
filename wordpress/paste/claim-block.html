@@ -161,6 +161,12 @@
   background:var(--gm-card,#ebebeb);margin-bottom:var(--gm-gut,37.5px);scroll-margin-top:24px}
 .gmi-offer-img{flex:0 0 400px;line-height:0}
 .gmi-offer-img img{width:100%;height:auto}
+/* Two of the creatives are 1024x320 banners rather than squares. Those
+   cards run the picture the full width of the card instead of in the 400px
+   side column: a square crop would throw the price lockup away and then
+   upscale what was left more than three times. The doubled class outranks
+   both .gmi-offer-img and its narrow-screen rule whatever the order. */
+.gmi-offer-wide .gmi-offer-img{flex:1 1 100%;max-width:none;margin:0}
 .gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gmi-offer-main{flex:1 1 280px;min-width:0}
@@ -566,12 +572,20 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
           "name": "0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon",
           "ends": "Offer ends November 30, 2026"
       },
+      "wrangler-loyalty": {
+          "name": "Up to $1,500 Loyalty Bonus Cash — 2026 Jeep Wrangler",
+          "ends": "Offer ends November 30, 2026"
+      },
       "grand-cherokee": {
           "name": "0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit",
           "ends": "Offer ends November 30, 2026"
       },
       "cherokee": {
           "name": "1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid",
+          "ends": "Offer ends November 30, 2026"
+      },
+      "ram-3500": {
+          "name": "Up to $11,000 Cash Discount — 2026 Ram 3500 6.7L Cummins HO Diesel",
           "ends": "Offer ends November 30, 2026"
       }
   };

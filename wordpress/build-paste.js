@@ -110,7 +110,7 @@ function offerMap() {
   const block = js.match(/var OFFERS = \{([\s\S]*?)\n  \};/);
   if (!block) throw new Error('OFFERS map not found');
   const map = {};
-  for (const m of block[1].matchAll(/'([a-z-]+)':\s*\{ name: '(.*?)', ends: '(.*?)' \}/g)) {
+  for (const m of block[1].matchAll(/'([a-z0-9-]+)':\s*\{ name: '(.*?)', ends: '(.*?)' \}/g)) {
     map[m[1]] = { name: m[2], ends: m[3] };
   }
   if (!Object.keys(map).length) throw new Error('no offers parsed');
