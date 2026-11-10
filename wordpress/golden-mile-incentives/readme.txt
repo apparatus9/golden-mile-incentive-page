@@ -21,9 +21,9 @@ Two shortcodes:
   offer back to the customer, locks it into a hidden field and reveals only
   that offer's eligibility questions.
 
-Leads are emailed through FormSubmit. There is no server-side handling and
-nothing is stored in the database, so the plugin adds no tables, no options
-and no admin screens.
+Leads are handled by this site. Each one is saved as a private gmi_lead post
+and then emailed with wp_mail(), in that order, so a mail problem cannot lose
+an enquiry. They are listed under Offer Leads in wp-admin.
 
 == No-install alternative ==
 
@@ -95,20 +95,46 @@ overwrite them — use the `gmi_offers` filter instead.
 
 == Leads ==
 
-Submissions POST as JSON to `https://formsubmit.co/ajax/<lead_to>` and
-FormSubmit sends the mail, with `lead_cc` copied.
+Submissions POST as JSON to `/wp-json/gmi/v1/lead` on this site. The handler
+does two things, in this order:
 
-**Before launch:** FormSubmit will not deliver anything until the address is
-activated. Send one test submission, have the recipient click the activation
-link FormSubmit emails them, then send a second and confirm both addresses
-receive it. Until that is done the visitor sees the success panel and the
-lead is silently dropped.
+1. **Saves** the lead as a private `gmi_lead` post.
+2. **Emails** it with `wp_mail()` to `lead_to`, copying `lead_cc`, with
+   Reply-To set to the customer.
 
-After activation FormSubmit issues a hashed alias for the primary address.
-Swap it into `lead_to`, so the real address is not sitting in public HTML.
-The cc address cannot be aliased and stays visible either way. If that
-matters, route the mail through something you control instead and point
-`MAIL_ENDPOINT` in `assets/gm-incentives.js` at it.
+Saving first is deliberate. A mail server that is down, throttled or simply
+not configured cannot lose an enquiry: it is in Offer Leads > Leads either
+way, with the phone number as a click-to-call link. If only the mail fails,
+the visitor is still thanked - the dealership has their number - and the
+failure is flagged on the lead and in a red admin notice shown to every
+administrator until it is cleared.
+
+The plugin never puts either address in the page. They stay on the server.
+
+**Offer Leads > Test email** sends one test lead to both addresses at the
+press of a button. Do this first, before any real traffic.
+
+If the test says WordPress refused to send it, this site cannot send mail at
+all. If it says WordPress accepted it but nothing arrives, it sent and was
+filtered. Either way, install an SMTP plugin - WP Mail SMTP or Post SMTP -
+and press the button again. This is the usual reason a WordPress form appears
+not to work and is nothing to do with this plugin.
+
+= Spam =
+
+The endpoint is public and carries no nonce, on purpose: these pages sit
+behind a page cache, and a cached nonce is a stale nonce that would fail for
+exactly the visitors the page exists for. Instead there is a hidden honeypot
+field, a limit of six submissions an hour from one IP (filter
+`gmi_rate_limit`), and validation that rejects anything without a name, a
+real email and a phone number of at least seven digits.
+
+= The pasted blocks =
+
+The blocks in `wordpress/paste/` POST to FormSubmit when no plugin is
+present. Activating this plugin on the same site is enough to redirect them
+here instead - it announces its endpoint on any page carrying the form, and
+the block's script prefers it. No re-paste needed.
 
 A hidden `_honey` honeypot is included; bots that fill it are discarded. If
 the POST fails, the visitor is shown the dealership phone number and the

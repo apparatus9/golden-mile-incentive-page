@@ -290,40 +290,78 @@ Every submission is emailed to **both**:
 | To | `ejay@goldenmilechrysler.ca` |
 | Cc | `mitch@goldenmilechrysler.ca` |
 
-Delivery runs through [FormSubmit](https://formsubmit.co) — no account, no server, no
-API key. The page POSTs JSON to `formsubmit.co/ajax/<address>` and FormSubmit sends the
-mail. Both addresses are set in the CONFIG block at the bottom of `index.html`:
+There are two delivery routes. The page picks one at the moment of submit, by
+looking for `window.GMI_LEAD`:
 
-```js
-var LEAD_TO = 'ejay@goldenmilechrysler.ca';
-var LEAD_CC = 'mitch@goldenmilechrysler.ca';
+| | route | used by |
+|---|---|---|
+| **1** | `POST /wp-json/gmi/v1/lead` on the dealership's own site | WordPress, with the plugin active |
+| **2** | `POST formsubmit.co/ajax/<address>` | the standalone page and the eDealer build, which have no server |
+
+**Route 1 is the one that matters, and it is the one WordPress uses.** The plugin
+prints its endpoint into `wp_head` on any page carrying the form — the shortcode
+and the pasted Custom HTML block both qualify, because the block keeps
+`id="gmi-form"`. The script sees it and sends there instead.
+
+```
+visitor submits
+  → POST /wp-json/gmi/v1/lead
+    → 1. SAVED as a gmi_lead post          ← happens first, always
+    → 2. EMAILED via wp_mail() to lead_to, Cc lead_cc, Reply-To the customer
 ```
 
-### ⚠️ One-time activation — do this before launch
+The order is the point. The lead is recorded **before** any mail is attempted, so
+a mail server that is down, throttled or misconfigured cannot lose it. Every
+enquiry is in **Offer Leads → Leads** in wp-admin whatever happens to the email,
+with the phone number as a click-to-call link.
 
-**The first submission will not be delivered.** Instead FormSubmit emails Ejay an
-activation link. Until someone clicks it, submissions are accepted by the page (the
-visitor sees the success panel) and silently dropped.
+If the mail fails, the visitor is still thanked — correctly, because the
+dealership does have their number. The failure is flagged on the lead and in a
+red admin notice that every logged-in administrator sees until it is dealt with.
+Only a failure to *save* tells the visitor to phone instead.
 
-So before this page goes anywhere near real traffic:
+**Offer Leads → Test email** sends one test lead to both addresses at the press
+of a button, so delivery can be proved without inventing a customer. If it does
+not arrive, the site cannot send mail: install an SMTP plugin (WP Mail SMTP,
+Post SMTP) and press it again. This is the single most common reason a
+WordPress form "doesn't work", and it has nothing to do with this plugin.
 
-1. Open the page and send one test submission.
-2. Have Ejay check his inbox for the FormSubmit activation email and click the link.
-3. Send a second test submission and confirm it lands for **both** Ejay and Mitch.
+Both addresses are settings, changed with the `gmi_settings` filter and never by
+editing the plugin:
 
-### ⚠️ The addresses are visible in the page source
-
-`index.html` is public, and so is this repo — both mailboxes are sitting in the markup
-where scrapers can find them. After activation, FormSubmit issues a hashed alias for the
-primary address. Swap it in:
-
-```js
-var LEAD_TO = 'a1b2c3d4e5f6...';   // the alias, not the raw address
+```php
+add_filter( 'gmi_settings', function ( $s ) {
+    $s['lead_to'] = 'ejay@goldenmilechrysler.ca';
+    $s['lead_cc'] = 'mitch@goldenmilechrysler.ca';
+    return $s;
+} );
 ```
 
-`LEAD_CC` can't be aliased, so Mitch's address stays visible either way. If that matters,
-the alternative is a mail route you control (a Cloudflare Worker or Firebase Function
-holding the addresses server-side).
+### Route 2, and why it is only a fallback
+
+`index.html` and the eDealer fragments have no server behind them, so they still
+POST to FormSubmit. Two things to know before relying on it:
+
+- **It has never been activated.** FormSubmit delivers nothing until someone
+  clicks a link it emails to `lead_to`. Send one submission, have Ejay click the
+  link, send a second and confirm it reaches both addresses.
+- **Both mailboxes sit in public JavaScript** there, where scrapers find them.
+  FormSubmit issues a hashed alias for the To address after activation; the Cc
+  cannot be aliased. Route 1 has neither problem — the addresses never leave the
+  server.
+
+### Spam, and why there is no nonce
+
+The endpoint is public, the way the FormSubmit one was. A nonce would be worse
+than useless here: these pages sit behind a page cache, so the nonce in the HTML
+would be whatever was minted when the page was cached, and would fail for
+exactly the visitors the page exists for. Instead:
+
+- the hidden `_honey` field — anything in it is a bot, and the bot is told it
+  succeeded so it does not come back harder;
+- six submissions an hour per IP, filterable with `gmi_rate_limit`;
+- first name, last name, a valid email and a phone with at least seven digits,
+  or it is refused with a message naming what is wrong.
 
 ### What the email contains
 
@@ -336,15 +374,18 @@ Rows are plain English, and empty fields are dropped so the mail stays short:
 > **Comments** / **Consent to contact** / **Submitted** (Toronto time) / **Page**
 
 Offer-specific rows only appear when that offer was chosen. There is one such block
-left: *Currently owns* and *Registered since*, shown for the two offers that carry
-$1,500 loyalty bonus cash (`wrangler` and `grand-cherokee`). A conditional block can
-now serve several offers — `data-for` takes a space-separated list of keys.
+left: *Currently owns* and *Registered since*, shown for the three offers that carry
+$1,500 loyalty bonus cash (`wrangler`, `wrangler-loyalty` and `grand-cherokee`). A
+conditional block can serve several offers — `data-for` takes a space-separated list of
+keys. In the plugin that list is built from the `'loyalty' => true` flag in
+`offers.php`, so adding a loyalty offer there is enough; the two hand-written claim
+fragments carry the list literally and have to be edited.
 
 The subject line is `Offer request: <offer> - <name>`, so the inbox sorts itself.
 
-A hidden `_honey` honeypot field is included; bots that fill it get silently discarded by
-FormSubmit. If the POST fails, the visitor is shown the dealership phone number and
-Ejay's address rather than losing the lead.
+A hidden `_honey` honeypot field is included and travels on both routes. If the POST
+fails outright, the visitor is shown the dealership phone number and Ejay's address
+rather than losing the lead.
 
 ### Swapping to a different provider
 
@@ -561,43 +602,21 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   2026**. The square creatives say "for eligible owners" and nothing more, so the
   cutoff is absent from the Wrangler Rubicon and Grand Cherokee paragraphs and from
   the form note. Confirm whether November 3 applies to all of them and put it back.
-- **FormSubmit has never been activated, and this is the one blocker that
-  loses enquiries.** Until `ejay@goldenmilechrysler.ca` is confirmed inside
-  FormSubmit, FormSubmit delivers nothing at all — not to ejay, not to mitch.
-  Nothing in this repository can fix that: the confirmation link is emailed to
-  that mailbox and has to be clicked from it.
-
-  **Everything on this side of FormSubmit is now proven.** The form was filled
-  the way a customer fills it, with the network intercepted so nothing left the
-  machine, and the captured request checked field by field:
-
-  | checked | result |
-  |---|---|
-  | endpoint | `POST https://formsubmit.co/ajax/ejay@goldenmilechrysler.ca` |
-  | `_cc` | `mitch@goldenmilechrysler.ca` |
-  | `_replyto` | the customer's address |
-  | body | offer, end date, name, email, phone, preferred contact, vehicle, timeline, trade-in, buying method, ownership answers, comments, consent, timestamp, page URL |
-  | FormSubmit says `success:"false"` | no thank-you shown, phone number offered, button re-enabled |
-  | FormSubmit returns 521 | same |
-
-  So an unactivated address does **not** produce a cheerful success — that was
-  the open question, and the answer is that the visitor is correctly told to
-  phone instead. The enquiry is still lost, but it is lost visibly.
-
-  **To finish it:** submit the live form once; FormSubmit emails an activation
-  link to ejay; ejay clicks it; submit once more and confirm the mail arrives
-  at ejay **and** at mitch. Do this before the page is linked anywhere, and
-  re-check `_cc` specifically — FormSubmit's free tier has dropped CC before.
-- **Nothing stores the lead.** FormSubmit is a relay, not a database. If it is
-  down — it served a 521 on October 29, 2026, and was reported down in May and
-  July 2026 — the enquiry exists only in the visitor's head. Two ways out, in
-  order of effort: set `_cc` to a mailbox that is monitored separately, or
-  move delivery server-side. The plugin is PHP and already knows both
-  addresses, so a `register_rest_route` + `wp_mail()` pair would take
-  FormSubmit out of the path entirely for the WordPress build. The pasted
-  Custom HTML block cannot do this — it is HTML and JavaScript with no server
-  of its own, so it needs either FormSubmit, another hosted relay, or the
-  plugin.
+- **Lead delivery is now the site's own job, but it has never run inside
+  WordPress.** No PHP runtime exists on the build machine, so `lead.php` has been
+  syntax-checked and its client side exercised in a browser against a stubbed
+  endpoint — every field it reads was verified to arrive — but the route itself,
+  `wp_mail()`, the post type and the admin screens have not executed. First job
+  after installing: **Offer Leads → Test email**, then one real submission through
+  the live form, then check it appears under **Leads** and in both inboxes.
+- **wp_mail() may need an SMTP plugin.** Plenty of hosts either refuse PHP mail or
+  have it land in junk. The test button distinguishes the two cases: "WordPress
+  refused to send it" means the site cannot send at all, while "WordPress accepted
+  the message" plus an empty inbox means it sent and was filtered. Either way the
+  fix is WP Mail SMTP or Post SMTP, not this plugin.
+- **The standalone and eDealer builds still depend on FormSubmit, unactivated.**
+  See "Route 2" above. They have no server, so there is nothing better available
+  to them short of a hosted function.
 - ~~The paste blocks point at GitHub Pages for images~~ — **done.** `main` now
   carries the creatives and Pages serves all seven (verified 200, and verified
   loading in a browser from the real URLs). The blocks work as pasted, with no

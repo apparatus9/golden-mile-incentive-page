@@ -898,6 +898,31 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     return body;
   }
 
+  /* The same answers, keyed the way the WordPress endpoint wants them.
+     It labels and formats the mail itself, so what travels here is the
+     raw form, not a pre-rendered email. */
+  function buildLead(data) {
+    return {
+      offerName: current().name,
+      offerEnds: current().ends,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      contactMethod: data.contactMethod,
+      vehicle: data.vehicle,
+      timeline: data.timeline,
+      tradeIn: data.tradeIn,
+      financeType: data.financeType,
+      loyaltyVehicle: data.loyaltyVehicle,
+      loyaltySince: data.loyaltySince,
+      comments: data.comments,
+      consent: form.consent.checked ? 'Yes' : 'No',
+      pageUrl: window.location.href,
+      _honey: data._honey || ''
+    };
+  }
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     status.textContent = '';
@@ -916,10 +941,18 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     submit.disabled = true;
     submit.textContent = 'Sending…';
 
-    fetch(MAIL_ENDPOINT, {
+    /* When the WordPress plugin is active it prints its own endpoint, and
+       that is always the better one: the lead is recorded on the site
+       before any mail is attempted, so a mail server having a bad day
+       cannot lose it. FormSubmit is the fallback for the builds that have
+       no server behind them - the standalone page and the eDealer CMS. */
+    var endpoint = (window.GMI_LEAD && window.GMI_LEAD.url) || MAIL_ENDPOINT;
+    var onSite = endpoint !== MAIL_ENDPOINT;
+
+    fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(buildEmail(data))
+      body: JSON.stringify(onSite ? buildLead(data) : buildEmail(data))
     }).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (json) {
         if (!res.ok || String(json.success) === 'false') {

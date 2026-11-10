@@ -228,11 +228,47 @@ function gmi_claim_noindex() {
 }
 add_action( 'wp_head', 'gmi_claim_noindex', 1 );
 
+/**
+ * Tell the form where to send leads.
+ *
+ * Printed on any page carrying the form, whether that page uses the
+ * shortcodes or has the generated Custom HTML block pasted into it - the
+ * block's form keeps its id, so it is detectable either way.
+ *
+ * Deliberately just a URL, with no nonce in it. These pages sit behind a
+ * page cache, and a cached nonce is a stale nonce: it would fail for
+ * exactly the visitors the page exists for. gmi_handle_lead() is public
+ * and defends itself with the honeypot and a rate limit instead.
+ */
+function gmi_lead_endpoint_script() {
+	if ( ! is_singular() ) {
+		return;
+	}
+
+	$post = get_post();
+	if ( ! $post instanceof WP_Post ) {
+		return;
+	}
+
+	$has_form = has_shortcode( $post->post_content, 'gm_claim' ) ||
+		false !== strpos( $post->post_content, 'id="gmi-form"' );
+
+	if ( ! $has_form ) {
+		return;
+	}
+
+	echo '<script>window.GMI_LEAD=' . wp_json_encode(
+		array( 'url' => rest_url( 'gmi/v1/lead' ) )
+	) . ';</script>' . "\n";
+}
+add_action( 'wp_head', 'gmi_lead_endpoint_script' );
+
 /* -------------------------------------------------------------------------
  * Shortcodes
  * ---------------------------------------------------------------------- */
 
 require_once GMI_DIR . 'render.php';
+require_once GMI_DIR . 'lead.php';
 
 /**
  * [gm_offers] - the offers listing.
