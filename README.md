@@ -562,16 +562,42 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   cutoff is absent from the Wrangler Rubicon and Grand Cherokee paragraphs and from
   the form note. Confirm whether November 3 applies to all of them and put it back.
 - **FormSubmit has never been activated, and this is the one blocker that
-  loses enquiries.** Until the address is confirmed, FormSubmit delivers
-  nothing. The submit handler does check the response — it treats
-  `success: "false"` as a failure and shows the visitor the dealership phone
-  number instead of the success panel — but **whether an unactivated address
-  actually returns that, rather than a cheerful success, has not been
-  tested**, so assume the lead is lost until proven otherwise. Fixing it takes
-  about two minutes: send one submission, have the recipient click the
-  activation link FormSubmit emails them, then send a second and confirm it
-  arrives at both `lead_to` and `lead_cc`. Do this before the page is linked
-  anywhere.
+  loses enquiries.** Until `ejay@goldenmilechrysler.ca` is confirmed inside
+  FormSubmit, FormSubmit delivers nothing at all — not to ejay, not to mitch.
+  Nothing in this repository can fix that: the confirmation link is emailed to
+  that mailbox and has to be clicked from it.
+
+  **Everything on this side of FormSubmit is now proven.** The form was filled
+  the way a customer fills it, with the network intercepted so nothing left the
+  machine, and the captured request checked field by field:
+
+  | checked | result |
+  |---|---|
+  | endpoint | `POST https://formsubmit.co/ajax/ejay@goldenmilechrysler.ca` |
+  | `_cc` | `mitch@goldenmilechrysler.ca` |
+  | `_replyto` | the customer's address |
+  | body | offer, end date, name, email, phone, preferred contact, vehicle, timeline, trade-in, buying method, ownership answers, comments, consent, timestamp, page URL |
+  | FormSubmit says `success:"false"` | no thank-you shown, phone number offered, button re-enabled |
+  | FormSubmit returns 521 | same |
+
+  So an unactivated address does **not** produce a cheerful success — that was
+  the open question, and the answer is that the visitor is correctly told to
+  phone instead. The enquiry is still lost, but it is lost visibly.
+
+  **To finish it:** submit the live form once; FormSubmit emails an activation
+  link to ejay; ejay clicks it; submit once more and confirm the mail arrives
+  at ejay **and** at mitch. Do this before the page is linked anywhere, and
+  re-check `_cc` specifically — FormSubmit's free tier has dropped CC before.
+- **Nothing stores the lead.** FormSubmit is a relay, not a database. If it is
+  down — it served a 521 on October 29, 2026, and was reported down in May and
+  July 2026 — the enquiry exists only in the visitor's head. Two ways out, in
+  order of effort: set `_cc` to a mailbox that is monitored separately, or
+  move delivery server-side. The plugin is PHP and already knows both
+  addresses, so a `register_rest_route` + `wp_mail()` pair would take
+  FormSubmit out of the path entirely for the WordPress build. The pasted
+  Custom HTML block cannot do this — it is HTML and JavaScript with no server
+  of its own, so it needs either FormSubmit, another hosted relay, or the
+  plugin.
 - ~~The paste blocks point at GitHub Pages for images~~ — **done.** `main` now
   carries the creatives and Pages serves all seven (verified 200, and verified
   loading in a browser from the real URLs). The blocks work as pasted, with no

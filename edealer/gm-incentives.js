@@ -198,6 +198,9 @@
     var body = {
       _subject: 'Offer request: ' + offer.name + ' - ' + data.firstName + ' ' + data.lastName,
       _cc: LEAD_CC,
+      /* FormSubmit reads Reply-To from _replyto only. Without it, hitting
+         Reply in the inbox answers FormSubmit instead of the customer. */
+      _replyto: data.email,
       _template: 'table',
       _captcha: 'false',
       _honey: data._honey || '',

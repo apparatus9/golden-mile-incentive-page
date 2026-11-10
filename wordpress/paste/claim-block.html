@@ -423,7 +423,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </select>
 </div>
 
-<div class="gmi-conditional" data-for="wrangler grand-cherokee">
+<div class="gmi-conditional" data-for="wrangler wrangler-loyalty grand-cherokee">
 <p class="gmi-conditional-note"><strong>$1,500 Loyalty Bonus Cash.</strong> Available to eligible owners &mdash; you need a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name, and proof of ownership at time of purchase.</p>
 <div class="gmi-field">
 <label for="gmi-loyalty-vehicle">Vehicle currently registered to you</label>
@@ -668,6 +668,9 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     var body = {
       _subject: 'Offer request: ' + offer.name + ' - ' + data.firstName + ' ' + data.lastName,
       _cc: LEAD_CC,
+      /* FormSubmit reads Reply-To from _replyto only. Without it, hitting
+         Reply in the inbox answers FormSubmit instead of the customer. */
+      _replyto: data.email,
       _template: 'table',
       _captcha: 'false',
       _honey: data._honey || '',
