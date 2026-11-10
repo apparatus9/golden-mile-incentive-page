@@ -245,7 +245,7 @@ function gmi_shortcode_offers( $atts ) {
 		array(
 			'title' => 'Current Offers &amp; Incentives',
 			'kicker' => 'All-Out Clearout Event',
-			'lede'  => 'The All-Out Clearout Event: total incentives, factory rates and loyalty bonus cash on 2026 Jeep and Dodge models. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in.',
+			'lede'  => 'The All-Out Clearout Event: total incentives, factory rates, cash discounts and loyalty bonus cash on 2026 Jeep, Dodge and Ram models. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in.',
 			// h1 on a page whose theme already prints the page title would be
 			// a second h1; set heading="h2" there.
 			'heading' => 'h1',
