@@ -16,6 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { stripBlankLines } = require('./strip-blank-lines.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'edealer');
@@ -355,7 +356,7 @@ if (wrappers !== 1) {
 }
 
 const target = path.join(OUT, 'one-page-block.html');
-fs.writeFileSync(target, out);
+fs.writeFileSync(target, stripBlankLines(out));
 
 /* A viewable copy of exactly the same block, as a whole HTML page, so it
    can be opened on GitHub Pages. This is the reference: if the live

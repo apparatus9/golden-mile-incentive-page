@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { stripBlankLines } = require('./strip-blank-lines.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'edealer');
@@ -170,7 +171,7 @@ ${buildScript()}
 </script>
 `;
 
-  fs.writeFileSync(path.join(OUT, outName), out);
+  fs.writeFileSync(path.join(OUT, outName), stripBlankLines(out));
   const kb = (Buffer.byteLength(out, 'utf8') / 1024).toFixed(0);
   console.log('  ' + outName.padEnd(22) + kb + ' KB');
 }

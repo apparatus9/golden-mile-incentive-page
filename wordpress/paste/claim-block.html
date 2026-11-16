@@ -25,13 +25,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap">
 
-<style>
-/* Golden Mile incentives - eDealer embed styles.
+<style>/* Golden Mile incentives - eDealer embed styles.
    Everything is scoped under .gmi so it cannot leak into eDealer's own CSS,
    and eDealer's CSS has a harder time leaking in. Served from GitHub Pages;
    the eDealer pages reference it with <link rel="stylesheet">, because the
    page editor renders the contents of an inline <style> block as body text. */
-
 .gmi{
   background:#fff;
   scroll-behavior:smooth;
@@ -55,15 +53,12 @@
 [class*="gmi-"] *::before,[class*="gmi-"] *::after{box-sizing:border-box}
 .gmi img,
 [class*="gmi-"] img{max-width:100%;height:auto;display:block}
-
 /* The editor wraps loose block elements in its own <p> tags and leaves empty
    ones behind. Same defence the staff page needed. */
 .gmi > p:empty{display:none}
 .gmi > br,
 [class*="gmi-"] > br{display:none}
-
 .gmi-wrap{max-width:1440px;margin:0 auto;padding:0 48px}
-
 /* ---------- surviving a host editor that drops the wrappers ----------
    Every colour, face and measure is declared on .gmi, and the page gutter
    on .gmi-wrap. A WordPress block editor or page builder that re-parses
@@ -86,13 +81,11 @@
   .gmi-claim:not(.gmi-wrap *),.gmi-legal:not(.gmi-wrap *){width:min(1344px,100% - 40px)}}
 @media (max-width:1100px){.gmi-wrap{padding:0 40px}}
 @media (max-width:640px){.gmi-wrap{padding:0 20px}}
-
 /* ---------- host-page defences ----------
    These matter wherever the fragment is pasted into someone else's page:
    WordPress wraps loose markup in its own <p> tags, and themes style every
    link, image and list in the content area. Scoped to .gmi, so none of it
    reaches the host page.
-
    The doubled .gmi.gmi is deliberate: a theme rule like '.entry-content a'
    has two classes and outranks a single .gmi, which turns every button's
    text the theme's link colour - red on red on the primary button, i.e.
@@ -138,7 +131,6 @@
 [class*="gmi-"] .gmi-count-n{color:var(--gm-red,#ca0000)}
 .gmi.gmi .gmi-field :is(input,select,textarea):focus,
 [class*="gmi-"] .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
-
 /* ---------- hero ---------- */
 .gmi-intro{padding-top:44px;padding-bottom:40px}
 @media (max-width:640px){.gmi-intro{padding-top:30px;padding-bottom:26px}}
@@ -161,7 +153,6 @@
   letter-spacing:-.02em;color:var(--gm-red,#ca0000)}
 .gmi-count-l{display:block;margin-top:10px;font-size:19px;font-weight:500;
   line-height:1.3;text-wrap:balance;color:var(--gm-dark,#222)}
-
 /* ---------- offers ---------- */
 .gmi-offers{padding:0 0 10px}
 .gmi-offer{display:flex;flex-wrap:wrap;align-items:flex-start;--accent:var(--gm-red,#ca0000);
@@ -211,7 +202,6 @@
 .gmi-btn-ghost{background:transparent;color:#000;border-color:#c4c4c4;font-size:15px;padding:12px 18px}
 .gmi-btn-ghost:hover{background:transparent;border-color:#000;color:#000}
 .gmi-expiry{font-size:14px;text-align:right;color:var(--gm-muted,#5d5d5d);margin:4px 0 0}
-
 /* ---------- motion ----------
    The .gmi-motion flag is set by script, so if the script never runs
    nothing is hidden. Stagger delays are set per element by that script. */
@@ -244,14 +234,12 @@
 .gmi-foot ul{list-style:none;margin:0;padding:0}
 .gmi-foot li{display:flex;justify-content:space-between;gap:18px;max-width:280px}
 .gmi-foot a{text-decoration:none;font-weight:bold}
-
 /* ---------- claim page ---------- */
 .gmi-claim{padding:8px 0 40px}
 .gmi-claim h1{margin-bottom:10px}
 .gmi-claim-intro{color:var(--gm-muted,#5d5d5d);font-size:16px;margin:0 0 28px;max-width:760px}
 .gmi-formcard{background:var(--gm-card,#ebebeb);padding:34px 36px 30px;max-width:980px}
 @media (max-width:640px){.gmi-formcard{padding:24px 20px}}
-
 /* the offer carried over from the offers page */
 .gmi-chosen{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;
   border-left:4px solid var(--gm-red,#ca0000);background:#fff;padding:14px 18px;margin:0 0 26px}
@@ -261,7 +249,6 @@
   line-height:1.2;color:#000}
 .gmi-chosen-ends{font-size:12.5px;color:var(--gm-muted,#5d5d5d);margin:2px 0 0}
 .gmi-chosen a{font-size:12.5px;color:var(--gm-dark,#222);white-space:nowrap}
-
 /* the "you need to pick an offer first" state */
 .gmi-gate{display:none;background:var(--gm-card,#ebebeb);border-left:4px solid var(--gm-red,#ca0000);
   padding:40px 36px;max-width:780px}
@@ -272,7 +259,6 @@
 .gmi-gate .gmi-btn{width:auto;min-width:260px}
 .gmi-claimwrap{display:none}
 .gmi-claimwrap.is-on{display:block}
-
 /* ---------- form ---------- */
 .gmi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px}
 @media (max-width:700px){.gmi-grid{grid-template-columns:1fr}}
@@ -315,7 +301,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi-status{grid-column:1/-1;font-size:14px;font-weight:bold;color:var(--gm-red,#ca0000);margin:0}
 .gmi-status a{color:var(--gm-red,#ca0000)}
 .gmi-honey{position:absolute;left:-9999px;width:1px;height:1px;opacity:0} /* taste-skill-ignore: off-screen honeypot */
-
 /* ---------- success ---------- */
 .gmi-success{display:none;text-align:center;padding:26px 10px}
 .gmi-success.is-on{display:block}
@@ -326,16 +311,13 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
   display:flex;align-items:center;justify-content:center}
 .gmi-check svg{width:30px;height:30px}
 .gmi-success .gmi-btn{display:inline-flex;width:auto;min-width:220px}
-
 .gmi-legal{margin:56px 0 0;font-size:15px;line-height:1.7;color:#4a4a4a;max-width:86ch}
 .gmi-hidden{display:none !important}
-
 /* ---------- host overrides ----------
    This fragment is pasted inside someone else's page. A theme that styles
    `.entry-content h1` or `.entry-content p` beats a single class of ours on
    specificity, which is how the hero heading came back at body size, the legal
    block at reading size and the card headings in the theme's own face.
-
    GENERATED by scratchpad/mkoverrides.js from the rules above -- every
    declaration here is copied out of the stylesheet, not retyped, because
    retyping them by hand is exactly how an earlier version of this block set
@@ -351,7 +333,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi .gmi-expiry{font-size:14px;text-align:right;color:var(--gm-muted,#5d5d5d);margin:4px 0 0}
 .gmi .gmi-fine{font-size:15px;line-height:1.62;max-width:72ch;color:#4f4f4f;margin:12px 0 14px}
 .gmi .gmi-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:17px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;text-align:center;text-decoration:none;cursor:pointer;border:2px solid var(--gm-red,#ca0000);background:var(--gm-red,#ca0000);color:#fff;padding:15px 18px;transition:background .15s ease,border-color .15s ease,color .15s ease,transform .12s ease}
-
 /* The two headings are forced. The specificity bump above was not enough on the
    live page: the theme sets its heading face, size and casing with !important,
    which nothing but !important can match. These are the two pieces of type that
@@ -360,7 +341,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi .gmi-intro h1,
 .gmi .gmi-intro h2{padding:0 !important;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif) !important;font-weight:600 !important;font-size:clamp(38px,7.6vw,104px) !important;line-height:.94 !important;letter-spacing:-.005em !important;text-transform:uppercase !important;margin:0 0 22px !important;text-wrap:balance !important}
 .gmi .gmi-offer h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif) !important;font-weight:600 !important;font-size:27px !important;line-height:1.15 !important;letter-spacing:.2px !important;text-transform:uppercase !important;margin:0 0 4px !important;color:#000 !important}
-
 /* host-page defences live in the shared stylesheet above */
 </style>
 
@@ -503,10 +483,8 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<script>
-(function () {
+<script>(function () {
   'use strict';
-
   /* ---------- motion ----------
      Nothing is hidden until the flag is set, so a failed script leaves a
      complete page. Parts of each section rise in on their own short delay;
@@ -515,7 +493,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
   if (motionRoot && 'IntersectionObserver' in window &&
       motionRoot.querySelector('.gmi-offer')) {
     motionRoot.classList.add('gmi-motion');
-
     var groups = [];
     var intro = motionRoot.querySelector('.gmi-intro, .gmi-hero');
     if (intro) {
@@ -528,7 +505,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
         card.querySelector('.gmi-offer-cta')
       ]);
     });
-
     var watched = [];
     groups.forEach(function (group) {
       var step = 0;
@@ -540,7 +516,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
         step++;
       });
     });
-
     var seen = 0;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -550,9 +525,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
         if (++seen >= watched.length) { io.disconnect(); }
       });
     }, { rootMargin: '0px', threshold: 0.01 });
-
     watched.forEach(function (el) { io.observe(el); });
-
     /* Safety net: reveal whatever is on screen now and on every scroll,
        so nothing is left invisible if the observer never fires for it
        (a short page can leave its last elements untriggered). */
@@ -568,25 +541,20 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     requestAnimationFrame(sweep);
     window.addEventListener('scroll', sweep, { passive: true });
   }
-
   /* ================================================================
      EDIT THESE TWO LINES
-
      Set them to the real permalinks of your two WordPress pages. They are
      the only things that must change for this to work on your site; every
      link on the page is rewritten from them.
      ================================================================ */
   var OFFERS_URL = '/offers/';        /* the page holding the offer cards  */
   var CLAIM_URL  = '/offers-claim/';  /* the page holding the claim form   */
-
   /* ----------------------------------------------------------------
      The rest only changes when the offers or the mailbox change.
-
      Leads go to LEAD_TO with LEAD_CC copied, through FormSubmit, which
      needs a one-time activation click sent to LEAD_TO before anything is
      delivered. Once activated, swap LEAD_TO for the hashed alias
      FormSubmit issues, so the address is not sitting in public HTML.
-
      EVENT_ENDS drives the countdown, which hides itself once the date has
      passed. Set it to '' to switch the countdown off.
   ---------------------------------------------------------------- */
@@ -596,7 +564,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
   var PHONE_HREF = '+16472885337';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
   var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
-
   var OFFERS = {
       "durango": {
           "name": "Up to $10,000 in Total Incentives — 2026 Dodge Durango",
@@ -635,7 +602,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
           "ends": "Offer ends November 30, 2026"
       }
   };
-
   /* The cards carry a placeholder claim path so they still work if this
      script never runs. Point them at the real page, keeping the ?offer=. */
   var PLACEHOLDER = '/offers-claim';
@@ -646,7 +612,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
       a.setAttribute('href', CLAIM_URL + href.slice(PLACEHOLDER.length).replace(/^\//, ''));
     }
   );
-
   /* ---------- offers page: countdown ---------- */
   var countdown = document.getElementById('gmi-countdown');
   if (countdown && EVENT_ENDS) {
@@ -657,24 +622,20 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
         ' left in the Black Friday Sales Event</span>';
     }
   }
-
   /* ---------- claim page ---------- */
   var form = document.getElementById('gmi-form');
   if (!form) { return; }
-
   var gate = document.getElementById('gmi-gate');
   var claimwrap = document.getElementById('gmi-claimwrap');
   var status = document.getElementById('gmi-status');
   var submit = document.getElementById('gmi-submit');
   var success = document.getElementById('gmi-success');
   var successMsg = document.getElementById('gmi-success-msg');
-
   /* Which offer did they arrive with? Accept ?offer=key, and #key as a
      fallback in case eDealer strips the query string from internal links. */
   var params = new URLSearchParams(window.location.search);
   var key = params.get('offer') || window.location.hash.replace('#', '');
   var offer = OFFERS[key];
-
   /* No valid offer means they did not come through an offer button. Show
      the way back instead of a form with nothing attached to it. This is a
      usability gate, not access control - the page is public either way. */
@@ -685,28 +646,23 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     if (gate) { gate.classList.add('is-on'); }
     return;
   }
-
   document.getElementById('gmi-chosen-name').textContent = offer.name;
   document.getElementById('gmi-chosen-ends').textContent = offer.ends;
   document.getElementById('gmi-offer-key').value = key;
   Array.prototype.forEach.call(document.querySelectorAll('.gmi-offers-link'), function (a) {
     a.setAttribute('href', OFFERS_URL);
   });
-
   /* Only the eligibility questions belonging to this offer. */
   Array.prototype.forEach.call(document.querySelectorAll('.gmi-conditional'), function (block) {
     var owners = (block.getAttribute('data-for') || '').split(/\s+/);
     block.classList.toggle('is-on', owners.indexOf(key) > -1);
   });
-
   if (claimwrap) { claimwrap.classList.add('is-on'); }
-
   function collect() {
     var data = {};
     new FormData(form).forEach(function (value, name) { data[name] = value; });
     return data;
   }
-
   /* Keys become the row labels in the delivered email, so they read as
      plain English. Empty rows are dropped to keep the mail short, and the
      eligibility answers for other offers are never in the DOM to begin with. */
@@ -742,7 +698,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     });
     return body;
   }
-
   /* The same answers, keyed the way the WordPress endpoint wants them.
      It labels and formats the mail itself, so what travels here is the
      raw form, not a pre-rendered email. */
@@ -767,11 +722,9 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
       _honey: data._honey || ''
     };
   }
-
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     status.textContent = '';
-
     if (!form.checkValidity()) {
       var firstBad = form.querySelector(':invalid');
       status.textContent = 'Please complete the highlighted fields before sending.';
@@ -781,11 +734,9 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
       }
       return;
     }
-
     var data = collect();
     submit.disabled = true;
     submit.textContent = 'Sending…';
-
     /* When the WordPress plugin is active it prints its own endpoint, and
        that is always the better one: the lead is recorded on the site
        before any mail is attempted, so a mail server having a bad day
@@ -793,7 +744,6 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
        no server behind them - the standalone page and the eDealer CMS. */
     var endpoint = (window.GMI_LEAD && window.GMI_LEAD.url) || MAIL_ENDPOINT;
     var onSite = endpoint !== MAIL_ENDPOINT;
-
     fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -819,5 +769,4 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     });
   });
 })();
-
 </script>
