@@ -17,6 +17,7 @@
 const fs = require('fs');
 const path = require('path');
 const { stripBlankLines } = require('./strip-blank-lines.js');
+const { makeHosted } = require('./make-hosted.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'edealer');
@@ -356,7 +357,14 @@ if (wrappers !== 1) {
 }
 
 const target = path.join(OUT, 'one-page-block.html');
-fs.writeFileSync(target, stripBlankLines(out));
+const finalOut = stripBlankLines(out);
+fs.writeFileSync(target, finalOut);
+
+/* The hosted twin: markup only, CSS and JS served from Pages. */
+const hostedDir = path.join(ROOT, 'wordpress', 'hosted');
+const hosted = makeHosted(finalOut, 'one-page', hostedDir);
+fs.writeFileSync(path.join(ROOT, 'wordpress', 'paste', 'one-page-block-hosted.html'), hosted);
+console.log('  one-page-block-hosted.html  ' + Math.round(hosted.length/1024) + ' KB  (links gm-one-page.css/.js)');
 
 /* A viewable copy of exactly the same block, as a whole HTML page, so it
    can be opened on GitHub Pages. This is the reference: if the live
