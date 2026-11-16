@@ -11,6 +11,7 @@ if (cut > -1) css = css.slice(0, cut);          // drop the previous block entir
 
 /* Selectors the host theme can realistically reach: headings, paragraphs, lists. */
 const WANT = [
+  '.gmi-intro',
   '.gmi-intro h1',
   '.gmi-lede',
   '.gmi-hero-facts li',
@@ -25,24 +26,37 @@ const WANT = [
 
 /* Collect declarations for a selector from every rule that targets it, in order,
    ignoring anything inside an @media block (those keep their own breakpoints). */
+/* Remove every @media block first: those keep their own breakpoints, and
+   leaving them in confuses a flat rule-matcher (a nested '{' breaks the match
+   and whole rules go missing, which is how .gmi-intro came back empty). */
+function withoutMedia(src) {
+  let out = '', i = 0;
+  while (i < src.length) {
+    const at = src.indexOf('@media', i);
+    if (at < 0) { out += src.slice(i); break; }
+    out += src.slice(i, at);
+    let k = src.indexOf('{', at);
+    if (k < 0) break;
+    let d = 1; k++;
+    while (k < src.length && d > 0) { if (src[k] === '{') d++; else if (src[k] === '}') d--; k++; }
+    i = k;
+  }
+  return out;
+}
+
+/* Collect declarations for a selector from every rule that targets it, in order. */
+/* Comments have to go too. A flat matcher takes everything between the previous
+   '}' and the next '{' as the selector, so a comment sitting above a rule ends
+   up glued to it and the rule never matches. That is what hid .gmi-intro. */
+const stripComments = src => src.replace(/\/\*[\s\S]*?\*\//g, '');
+
 function declsFor(sel) {
+  const flat = withoutMedia(stripComments(css));
   const out = [];
   const re = /([^{}]+)\{([^{}]*)\}/g;
-  let m, depth = 0, i = 0;
-  // crude @media skip: walk and track brace depth of @media wrappers
-  const media = [];
-  const mre = /@media[^{]*\{/g;
-  let mm;
-  while ((mm = mre.exec(css))) {
-    let d = 1, k = mm.index + mm[0].length;
-    while (k < css.length && d > 0) { if (css[k] === '{') d++; else if (css[k] === '}') d--; k++; }
-    media.push([mm.index, k]);
-  }
-  const inMedia = pos => media.some(([a, b]) => pos > a && pos < b);
-
-  while ((m = re.exec(css))) {
-    if (inMedia(m.index)) continue;
-    const sels = m[1].split(',').map(s => s.trim());
+  let m;
+  while ((m = re.exec(flat))) {
+    const sels = m[1].split(',').map(x => x.trim()).filter(Boolean);
     if (!sels.includes(sel)) continue;
     out.push(m[2].trim().replace(/\s*\n\s*/g, ''));
   }
