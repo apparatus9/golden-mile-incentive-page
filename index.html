@@ -32,15 +32,30 @@ a{color:inherit}
 @media (max-width:640px){.gm-wrap{padding:0 20px}}
 
 /* ---------- hero ---------- */
-.gm-hero{background:#fff}
-.gm-hero .gm-wrap{padding-top:18px;padding-bottom:30px}
+/* The hero is a black field because the creatives are: every one of the nine
+   is white and red type on black. A white hero made the page open on nothing
+   and let the first card carry the whole first screen. */
+.gm-hero{background:#111;color:#fff}
+.gm-hero .gm-wrap{padding-top:52px;padding-bottom:52px}
 .gm-hero-main{min-width:0}
 .gm-kicker{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;
   letter-spacing:2.4px;text-transform:uppercase;color:#fff;background:var(--gm-red);
-  padding:6px 14px;margin:0 0 16px}
-h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.05;
-  letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px}
-.gm-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted)}
+  padding:6px 14px;margin:0 0 18px}
+h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(38px,7.6vw,104px);line-height:.94;
+  letter-spacing:-.005em;text-transform:uppercase;margin:0 0 22px;text-wrap:balance}
+.gm-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.5;color:rgba(255,255,255,.82)}
+/* The deadline and the count are the two facts a visitor wants first, so they
+   are set at reading size in the hero instead of only inside every card. */
+.gm-hero-facts{display:flex;flex-wrap:wrap;gap:10px 34px;margin:26px 0 0;padding:0;list-style:none}
+.gm-hero-facts li{font-family:var(--gm-head);font-size:17px;font-weight:500;letter-spacing:.2px;
+  text-transform:uppercase;color:#fff}
+.gm-hero-facts b{color:#ff5c5c;font-weight:600}
+@media (max-width:640px){
+  .gm-hero .gm-wrap{padding-top:34px;padding-bottom:34px}
+  .gm-lede{font-size:17px}
+  .gm-hero-facts{gap:8px 22px;margin-top:20px}
+  .gm-hero-facts li{font-size:15px}
+}
 .gm-countdown{margin:0;font-family:var(--gm-head);line-height:.95;color:var(--gm-dark)}
 .gm-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
   letter-spacing:-.02em;color:var(--gm-red)}
@@ -57,7 +72,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
 .gm-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gm-offer-main{flex:1 1 280px;min-width:0}
-.gm-eyebrow{display:inline-block;font-family:var(--gm-head);font-size:11.5px;font-weight:600;
+.gm-eyebrow{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;
   letter-spacing:1.8px;text-transform:uppercase;color:var(--accent-ink,#fff);background:var(--accent);
   padding:4px 10px;margin:0 0 10px}
 .gm-offer h2{font-family:var(--gm-head);font-weight:600;font-size:27px;line-height:1.15;
@@ -65,16 +80,16 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
 .gm-offer-sub{font-family:var(--gm-head);font-size:19px;font-weight:400;line-height:1.3;
   color:var(--gm-dark);margin:0 0 14px}
 .gm-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
-.gm-facts li{font-size:12.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
+.gm-facts li{font-size:13px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
   background:#fff;border-left:3px solid var(--accent);padding:6px 11px;color:var(--gm-dark)}
-.gm-offer details{border-top:1px solid #dcdcdc;margin-top:4px}
-.gm-offer summary{cursor:pointer;list-style:none;padding:11px 0 0;font-size:13px;font-weight:bold;
+.gm-offer details{margin-top:18px}
+.gm-offer summary{cursor:pointer;list-style:none;padding:0;font-size:13.5px;font-weight:bold;
   letter-spacing:.4px;text-transform:uppercase;color:var(--gm-muted)}
 .gm-offer summary::-webkit-details-marker{display:none}
 .gm-offer summary::after{content:" +";color:var(--accent);font-size:15px}
 .gm-offer details[open] summary::after{content:" \2212"}
 .gm-offer summary:hover,.gm-offer summary:focus-visible{color:var(--gm-red)}
-.gm-fine{font-size:11.5px;line-height:1.6;color:#6b6b6b;margin:9px 0 12px}
+.gm-fine{font-size:15px;line-height:1.62;max-width:72ch;color:#4f4f4f;margin:12px 0 14px}
 .gm-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
 @media (max-width:1040px){
   .gm-offer-img{flex:1 1 100%;max-width:460px;margin:0 auto}
@@ -124,7 +139,12 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
     <div class="gm-hero-main">
       <p class="gm-kicker">Black Friday Sales Event</p>
       <h1>Current Offers &amp; Incentives</h1>
-      <p class="gm-lede">The Black Friday Sales Event: total incentives, 0% factory rates, Black Friday incentives, loyalty bonus cash and a no-charge Cummins on 2026 Jeep, Dodge, Ram and Chrysler models. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in.</p>
+      <p class="gm-lede">Factory rates, total incentives, loyalty bonus cash and a no-charge Cummins on 2026 Jeep, Dodge, Ram and Chrysler models. Pick the one that fits and we&rsquo;ll confirm your eligibility and lock it in.</p>
+      <ul class="gm-hero-facts">
+        <li><b>9</b> offers</li>
+        <li>Jeep &middot; Dodge &middot; Ram &middot; Chrysler</li>
+        <li>All end <b>November 30</b></li>
+      </ul>
     </div>
   </div>
 </header>
@@ -132,7 +152,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
 <main>
 <section class="gm-offers">
   <div class="gm-wrap">
-    <article class="gm-offer" id="offer-durango">
+    <article class="gm-offer" id="offer-durango" style="--accent:#c8102e;--accent-ink:#ffffff">
       <div class="gm-offer-img">
         <img src="assets/offer-durango.webp" width="1080" height="1045" alt="Black Friday Sales Event: up to $10,000 in total incentives on the 2026 Dodge Durango at Golden Mile Chrysler Dodge Jeep Ram.">
       </div>
@@ -159,7 +179,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-compass">
+    <article class="gm-offer" id="offer-compass" style="--accent:#e4601c;--accent-ink:#141414">
       <div class="gm-offer-img">
         <img src="assets/offer-compass.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: up to $7,500 in total incentives on the 2026 Jeep Compass at Golden Mile Chrysler Dodge Jeep Ram.">
       </div>
@@ -186,7 +206,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-wrangler">
+    <article class="gm-offer" id="offer-wrangler" style="--accent:#c9a227;--accent-ink:#141414">
       <div class="gm-offer-img">
         <img src="assets/offer-wrangler-rubicon.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 84 months plus $4,500 in Black Friday incentives on the 2026 Jeep Wrangler 4-Door Rubicon 2.0L.">
       </div>
@@ -214,7 +234,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-grand-cherokee">
+    <article class="gm-offer" id="offer-grand-cherokee" style="--accent:#44607a;--accent-ink:#ffffff">
       <div class="gm-offer-img">
         <img src="assets/offer-grand-cherokee.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 72 months plus $4,500 in Black Friday incentives on the 2026 Jeep Grand Cherokee Summit 4x4.">
       </div>
@@ -242,7 +262,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-cherokee">
+    <article class="gm-offer" id="offer-cherokee" style="--accent:#2461db;--accent-ink:#ffffff">
       <div class="gm-offer-img">
         <img src="assets/offer-cherokee-hybrid.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: lease most all-new 2026 Jeep Cherokee Hybrid models from 1.99% for up to 24 months.">
       </div>
@@ -268,7 +288,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-ram-1500">
+    <article class="gm-offer" id="offer-ram-1500" style="--accent:#192f4e;--accent-ink:#ffffff">
       <div class="gm-offer-img">
         <img src="assets/offer-ram-1500.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 84 months plus up to $5,000 loyalty bonus cash on the 2026 Ram 1500 Big Horn and RHO Crew Cab 4x4.">
       </div>
@@ -296,7 +316,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-ram-hd">
+    <article class="gm-offer" id="offer-ram-hd" style="--accent:#9e884a;--accent-ink:#141414">
       <div class="gm-offer-img">
         <img src="assets/offer-ram-hd.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: no-charge Cummins Turbo Diesel worth $11,000 in total value plus $1,500 loyalty bonus cash on the 2026 Ram Heavy Duty pickup.">
       </div>
@@ -324,7 +344,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-pacifica">
+    <article class="gm-offer" id="offer-pacifica" style="--accent:#535e24;--accent-ink:#ffffff">
       <div class="gm-offer-img">
         <img src="assets/offer-pacifica.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 36 months or lease from 3.99% for up to 36 months on the 2027 Chrysler Pacifica.">
       </div>
@@ -351,7 +371,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
       </div>
     </article>
 
-    <article class="gm-offer" id="offer-grand-caravan">
+    <article class="gm-offer" id="offer-grand-caravan" style="--accent:#7b2b25;--accent-ink:#ffffff">
       <div class="gm-offer-img">
         <img src="assets/offer-grand-caravan.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: the 2027 Chrysler Grand Caravan, assembled in Canada, starting at $50,995.">
       </div>
@@ -422,15 +442,18 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
 
   /* Days left in the clearout, under the intro. The form that used to live
      on this page is now claim.html, which the offer buttons link to. */
+  /* The hero countdown was taken out on 3 November, so this element is normally
+     absent. It used to `return` here when it was missing, which also skipped
+     everything below it and left the motion layer dead on the whole page. */
   var countdown = document.getElementById('gm-countdown');
-  if (!countdown) { return; }
-
-  var endsAt = new Date('2026-11-30T23:59:59-05:00');
-  var daysLeft = Math.ceil((endsAt - new Date()) / 86400000);
-  if (daysLeft > 0) {
-    countdown.innerHTML = '<span class="gm-count-n">' + daysLeft + '</span>' +
-      '<span class="gm-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
-      ' left in the Black Friday Sales Event</span>';
+  if (countdown) {
+    var endsAt = new Date('2026-11-30T23:59:59-05:00');
+    var daysLeft = Math.ceil((endsAt - new Date()) / 86400000);
+    if (daysLeft > 0) {
+      countdown.innerHTML = '<span class="gm-count-n">' + daysLeft + '</span>' +
+        '<span class="gm-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
+        ' left in the Black Friday Sales Event</span>';
+    }
   }
 
   /* ---------- motion ----------
@@ -445,7 +468,7 @@ h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.6vw,52px);l
     var groups = [];
     var intro = motionRoot.querySelector('.gm-intro, .gm-hero');
     if (intro) {
-      groups.push(intro.querySelectorAll('h1, .gm-lede, .gm-countdown'));
+      groups.push(intro.querySelectorAll('.gm-kicker, h1, .gm-lede, .gm-hero-facts, .gm-countdown'));
     }
     Array.prototype.forEach.call(motionRoot.querySelectorAll('.gm-offer'), function (card) {
       groups.push([

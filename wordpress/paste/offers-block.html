@@ -140,15 +140,22 @@
 [class*="gmi-"] .gmi-field :is(input,select,textarea):focus{box-shadow:0 0 0 3px rgba(202,0,0,.14)} /* taste-skill-ignore: visible focus ring */
 
 /* ---------- hero ---------- */
-.gmi-intro{padding-top:18px;padding-bottom:30px}
+.gmi-intro{padding:52px 40px;background:#111;color:#fff}
+@media (max-width:640px){.gmi-intro{padding:34px 20px}}
 .gmi-hero-main{min-width:0}
 .gmi-kicker{display:inline-block;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:13px;font-weight:600;
   letter-spacing:2.4px;text-transform:uppercase;color:#fff;background:var(--gm-red,#ca0000);
-  padding:6px 14px;margin:0 0 16px}
+  padding:6px 14px;margin:0 0 18px}
 .gmi h1,
 [class*="gmi-"] h1{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:clamp(32px,4.6vw,52px);
   line-height:1.05;letter-spacing:.4px;text-transform:uppercase;margin:0 0 14px}
-.gmi-lede{max-width:780px;margin:0;font-size:17px;color:var(--gm-muted,#5d5d5d)}
+.gmi-intro h1{font-size:clamp(38px,7.6vw,104px);line-height:.94;letter-spacing:-.005em;margin:0 0 22px;text-wrap:balance;color:#fff}
+.gmi-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.5;color:rgba(255,255,255,.82)}
+.gmi-hero-facts{display:flex;flex-wrap:wrap;gap:10px 34px;margin:26px 0 0;padding:0;list-style:none}
+.gmi-hero-facts li{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:17px;font-weight:500;
+  letter-spacing:.2px;text-transform:uppercase;color:#fff}
+.gmi-hero-facts b{color:#ff5c5c;font-weight:600}
+@media (max-width:640px){.gmi-lede{font-size:17px}.gmi-hero-facts{gap:8px 22px;margin-top:20px}.gmi-hero-facts li{font-size:15px}}
 .gmi-countdown{margin:0;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);line-height:.95;color:var(--gm-dark,#222)}
 .gmi-count-n{display:block;font-size:clamp(54px,5.4vw,82px);font-weight:600;
   letter-spacing:-.02em;color:var(--gm-red,#ca0000)}
@@ -170,7 +177,7 @@
 .gmi-offer-body{flex:1 1 480px;min-width:0;align-self:center;display:flex;flex-wrap:wrap;
   align-items:flex-start;gap:26px 40px;padding:34px 28px 30px}
 .gmi-offer-main{flex:1 1 280px;min-width:0}
-.gmi-eyebrow{display:inline-block;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:11.5px;font-weight:600;
+.gmi-eyebrow{display:inline-block;font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:13px;font-weight:600;
   letter-spacing:1.8px;text-transform:uppercase;color:var(--accent-ink,#fff);background:var(--accent,#ca0000);
   padding:4px 10px;margin:0 0 10px}
 .gmi-offer h2{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-weight:600;font-size:27px;line-height:1.15;
@@ -178,17 +185,17 @@
 .gmi-offer-sub{font-family:var(--gm-head,Oswald,"Arial Narrow",Helvetica,Arial,sans-serif);font-size:19px;font-weight:400;line-height:1.3;
   color:var(--gm-dark,#222);margin:0 0 14px}
 .gmi-facts.gmi-facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 14px;padding:0}
-.gmi-facts li{font-size:12.5px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
+.gmi-facts li{font-size:13px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase;
   background:#fff;border-left:3px solid var(--accent,#ca0000);padding:6px 11px;
   color:var(--gm-dark,#222)}
-.gmi-offer details{border-top:1px solid #dcdcdc;margin-top:4px}
-.gmi-offer summary{cursor:pointer;list-style:none;padding:11px 0 0;font-size:13px;font-weight:bold;
+.gmi-offer details{margin-top:18px}
+.gmi-offer summary{cursor:pointer;list-style:none;padding:0;font-size:13.5px;font-weight:bold;
   letter-spacing:.4px;text-transform:uppercase;color:var(--gm-muted,#5d5d5d)}
 .gmi-offer summary::-webkit-details-marker{display:none}
 .gmi-offer summary::after{content:" +";color:var(--accent,#ca0000);font-size:15px}
 .gmi-offer details[open] summary::after{content:" \2212"}
 .gmi-offer summary:hover,.gmi-offer summary:focus-visible{color:var(--gm-red,#ca0000)}
-.gmi-fine{font-size:11.5px;line-height:1.6;color:#6b6b6b;margin:9px 0 12px}
+.gmi-fine{font-size:15px;line-height:1.62;max-width:72ch;color:#4f4f4f;margin:12px 0 14px}
 .gmi-offer-cta{flex:0 0 272px;display:flex;flex-direction:column;gap:10px}
 @media (max-width:1040px){
   .gmi-offer-img{flex:1 1 100%;max-width:460px;margin:0 auto}
@@ -333,11 +340,16 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 <div class="gmi-hero-main">
 <p class="gmi-kicker">Black Friday Sales Event</p>
 <h1>Current Offers &amp; Incentives</h1>
-<p class="gmi-lede">The Black Friday Sales Event: total incentives, 0% factory rates, Black Friday incentives, loyalty bonus cash and a no-charge Cummins on 2026 Jeep, Dodge, Ram and Chrysler models. Pick the offer that fits and we’ll confirm your eligibility and lock it in.</p>
+<p class="gmi-lede">Factory rates, total incentives, loyalty bonus cash and a no-charge Cummins on 2026 Jeep, Dodge, Ram and Chrysler models. Pick the one that fits and we’ll confirm your eligibility and lock it in.</p>
+<ul class="gmi-hero-facts">
+<li><b>9</b> offers</li>
+<li>Jeep &middot; Dodge &middot; Ram &middot; Chrysler</li>
+<li>All end <b>November 30</b></li>
+</ul>
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-durango">
+<div class="gmi-offer" id="offer-durango" style="--accent:#c8102e;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-durango.webp" width="1080" height="1045" alt="Black Friday Sales Event: up to $10,000 in total incentives on the 2026 Dodge Durango at Golden Mile Chrysler Dodge Jeep Ram."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -357,7 +369,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-compass">
+<div class="gmi-offer" id="offer-compass" style="--accent:#e4601c;--accent-ink:#141414">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-compass.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: up to $7,500 in total incentives on the 2026 Jeep Compass at Golden Mile Chrysler Dodge Jeep Ram."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -377,7 +389,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-wrangler">
+<div class="gmi-offer" id="offer-wrangler" style="--accent:#c9a227;--accent-ink:#141414">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-wrangler-rubicon.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 84 months plus $4,500 in Black Friday incentives on the 2026 Jeep Wrangler 4-Door Rubicon 2.0L."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -398,7 +410,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-grand-cherokee">
+<div class="gmi-offer" id="offer-grand-cherokee" style="--accent:#44607a;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-grand-cherokee.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 72 months plus $4,500 in Black Friday incentives on the 2026 Jeep Grand Cherokee Summit 4x4."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -419,7 +431,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-cherokee">
+<div class="gmi-offer" id="offer-cherokee" style="--accent:#2461db;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-cherokee-hybrid.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: lease most all-new 2026 Jeep Cherokee Hybrid models from 1.99% for up to 24 months."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -439,7 +451,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-ram-1500">
+<div class="gmi-offer" id="offer-ram-1500" style="--accent:#192f4e;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-ram-1500.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 84 months plus up to $5,000 loyalty bonus cash on the 2026 Ram 1500 Big Horn and RHO Crew Cab 4x4."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -460,7 +472,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-ram-hd">
+<div class="gmi-offer" id="offer-ram-hd" style="--accent:#9e884a;--accent-ink:#141414">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-ram-hd.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: no-charge Cummins Turbo Diesel worth $11,000 in total value plus $1,500 loyalty bonus cash on the 2026 Ram Heavy Duty pickup."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -481,7 +493,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-pacifica">
+<div class="gmi-offer" id="offer-pacifica" style="--accent:#535e24;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-pacifica.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: 0% financing for up to 36 months or lease from 3.99% for up to 36 months on the 2027 Chrysler Pacifica."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -501,7 +513,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 </div>
 </div>
 
-<div class="gmi-offer" id="offer-grand-caravan">
+<div class="gmi-offer" id="offer-grand-caravan" style="--accent:#7b2b25;--accent-ink:#ffffff">
 <div class="gmi-offer-img"><img src="https://apparatus9.github.io/golden-mile-incentive-page/assets/offer-grand-caravan.webp" width="1080" height="1080" loading="lazy" alt="Black Friday Sales Event: the 2027 Chrysler Grand Caravan, assembled in Canada, starting at $50,995."></div>
 <div class="gmi-offer-body">
 <div class="gmi-offer-main">
@@ -542,7 +554,7 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
     var groups = [];
     var intro = motionRoot.querySelector('.gmi-intro, .gmi-hero');
     if (intro) {
-      groups.push(intro.querySelectorAll('h1, .gmi-lede, .gmi-countdown'));
+      groups.push(intro.querySelectorAll('.gmi-kicker, h1, .gmi-lede, .gmi-hero-facts, .gmi-countdown'));
     }
     Array.prototype.forEach.call(motionRoot.querySelectorAll('.gmi-offer'), function (card) {
       groups.push([

@@ -281,7 +281,7 @@ function gmi_shortcode_offers( $atts ) {
 		array(
 			'title' => 'Current Offers &amp; Incentives',
 			'kicker' => 'Black Friday Sales Event',
-			'lede'  => 'The Black Friday Sales Event: total incentives, 0% factory rates, Black Friday incentives, loyalty bonus cash and a no-charge Cummins on 2026 Jeep, Dodge, Ram and Chrysler models. Pick the offer that fits and we&rsquo;ll confirm your eligibility and lock it in.',
+			'lede'  => 'Factory rates, total incentives, loyalty bonus cash and a no-charge Cummins on 2026 Jeep, Dodge, Ram and Chrysler models. Pick the one that fits and we&rsquo;ll confirm your eligibility and lock it in.',
 			// h1 on a page whose theme already prints the page title would be
 			// a second h1; set heading="h2" there.
 			'heading' => 'h1',

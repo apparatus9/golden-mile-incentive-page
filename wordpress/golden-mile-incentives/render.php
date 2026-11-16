@@ -57,6 +57,13 @@ function gmi_render_offers( $atts ) {
 	$inventory = untrailingslashit( gmi_setting( 'inventory_url' ) );
 	$h         = gmi_heading_tag( $atts['heading'] );
 
+	// "November 30, 2026" -> "November 30", so the hero line never drifts from
+	// the offers' own end date: it is read from the first offer, not retyped.
+	$ends_short = '';
+	if ( ! empty( $offers[0]['ends'] ) ) {
+		$ends_short = trim( preg_replace( '/,\s*\d{4}\s*$/', '', $offers[0]['ends'] ) );
+	}
+
 	ob_start();
 	?>
 <div class="gmi">
@@ -67,6 +74,11 @@ function gmi_render_offers( $atts ) {
 <?php if ( ! empty( $atts['kicker'] ) ) : ?><p class="gmi-kicker"><?php echo esc_html( $atts['kicker'] ); ?></p><?php endif; ?>
 <<?php echo esc_html( $h ); ?>><?php echo wp_kses( $atts['title'], gmi_allowed_html() ); ?></<?php echo esc_html( $h ); ?>>
 <p class="gmi-lede"><?php echo wp_kses( $atts['lede'], gmi_allowed_html() ); ?></p>
+<ul class="gmi-hero-facts">
+<li><b><?php echo count( $offers ); ?></b> offers</li>
+<li>Jeep &middot; Dodge &middot; Ram &middot; Chrysler</li>
+<li>All end <b><?php echo esc_html( $ends_short ); ?></b></li>
+</ul>
 </div>
 </div>
 

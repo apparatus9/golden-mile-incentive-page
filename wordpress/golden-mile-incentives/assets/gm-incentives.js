@@ -23,7 +23,7 @@
     var groups = [];
     var intro = motionRoot.querySelector('.gmi-intro, .gmi-hero');
     if (intro) {
-      groups.push(intro.querySelectorAll('h1, .gmi-lede, .gmi-countdown'));
+      groups.push(intro.querySelectorAll('.gmi-kicker, h1, .gmi-lede, .gmi-hero-facts, .gmi-countdown'));
     }
     Array.prototype.forEach.call(motionRoot.querySelectorAll('.gmi-offer'), function (card) {
       groups.push([
