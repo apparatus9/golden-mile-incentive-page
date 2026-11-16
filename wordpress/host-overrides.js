@@ -100,4 +100,42 @@ function buildOverrides(cssText, want, forced = []) {
   return { css: lines.concat(forcedLines).join('\n'), missing };
 }
 
-module.exports = { buildOverrides, splitSelectors, stripComments, withoutMedia };
+/**
+ * Find modifiers and states of a covered selector that are not themselves
+ * covered.
+ *
+ * Restating `.gmi-btn` as `.gmi .gmi-btn` raises it from one class to two, so
+ * it starts beating `.gmi-btn-ghost` — and every outline button turns solid
+ * red. The same trap waits for any `-modifier`, `:state` or `.combo` of
+ * anything in the list. Covering them too, after the base, fixes it; this finds
+ * the ones that were missed.
+ *
+ * @returns {string[]} selectors that need adding, in stylesheet order
+ */
+function findUncoveredVariants(cssText, want, alsoCovered = []) {
+  const flat = withoutMedia(stripComments(cssText));
+  const declsFor = makeDeclsFor(cssText);
+  const props = sel => new Set(declsFor(sel).split(';')
+    .map(d => d.split(':')[0].trim()).filter(Boolean));
+
+  const covered = new Set([...want, ...alsoCovered]);
+  const baseProps = new Map(want.map(b => [b, props(b)]));
+  const found = [];
+
+  for (const m of flat.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    for (const sel of splitSelectors(m[1])) {
+      if (covered.has(sel) || found.includes(sel)) continue;
+      for (const base of want) {
+        // a variant extends the base with -suffix, :state or .another-class
+        if (!sel.startsWith(base) || !/^[-:.]/.test(sel.slice(base.length))) continue;
+        // only a problem where they set the same property: the base override
+        // cannot win a property the variant alone declares
+        const mine = new Set(m[2].split(';').map(d => d.split(':')[0].trim()).filter(Boolean));
+        if ([...mine].some(p => baseProps.get(base).has(p))) { found.push(sel); break; }
+      }
+    }
+  }
+  return found;
+}
+
+module.exports = { buildOverrides, findUncoveredVariants, splitSelectors, stripComments, withoutMedia };

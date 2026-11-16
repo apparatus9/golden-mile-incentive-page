@@ -8,7 +8,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { buildOverrides } = require('./host-overrides.js');
+const { buildOverrides, findUncoveredVariants } = require('./host-overrides.js');
 
 const P = path.join(__dirname, '..', 'edealer', 'gm-incentives.css');
 let css = fs.readFileSync(P, 'utf8');
@@ -31,6 +31,11 @@ const WANT = [
   '.gmi-expiry',
   '.gmi-fine',
   '.gmi-btn',
+  // the modifiers must follow the base, or restating .gmi-btn one level deeper
+  // beats .gmi-btn-ghost and every outline button turns solid red
+  '.gmi-btn:hover',
+  '.gmi-btn-ghost',
+  '.gmi-btn-ghost:hover',
   // the claim form
   '.gmi-claim',
   '.gmi-claim h1',
@@ -88,4 +93,15 @@ if (missing.length) {
   process.exitCode = 1;
 } else {
   console.log('every selector resolved');
+}
+
+/* Restating a selector one class deeper makes it start beating its own
+   modifiers and states. That is how every outline button turned solid red. */
+const uncovered = findUncoveredVariants(css, WANT, FORCED.flatMap(f => f.from));
+if (uncovered.length) {
+  console.log('\nUNCOVERED VARIANTS -- each of these now loses to its own base:\n  ' +
+    uncovered.join('\n  ') + '\nAdd them to WANT, after their base.');
+  process.exitCode = 1;
+} else {
+  console.log('no variant is left losing to its base');
 }
