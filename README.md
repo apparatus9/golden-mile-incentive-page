@@ -49,11 +49,11 @@ across to the form on the second.
 
 ### If your paths differ
 
-The six **Claim This Offer** hrefs are hardcoded in `offers.html` as
+The nine **Claim This Offer** hrefs are hardcoded in `offers.html` as
 `/offers-claim?offer=<key>` — deliberately, so the buttons still work if the script
 fails to load. If eDealer assigns different slugs, update:
 
-1. those six hrefs in `offers.html`, and
+1. those nine hrefs in `offers.html`, and
 2. `OFFERS_PATH` at the top of `gm-incentives.js` (used for the "back to offers" links).
 
 ### The claim page is gated
@@ -504,7 +504,7 @@ with: width 1080, quality 82):
 node -e "require('sharp')('assets/offer-NAME.png').resize({width:1080,withoutEnlargement:true}).webp({quality:82}).toFile('assets/offer-NAME.webp')"
 ```
 
-This took the original five creatives from 6.5 MB to 519 KB. Keep the `width`/`height`
+This took the original five creatives from 6.5 MB to 519 KB (the November set of nine runs about 890 KB). Keep the `width`/`height`
 attributes on each `<img>` in step with the source so the page does not shift as the
 images load — the Durango export is 1080x1045, the other three squares are 1080x1080,
 and the two banners are 1024x320.

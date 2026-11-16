@@ -104,7 +104,7 @@
     if (daysLeft > 0) {
       countdown.innerHTML = '<span class="gmi-count-n">' + daysLeft + '</span>' +
         '<span class="gmi-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
-        ' left in the All-Out Clearout</span>';
+        ' left in the Black Friday Sales Event</span>';
     }
   }
 

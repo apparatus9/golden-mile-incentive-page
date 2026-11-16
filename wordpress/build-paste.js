@@ -20,7 +20,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'edealer');
 const OUT = path.join(ROOT, 'wordpress', 'paste');
 
-/* Where the five creatives are served from. GitHub Pages by default; the
+/* Where the nine creatives are served from. GitHub Pages by default; the
    readme explains swapping these for WordPress Media Library URLs, which is
    a single find-and-replace because every src shares this prefix. */
 const IMG_BASE = 'https://apparatus9.github.io/golden-mile-incentive-page/assets';
@@ -149,7 +149,7 @@ function build(fragmentName, outName, label) {
   wordpress/golden-mile-incentives instead.
 
   IMAGES are served from GitHub Pages. To serve them from your own Media
-  Library instead, upload the five .webp files and replace every
+  Library instead, upload the nine .webp files and replace every
     ${IMG_BASE}
   with the Media Library URL. They all share that prefix, so it is one
   find-and-replace.
