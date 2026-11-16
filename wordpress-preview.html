@@ -370,6 +370,20 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi .gmi-btn{font-size:17px;line-height:1.2}
 @media (max-width:640px){.gmi .gmi-lede{font-size:17px}.gmi .gmi-hero-facts li{font-size:15px}}
 
+/* The hero heading, and only the hero heading, is forced.
+   The specificity bump above was not enough on the live WordPress page, which
+   means the theme sets its heading size with !important. That cannot be beaten
+   by a more specific selector, only by matching it. It is deliberately limited
+   to these four properties on this one element: everything else in the block
+   still loses to the host politely, which is how it should be. */
+.gmi .gmi-intro h1,
+.gmi .gmi-intro h2{
+  font-size:clamp(38px,7.6vw,104px) !important;
+  line-height:.94 !important;
+  letter-spacing:-.005em !important;
+  margin:0 0 22px !important;
+}
+
 /* ---------- one-page build ---------- */
 .gmi-claim{padding-top:10px;scroll-margin-top:24px}
 .gmi-claim h2{font-family:var(--gm-head);font-weight:600;
