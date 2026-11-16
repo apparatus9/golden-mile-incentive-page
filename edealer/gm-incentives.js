@@ -92,7 +92,7 @@
   var OFFERS_PATH = '/offers';
   var CLAIM_PATH = '/offers-claim';
   var LEAD_TO = 'ejay@goldenmilechrysler.ca';
-  var LEAD_CC = 'mitch@goldenmilechrysler.ca';
+  var LEAD_CC = 'mitch@goldenmilechrysler.ca,nav@goldenmilechrysler.ca';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
   var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
 

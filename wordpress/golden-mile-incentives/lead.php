@@ -307,6 +307,31 @@ function gmi_handle_lead( WP_REST_Request $request ) {
  * ---------------------------------------------------------------------- */
 
 /**
+ * The addresses copied on every lead, as a clean list.
+ *
+ * lead_cc may be one address, several separated by commas, or an array, so
+ * that the dealership can add or drop someone without touching any code.
+ * Each is validated on its own: a typo in one costs that copy, not all of
+ * them, and never the delivery to lead_to.
+ *
+ * @param string|array $cc The lead_cc setting.
+ * @return string[] Valid addresses, in order, without duplicates.
+ */
+function gmi_cc_list( $cc ) {
+	$parts = is_array( $cc ) ? $cc : explode( ',', (string) $cc );
+	$out   = array();
+
+	foreach ( $parts as $part ) {
+		$address = trim( $part );
+		if ( is_email( $address ) && ! in_array( $address, $out, true ) ) {
+			$out[] = $address;
+		}
+	}
+
+	return $out;
+}
+
+/**
  * Build and send the lead email.
  *
  * Plain text on purpose. It always renders, it is the least likely thing to
@@ -360,6 +385,7 @@ function gmi_mail_lead( $lead, $post_id = 0 ) {
 
 	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
 
+
 	// Only when configured. Empty leaves WordPress's own default alone, which
 	// is what sites sending through the local mailer want. Providers that
 	// check the From domain need this set to an address on a domain verified
@@ -372,8 +398,11 @@ function gmi_mail_lead( $lead, $post_id = 0 ) {
 			: 'From: ' . $from;
 	}
 
-	if ( is_email( $cc ) ) {
-		$headers[] = 'Cc: ' . $cc;
+	// lead_cc may name several people. is_email() rejects a list outright, so
+	// split first and keep the ones that are real addresses: a typo in one
+	// then costs that copy, not every copy.
+	foreach ( gmi_cc_list( $cc ) as $address ) {
+		$headers[] = 'Cc: ' . $address;
 	}
 	if ( is_email( $lead['email'] ) ) {
 		$headers[] = 'Reply-To: ' . $name . ' <' . $lead['email'] . '>';
@@ -633,7 +662,7 @@ function gmi_lead_test_render() {
 		/* translators: 1: To address, 2: Cc address. */
 		esc_html__( 'Sends one test lead to %1$s, copying %2$s. Nothing is saved to Leads.', 'golden-mile-incentives' ),
 		'<code>' . esc_html( $to ) . '</code>',
-		'<code>' . esc_html( $cc ) . '</code>'
+		'<code>' . esc_html( implode( ', ', gmi_cc_list( $cc ) ) ) . '</code>'
 	) . '</p>';
 
 	if ( true === $result ) {

@@ -56,7 +56,7 @@ function gmi_settings() {
 				// Where leads go. See readme.txt - FormSubmit needs one
 				// activation click before anything is delivered.
 				'lead_to'       => 'ejay@goldenmilechrysler.ca',
-				'lead_cc'       => 'mitch@goldenmilechrysler.ca',
+				'lead_cc'       => 'mitch@goldenmilechrysler.ca, nav@goldenmilechrysler.ca',
 
 				// Who the lead appears to come from. Leave empty and WordPress
 				// decides, which is wordpress@<site domain>.

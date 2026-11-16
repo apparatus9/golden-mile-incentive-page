@@ -67,7 +67,7 @@
      passed. Set it to '' to switch the countdown off.
      ================================================================ */
   var LEAD_TO = 'ejay@goldenmilechrysler.ca';
-  var LEAD_CC = 'mitch@goldenmilechrysler.ca';
+  var LEAD_CC = 'mitch@goldenmilechrysler.ca,nav@goldenmilechrysler.ca';
   var PHONE = '647-288-5337';
   var PHONE_HREF = '+16472885337';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;

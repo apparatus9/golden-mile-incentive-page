@@ -724,6 +724,11 @@ without a code change. Resend is set up this way:
    | Username | `resend` |
    | Password | the API key |
 
+**Who receives a lead.**  gets it,  is copied, and
+ takes several addresses separated by commas (or an array). Each is
+validated separately, so a typo in one costs that copy and never the delivery
+to . Currently: **ejay@** with **mitch@** and **nav@** copied.
+
 4. **Set the From address** to something on the verified domain, for example
    `offers@goldenmilechrysler.ca`. Either in WP Mail SMTP, or with this
    plugin's own `lead_from` setting:
