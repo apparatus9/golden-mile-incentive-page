@@ -721,10 +721,25 @@ The paste blocks send from the browser to FormSubmit, which needs no key. The
 **plugin** sends with `wp_mail()`, so it can go through any SMTP provider
 without a code change. Resend is set up this way:
 
-1. **Verify the domain in Resend.** Add `goldenmilechrysler.ca`, then add the
-   SPF and DKIM records it gives you to the domain's DNS. Wait for Resend to
-   show it verified. Until then Resend will only send from
-   `onboarding@resend.dev`, which lands in junk.
+1. **Nothing to verify — use `goldenmiledeals.ca`.** It is already verified in
+   the Resend account, confirmed by DNS:
+
+   ```
+   nslookup -type=TXT resend._domainkey.goldenmiledeals.ca 8.8.8.8   -> TXT present
+   nslookup -type=TXT resend._domainkey.goldenmilechrysler.ca 8.8.8.8 -> NXDOMAIN
+   ```
+
+   So the From is an address on **goldenmiledeals.ca**, e.g.
+   `offers@goldenmiledeals.ca`. The verified domain does not have to be the
+   one receiving the mail and need not accept mail at all — ejay, mitch and
+   nav keep their `@goldenmilechrysler.ca` addresses as recipients, because
+   **receiving** needs no verification. Only the From does.
+
+   Do **not** reach for `goldenmilechrysler.ca`: it runs on Microsoft 365
+   behind a strict `-all` SPF record, it has no Resend DKIM record, and
+   Resend will reject a send From it. This wall has now been hit three times
+   across the Golden Mile pages (fleet, financing, and this one). Check the
+   DKIM record before debugging anything else.
 2. **Create an API key** in Resend with sending access. It never goes in this
    repo, and never in a paste block — the block is public HTML, so a key in it
    could be read by anyone and used to send as the dealership.
@@ -754,15 +769,41 @@ without a code change. Resend is set up this way:
    define( 'WPMS_SMTP_USER', 'resend' );
    define( 'WPMS_SMTP_PASS', 'PASTE_THE_RESEND_KEY_HERE' );
 
-   define( 'WPMS_MAIL_FROM', 'offers@goldenmilechrysler.ca' );
+   define( 'WPMS_MAIL_FROM', 'offers@goldenmiledeals.ca' );
    define( 'WPMS_MAIL_FROM_NAME', 'Golden Mile Chrysler' );
    define( 'WPMS_MAIL_FROM_FORCE', true );
    ```
 
    `WPMS_MAIL_FROM` has to be on the domain verified in step 1 or Resend
-   rejects the send. `WPMS_MAIL_FROM_FORCE` makes every plugin on the site
-   send from it, which is what you want here: a From that Resend has not
-   verified fails, whichever plugin set it.
+   rejects the send.
+
+   **Read this before switching it on — the blast radius is the whole site.**
+   `wp_mail()` is global, so WP Mail SMTP reroutes *every* plugin's mail
+   through Resend, not just this one. This site already sends through
+   **Contact Form 7** and **Formidable Forms** (both visible in
+   `/wp-json/`), today almost certainly via Microsoft 365. After the switch
+   those go through Resend too, and any of them sending From an address on
+   `goldenmilechrysler.ca` will be **rejected**, because that domain is not
+   verified. Existing forms that work now can stop working.
+
+   That is what `WPMS_MAIL_FROM_FORCE` is for: it rewrites every From to the
+   verified address, so nothing gets rejected. The cost is that the
+   dealership's other forms then arrive from `offers@goldenmiledeals.ca`
+   instead of their own address, which is a visible change someone should
+   agree to first. `Reply-To` is untouched either way, so replies still work.
+
+   The two honest options:
+
+   - **`FORCE` on** — nothing breaks, every site form's apparent sender
+     changes. Simplest, and reversible by removing one line.
+   - **Leave the existing mail route alone** and verify
+     `goldenmilechrysler.ca` in Resend as well. Its Resend records sit on a
+     `send.` subdomain plus `resend._domainkey`, so adding them does **not**
+     disturb the Microsoft 365 flow, even behind that strict `-all` SPF. More
+     DNS work up front, no change to anything already working.
+
+   If the site turns out to have an SMTP plugin configured already, do not
+   add a second one — put the Resend credentials into the existing one.
 
    Whichever way it is stored, the key is a password. It belongs in the
    database or in `wp-config.php` on the server, and nowhere else — not in
@@ -776,12 +817,12 @@ separately, so a typo in one costs that copy and never the delivery to
 `lead_to`. Currently **ejay@** with **mitch@** and **nav@** copied.
 
 4. **Set the From address** to something on the verified domain, for example
-   `offers@goldenmilechrysler.ca`. Either in WP Mail SMTP, or with this
+   `offers@goldenmiledeals.ca`. Either in WP Mail SMTP, or with this
    plugin's own `lead_from` setting:
 
    ```php
    add_filter( 'gmi_settings', function ( $s ) {
-       $s['lead_from']      = 'offers@goldenmilechrysler.ca';
+       $s['lead_from']      = 'offers@goldenmiledeals.ca';
        $s['lead_from_name'] = 'Golden Mile Chrysler';
        return $s;
    } );
