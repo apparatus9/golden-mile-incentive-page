@@ -32,10 +32,9 @@ a{color:inherit}
 @media (max-width:640px){.gm-wrap{padding:0 20px}}
 
 /* ---------- hero ---------- */
-/* The hero is a black field because the creatives are: every one of the nine
-   is white and red type on black. A white hero made the page open on nothing
-   and let the first card carry the whole first screen. */
-.gm-hero{background:#111;color:#fff}
+/* The hero carries the page on type and scale rather than a field of colour:
+   the headline runs to display size and the two facts sit under it. */
+.gm-hero{background:#fff}
 .gm-hero .gm-wrap{padding-top:52px;padding-bottom:52px}
 .gm-hero-main{min-width:0}
 .gm-kicker{display:inline-block;font-family:var(--gm-head);font-size:13px;font-weight:600;
@@ -43,13 +42,13 @@ a{color:inherit}
   padding:6px 14px;margin:0 0 18px}
 h1{font-family:var(--gm-head);font-weight:600;font-size:clamp(38px,7.6vw,104px);line-height:.94;
   letter-spacing:-.005em;text-transform:uppercase;margin:0 0 22px;text-wrap:balance}
-.gm-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.5;color:rgba(255,255,255,.82)}
+.gm-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.5;color:#3f3f3f}
 /* The deadline and the count are the two facts a visitor wants first, so they
    are set at reading size in the hero instead of only inside every card. */
 .gm-hero-facts{display:flex;flex-wrap:wrap;gap:10px 34px;margin:26px 0 0;padding:0;list-style:none}
 .gm-hero-facts li{font-family:var(--gm-head);font-size:17px;font-weight:500;letter-spacing:.2px;
-  text-transform:uppercase;color:#fff}
-.gm-hero-facts b{color:#ff5c5c;font-weight:600}
+  text-transform:uppercase;color:var(--gm-dark)}
+.gm-hero-facts b{color:var(--gm-red);font-weight:600}
 @media (max-width:640px){
   .gm-hero .gm-wrap{padding-top:34px;padding-bottom:34px}
   .gm-lede{font-size:17px}
