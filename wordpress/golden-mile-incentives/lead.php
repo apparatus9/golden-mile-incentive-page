@@ -360,6 +360,18 @@ function gmi_mail_lead( $lead, $post_id = 0 ) {
 
 	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
 
+	// Only when configured. Empty leaves WordPress's own default alone, which
+	// is what sites sending through the local mailer want. Providers that
+	// check the From domain need this set to an address on a domain verified
+	// with them; see 'lead_from' in golden-mile-incentives.php.
+	$from      = gmi_setting( 'lead_from' );
+	$from_name = gmi_setting( 'lead_from_name' );
+	if ( is_email( $from ) ) {
+		$headers[] = $from_name
+			? 'From: ' . $from_name . ' <' . $from . '>'
+			: 'From: ' . $from;
+	}
+
 	if ( is_email( $cc ) ) {
 		$headers[] = 'Cc: ' . $cc;
 	}

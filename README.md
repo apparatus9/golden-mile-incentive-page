@@ -699,3 +699,54 @@ countdown do not.
 **What breaks if Pages is down.** The page keeps its content and loses its
 styling and behaviour, which is the trade the self-contained block exists to
 avoid. Both are built every time, so switching back is one paste.
+
+## Sending leads through Resend
+
+The paste blocks send from the browser to FormSubmit, which needs no key. The
+**plugin** sends with `wp_mail()`, so it can go through any SMTP provider
+without a code change. Resend is set up this way:
+
+1. **Verify the domain in Resend.** Add `goldenmilechrysler.ca`, then add the
+   SPF and DKIM records it gives you to the domain's DNS. Wait for Resend to
+   show it verified. Until then Resend will only send from
+   `onboarding@resend.dev`, which lands in junk.
+2. **Create an API key** in Resend with sending access. It never goes in this
+   repo, and never in a paste block — the block is public HTML, so a key in it
+   could be read by anyone and used to send as the dealership.
+3. **Install WP Mail SMTP** (or any SMTP plugin) and point it at Resend:
+
+   | Setting | Value |
+   |---|---|
+   | Host | `smtp.resend.com` |
+   | Port | `587` |
+   | Encryption | STARTTLS |
+   | Authentication | on |
+   | Username | `resend` |
+   | Password | the API key |
+
+4. **Set the From address** to something on the verified domain, for example
+   `offers@goldenmilechrysler.ca`. Either in WP Mail SMTP, or with this
+   plugin's own `lead_from` setting:
+
+   ```php
+   add_filter( 'gmi_settings', function ( $s ) {
+       $s['lead_from']      = 'offers@goldenmilechrysler.ca';
+       $s['lead_from_name'] = 'Golden Mile Chrysler';
+       return $s;
+   } );
+   ```
+
+   This matters: left empty, WordPress sends as `wordpress@<site domain>`, and
+   a provider that checks the From domain rejects anything it has not
+   verified. **Never set it to the customer's address** — that is someone
+   else's domain and will fail or be marked as spoofing. The customer is
+   already in `Reply-To`, so hitting reply still reaches them.
+5. **Test in this order**: **Offer Leads → Test email** in the plugin, then
+   one real submission through the live form, then check it appears under
+   **Leads** and in both inboxes, and that Resend's dashboard logs it.
+
+If the test fails, the plugin's message tells you which half is wrong:
+"WordPress refused to send it" means WordPress never handed it to Resend —
+check the SMTP plugin. "WordPress accepted it" means Resend took it and the
+problem is delivery — check Resend's logs, the domain verification and the
+From address.

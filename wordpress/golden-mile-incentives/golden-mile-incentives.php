@@ -58,6 +58,18 @@ function gmi_settings() {
 				'lead_to'       => 'ejay@goldenmilechrysler.ca',
 				'lead_cc'       => 'mitch@goldenmilechrysler.ca',
 
+				// Who the lead appears to come from. Leave empty and WordPress
+				// decides, which is wordpress@<site domain>.
+				//
+				// Set it when sending through a provider that checks the From
+				// domain - Resend, Postmark, SendGrid all do. It has to be an
+				// address on a domain verified with that provider or the send
+				// is rejected, so this is the dealership's own domain, never
+				// the customer's. The customer goes in Reply-To, which
+				// lead.php already sets, so hitting reply still reaches them.
+				'lead_from'      => '',
+				'lead_from_name' => 'Golden Mile Chrysler',
+
 				// Dealership contact, shown if the lead POST fails.
 				'phone'         => '647-288-5337',
 				'phone_href'    => '+16472885337',
