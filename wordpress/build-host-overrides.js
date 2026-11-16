@@ -1,15 +1,24 @@
-/* Rebuild the host-override block by reading the real rules out of the
-   stylesheet, so the restated values cannot drift from (or be invented
-   against) the originals. */
+/**
+ * Rewrite the host-override block at the end of edealer/gm-incentives.css.
+ *
+ *     node wordpress/build-host-overrides.js
+ *
+ * Run this after changing any rule it covers, then rebuild the paste blocks.
+ * The reasoning, and the parsing rules, live in host-overrides.js.
+ */
 const fs = require('fs');
-const P = require('path').join(__dirname, '..', 'edealer', 'gm-incentives.css');
+const path = require('path');
+const { buildOverrides } = require('./host-overrides.js');
+
+const P = path.join(__dirname, '..', 'edealer', 'gm-incentives.css');
 let css = fs.readFileSync(P, 'utf8');
 
 const MARK = '\n/* ---------- host overrides ----------';
 const cut = css.indexOf(MARK);
 if (cut > -1) css = css.slice(0, cut);          // drop the previous block entirely
 
-/* Selectors the host theme can realistically reach: headings, paragraphs, lists. */
+/* Everything a host theme can realistically reach: headings, paragraphs, lists,
+   and every control in the claim form, which themes style hardest of all. */
 const WANT = [
   '.gmi-intro',
   '.gmi-intro h1',
@@ -22,94 +31,61 @@ const WANT = [
   '.gmi-expiry',
   '.gmi-fine',
   '.gmi-btn',
+  // the claim form
+  '.gmi-claim',
+  '.gmi-claim h1',
+  '.gmi-claim-intro',
+  '.gmi-field label',
+  '.gmi-field input[type=text]',
+  '.gmi-field input[type=email]',
+  '.gmi-field input[type=tel]',
+  '.gmi-field select',
+  '.gmi-field textarea',
+  '.gmi-radios label',
+  '.gmi-consent span',
+  '.gmi-conditional-note',
+  '.gmi-status',
+  '.gmi-gate h2',
+  '.gmi-success h2',
+  '.gmi-success p',
 ];
 
-/* Collect declarations for a selector from every rule that targets it, in order,
-   ignoring anything inside an @media block (those keep their own breakpoints). */
-/* Remove every @media block first: those keep their own breakpoints, and
-   leaving them in confuses a flat rule-matcher (a nested '{' breaks the match
-   and whole rules go missing, which is how .gmi-intro came back empty). */
-function withoutMedia(src) {
-  let out = '', i = 0;
-  while (i < src.length) {
-    const at = src.indexOf('@media', i);
-    if (at < 0) { out += src.slice(i); break; }
-    out += src.slice(i, at);
-    let k = src.indexOf('{', at);
-    if (k < 0) break;
-    let d = 1; k++;
-    while (k < src.length && d > 0) { if (src[k] === '{') d++; else if (src[k] === '}') d--; k++; }
-    i = k;
-  }
-  return out;
-}
+/* These must also beat !important, which the live theme uses on them.
+   Themes style headings and form controls hardest, and those are exactly the
+   parts a visitor has to read and type into, so they are worth matching for.
+   Note the form controls pick up their shared rule automatically: it lists
+   select and textarea among its own selectors, so asking for either returns
+   the shared declarations followed by its specific ones, in cascade order. */
+const FORCED = [
+  { sel: '.gmi .gmi-intro h1,\n.gmi .gmi-intro h2', from: ['.gmi h1', '.gmi-intro h1'] },
+  { sel: '.gmi .gmi-offer h2', from: ['.gmi-offer h2'] },
+  { sel: '.gmi .gmi-claim-intro', from: ['.gmi-claim-intro'] },
+  { sel: '.gmi .gmi-field label', from: ['.gmi-field label'] },
+  { sel: '.gmi .gmi-field input[type=text],\n.gmi .gmi-field input[type=email],\n.gmi .gmi-field input[type=tel]',
+    from: ['.gmi-field input[type=text]'] },
+  { sel: '.gmi .gmi-field select', from: ['.gmi-field select'] },
+  { sel: '.gmi .gmi-field textarea', from: ['.gmi-field textarea'] },
+  { sel: '.gmi .gmi-radios label', from: ['.gmi-radios label'] },
+  // after the line above, or forcing the resting border would flatten the
+  // selected state the visitor relies on to see which option is chosen
+  { sel: '.gmi .gmi-radios label:has(input:checked)', from: ['.gmi-radios label:has(input:checked)'] },
+];
 
-/* Collect declarations for a selector from every rule that targets it, in order. */
-/* Comments have to go too. A flat matcher takes everything between the previous
-   '}' and the next '{' as the selector, so a comment sitting above a rule ends
-   up glued to it and the rule never matches. That is what hid .gmi-intro. */
-const stripComments = src => src.replace(/\/\*[\s\S]*?\*\//g, '');
+const { css: block, missing } = buildOverrides(css, WANT, FORCED);
 
-function declsFor(sel) {
-  const flat = withoutMedia(stripComments(css));
-  const out = [];
-  const re = /([^{}]+)\{([^{}]*)\}/g;
-  let m;
-  while ((m = re.exec(flat))) {
-    const sels = m[1].split(',').map(x => x.trim()).filter(Boolean);
-    if (!sels.includes(sel)) continue;
-    out.push(m[2].trim().replace(/\s*\n\s*/g, ''));
-  }
-  return out.join(';').replace(/;;+/g, ';').replace(/;$/, '');
-}
-
-const lines = WANT.map(sel => {
-  const d = declsFor(sel);
-  if (!d) return `/* ${sel}: no rule found */`;
-  return `.gmi ${sel}{${d}}`;
-});
-
-/* The hero heading is the one rule that must also beat !important. Its face,
-   weight and casing come from the shared h1 rule, so fold those in first or a
-   theme that sets font-family on h1 still wins them. */
-function force(sources) {
-  const merged = new Map();                    // property -> value; later wins, as the cascade would
-  for (const src of sources) {
-    for (const d of src.split(';')) {
-      const i = d.indexOf(':');
-      if (i < 0) continue;
-      merged.set(d.slice(0, i).trim(), d.slice(i + 1).trim());
-    }
-  }
-  return [...merged].map(([p, v]) => `${p}:${v} !important`).join(';');
-}
-const heroForced = force([declsFor('.gmi h1'), declsFor('.gmi-intro h1')]);
-const cardForced = force([declsFor('.gmi-offer h2')]);
-
-const block = `
+fs.writeFileSync(P, css.replace(/\s*$/, '\n') + `
 /* ---------- host overrides ----------
-   This fragment is pasted inside someone else's page. A theme that styles
-   \`.entry-content h1\` or \`.entry-content p\` beats a single class of ours on
-   specificity, which is how the hero heading came back at body size, the legal
-   block at reading size and the card headings in the theme's own face.
+   GENERATED by wordpress/build-host-overrides.js from the rules above. Do not
+   edit by hand: every declaration here is copied out of this stylesheet, which
+   is what stops it contradicting the rules it restates. Re-run that script
+   after changing any rule it covers. See host-overrides.js for why. */
+${block}
+`);
 
-   GENERATED by scratchpad/mkoverrides.js from the rules above -- every
-   declaration here is copied out of the stylesheet, not retyped, because
-   retyping them by hand is exactly how an earlier version of this block set
-   text-transform:none on the card headings and lost their capitals.
-   Re-run that script after changing any rule it covers. */
-${lines.join('\n')}
-
-/* The two headings are forced. The specificity bump above was not enough on the
-   live page: the theme sets its heading face, size and casing with !important,
-   which nothing but !important can match. These are the two pieces of type that
-   carry the page -- the page title and the figure on every card -- so they are
-   worth matching for. Everything else still loses to the host politely. */
-.gmi .gmi-intro h1,
-.gmi .gmi-intro h2{${heroForced}}
-.gmi .gmi-offer h2{${cardForced}}
-`;
-
-fs.writeFileSync(P, css.replace(/\s*$/, '\n') + block);
-console.log(block.split('\n').filter(l => l.startsWith('.gmi ')).join('\n'));
-console.log('\nhero forced ->', heroForced.slice(0, 90) + '...');
+console.log(block.split('\n').length + ' override rules written');
+if (missing.length) {
+  console.log('NO RULE FOUND for: ' + missing.join(', '));
+  process.exitCode = 1;
+} else {
+  console.log('every selector resolved');
+}

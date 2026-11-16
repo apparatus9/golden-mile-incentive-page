@@ -18,6 +18,23 @@ const fs = require('fs');
 const path = require('path');
 const { stripBlankLines } = require('./strip-blank-lines.js');
 const { makeHosted } = require('./make-hosted.js');
+const { buildOverrides } = require('./host-overrides.js');
+
+/* These three rules live only in this build, so the shared generator never
+   sees them. Host-proof them here from the same text, for the same reason. */
+function onePageOverrides() {
+  const own = [
+    '.gmi-claim{padding-top:10px;scroll-margin-top:24px}',
+    ".gmi-claim h2{font-family:var(--gm-head);font-weight:600;font-size:clamp(32px,4.2vw,56px);line-height:.98;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 18px;color:#000}",
+    '.gmi-claim-intro{font-size:19px;line-height:1.55;color:#000;margin:0 0 30px;max-width:54ch}',
+  ].join('\n');
+  const { css, missing } = buildOverrides(own,
+    ['.gmi-claim', '.gmi-claim-intro'],
+    [{ sel: '.gmi .gmi-claim h2', from: ['.gmi-claim h2'] },
+     { sel: '.gmi .gmi-claim-intro', from: ['.gmi-claim-intro'] }]);
+  if (missing.length) throw new Error('one-page overrides: no rule found for ' + missing.join(', '));
+  return css;
+}
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.join(ROOT, 'edealer');
@@ -310,6 +327,7 @@ ${css}
   font-size:clamp(32px,4.2vw,56px);line-height:.98;letter-spacing:-.015em;
   text-transform:uppercase;margin:0 0 18px;color:#000}
 .gmi-claim-intro{font-size:19px;line-height:1.55;color:#000;margin:0 0 30px;max-width:54ch}
+${onePageOverrides()}
 </style>
 
 <div class="gmi">
