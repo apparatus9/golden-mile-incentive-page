@@ -335,6 +335,31 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
 .gmi-legal{margin:56px 0 0;font-size:15px;line-height:1.7;color:#4a4a4a;max-width:86ch}
 .gmi-hidden{display:none !important}
 
+/* ---------- host overrides ----------
+   This fragment is pasted inside someone else's page. A theme that styles
+   `.entry-content h1` or `.entry-content p` beats a single class of ours on
+   specificity, which is how the hero heading came back at body size and the
+   legal block at reading size on the live WordPress page.
+
+   Every rule below is the same value already set above, restated one level
+   deeper (`.gmi .gmi-x` = two classes) so the host cannot win on specificity
+   alone. Nothing here is a new design decision; change the rule above and
+   change it here too. No !important: a theme that uses it needs a real fix,
+   not an arms race. */
+.gmi .gmi-intro h1{font-size:clamp(38px,7.6vw,104px);line-height:.94;letter-spacing:-.005em;
+  margin:0 0 22px;text-transform:uppercase}
+.gmi .gmi-lede{max-width:54ch;margin:0;font-size:19px;line-height:1.5;color:#3f3f3f}
+.gmi .gmi-hero-facts li{font-size:17px;line-height:1.3}
+.gmi .gmi-legal{margin:56px 0 0;font-size:15px;line-height:1.7;color:#4a4a4a;max-width:86ch}
+.gmi .gmi-offer h2{font-size:27px;line-height:1.15;margin:0 0 6px;text-transform:none}
+.gmi .gmi-offer-sub{font-size:19px;line-height:1.3}
+.gmi .gmi-eyebrow{font-size:13px;line-height:1.3}
+.gmi .gmi-facts li{font-size:13px;line-height:1.3}
+.gmi .gmi-fine{font-size:15px;line-height:1.62;color:#4f4f4f}
+.gmi .gmi-expiry{font-size:14px;line-height:1.4}
+.gmi .gmi-btn{font-size:17px;line-height:1.2}
+@media (max-width:640px){.gmi .gmi-lede{font-size:17px}.gmi .gmi-hero-facts li{font-size:15px}}
+
 /* ---------- one-page build ---------- */
 .gmi-claim{padding-top:10px;scroll-margin-top:24px}
 .gmi-claim h2{font-family:var(--gm-head);font-weight:600;
