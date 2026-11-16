@@ -442,7 +442,7 @@ on the left and the copy on the right. Its parts, in order:
 |---|---|
 | `h2` | **the figure, and only the figure** — `Up to $10,000`, `0% for 84 months`. This is the card's display type (up to 56px) and the thing the eye lands on. Keep it under about 24 characters so it stays on one line. |
 | `.gm-offer-sub` | one line saying what the figure buys: *In total incentives on every 2026 Dodge Durango*. |
-| `.gm-facts` | two or three plain qualifiers, separated by a middot. Not boxes, not chips. |
+| `.gm-facts` | two or three qualifiers, rendered as chips with an accent left edge. **They must carry what the headline does not** — scope, eligibility, conditions. A chip that restates the figure is wasted: if the `h2` says *0% for 84 Months + $4,500*, chips reading "0% financing" and "Up to 84 months" tell the visitor nothing. "4-Door Rubicon 2.0L only", "Limited inventory" and "On approved credit" do. |
 | `<details>` | the fine print. |
 | `.gm-offer-cta` | claim button, inventory link, end date. |
 
