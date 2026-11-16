@@ -706,7 +706,9 @@ avoid. Both are built every time, so switching back is one paste.
 posts straight from the browser to FormSubmit, which never touches wp_mail()
 and so never touches Resend. The WordPress builds now set:
 
-
+```js
+var LEAD_URL = '/wp-json/gmi/v1/lead';
+```
 
 which is the plugin's own REST route, relative so it resolves against whatever
 site the block is pasted into. With the plugin installed the lead is recorded
