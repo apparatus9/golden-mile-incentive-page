@@ -1,7 +1,7 @@
 # Golden Mile — Incentive Page
 
 A single-page offers/incentives landing page for Golden Mile Chrysler Dodge Jeep Ram.
-Seven live offers, each with a "Claim This Offer" button that drops the visitor into one
+Nine live offers, each with a "Claim This Offer" button that drops the visitor into one
 form with that offer already selected and the eligibility questions for it revealed.
 
 There are **three builds** of the same thing:
@@ -25,7 +25,7 @@ edealer/footer.html                 the dealership block, shared source
 wordpress/build-paste.js            regenerates the two paste blocks
 wordpress/sync-from-edealer.js      keeps the plugin's assets in step
 
-assets/*.webp       the seven creatives, optimized — these are what the pages load
+assets/*.webp       the nine creatives, optimized — these are what the pages load
 assets/*.png/.jpg   the original exports, kept so the webp can be regenerated
                     (retired 1920x599 banners from the previous offer set are still
                      in assets/ but nothing references them)
@@ -123,7 +123,7 @@ plugin is better; if all you have is an editor login, paste the blocks.
 
 ### Option A — paste one block, one page
 
-`wordpress/paste/one-page-block.html` is the whole thing: the seven cards,
+`wordpress/paste/one-page-block.html` is the whole thing: the nine cards,
 and the claim form at the bottom of the same page. Each **Claim This Offer**
 button scrolls down to the form and selects that offer on the way.
 
@@ -166,7 +166,7 @@ and on multisite only Super Admins have it. An unstyled page means exactly
 that — use the plugin instead.
 
 The creatives are served from GitHub Pages. To serve them from your own
-Media Library, upload the seven `.webp` files and replace every
+Media Library, upload the nine `.webp` files and replace every
 `https://apparatus9.github.io/golden-mile-incentive-page/assets` with the
 Media Library URL — one find-and-replace, they all share the prefix.
 
@@ -273,7 +273,7 @@ outrank `.entry-content a` without `!important`.
 `index.html`, the `edealer/` pair and `wordpress/.../offers.php` each hold the offer
 content separately. A change to one does not reach the others. When offers change,
 update all three, or retire the builds you are not using. The duplicated parts are the
-seven offer blocks, the `OFFERS` object and the legal footer.
+nine offer blocks, the `OFFERS` object and the legal footer.
 
 The WordPress build is the only one where the offers are data rather than markup, so if
 you are picking one to keep, keep that one.
@@ -374,8 +374,8 @@ Rows are plain English, and empty fields are dropped so the mail stays short:
 > **Comments** / **Consent to contact** / **Submitted** (Toronto time) / **Page**
 
 Offer-specific rows only appear when that offer was chosen. There is one such block
-left: *Currently owns* and *Registered since*, shown for the three offers that carry
-$1,500 loyalty bonus cash (`wrangler`, `wrangler-loyalty` and `grand-cherokee`). A
+left: *Currently owns* and *Registered since*, shown for the two offers that carry
+loyalty bonus cash (`ram-1500` and `ram-hd`). A
 conditional block can serve several offers — `data-for` takes a space-separated list of
 keys. In the plugin that list is built from the `'loyalty' => true` flag in
 `offers.php`, so adding a loyalty offer there is enough; the two hand-written claim
@@ -411,6 +411,29 @@ example `/claim-your-offer/?offer=durango`. The script also accepts
 ```
 
 ## Updating the offers
+
+### Where the current offers came from
+
+The nine live offers are the **November 2026 Black Friday Sales Event**, taken from the
+Stellantis Canada dealer advertising pack on Box ("2026 November Dealer Advertising
+Assets"). Two parts of that pack matter:
+
+| Folder | What to take from it |
+|---|---|
+| `Digital Ads/English/Social Statics/` | the `1080x1080_ViewOffers` square per model — this is the card creative, and it states the offer |
+| `Dealer Event POS/November 2026 English/` | `Nov_Poster_*` / `Nov_Polesign_*` PDFs — these carry **OFFER ENDS NOVEMBER 30** and the same figures as live text, so the date and the numbers can be read rather than guessed |
+
+Read the figures off the artwork, not off the filenames: nothing in the pack encodes an
+amount in a filename, and `Black Friday Offer Lockups/` is **empty placeholder frames**
+(`_OFFER_` is the slot a dealer drops its own copy into, `B`/`W`/`BR`/`WR` are
+colourways) — there are no figures in it at all.
+
+Next month, expect the same shape: a new dated folder, a `Social Statics` square per
+model, and POS PDFs that state the end date. Convert the squares to `.webp` at quality
+78 (`sharp`, ~85–135 KB each at 1080px) and keep the source alongside, the way
+`assets/` already does.
+
+### The card
 
 Each offer is one `<article class="gm-offer">` in `index.html`, laid out as the creative
 on the left and the copy on the right. Its parts, in order:
@@ -488,12 +511,16 @@ and the two banners are 1024x320.
 
 ### Square creatives and banner creatives
 
-Five of the creatives are 1080px squares and sit in the card's 400px side column.
-Two — the Wrangler loyalty bonus and the Ram 3500 Cummins — were supplied as
-1024x320 banners instead. Those cards carry `gm-offer-wide` / `gmi-offer-wide`,
-which runs the picture the full width of the card with the copy underneath. The
-alternative was a square crop, which throws the price lockup away and then upscales
-what is left 3.4x. In the plugin the modifier comes from `'wide' => true` on the
+As of the November 2026 set, **all nine creatives are 1080px squares** (the Durango
+export is 1080x1045) and every card uses the standard side-column layout. The
+`gm-offer-wide` / `gmi-offer-wide` modifier is still in the CSS and in the plugin
+but nothing uses it right now.
+
+It was needed for the October set, where two offers — the Wrangler loyalty bonus and
+the Ram 3500 Cummins — were supplied as 1024x320 banners instead. Those cards carried
+`gm-offer-wide`, which runs the picture the full width of the card with the copy
+underneath. The alternative was a square crop, which throws the price lockup away and
+then upscales what is left 3.4x. In the plugin the modifier comes from `'wide' => true` on the
 offer. If a square version of either creative turns up, drop the flag and the card
 goes back to the side-column layout with no other change.
 
@@ -527,30 +554,28 @@ offer. The dealership asked for it back, and they were right: the eyebrow is
 the only thing that says what *kind* of offer it is, and the chips carry the
 terms without the visitor opening anything. Do not strip them again.
 
-Each card sets its own `--accent`, keyed to the vehicle in its creative, the
-way the original page did. It colours the eyebrow, the left edge of each chip,
-and the + on OFFER DETAILS.
+`--accent` colours the eyebrow, the left edge of each chip, and the + on
+OFFER DETAILS. **With the November 2026 Black Friday set, no card overrides it**
+— every card inherits the brand red from `.gm-offer`, and the inline
+`style="--accent:…;--accent-ink:…"` attributes are gone.
 
-| offer | accent | taken from |
-|---|---|---|
-| Durango | `#c8102e` | Dodge red, off the badge in the creative — the vehicle is white |
-| Compass | `#e4601c` | the orange paint |
-| Wrangler | `#c9a227` | the gold paint |
-| Grand Cherokee | `#44607a` | the slate of the bridge — the vehicle is white |
-| Cherokee | `#2461db` | the blue paint |
-| Wrangler loyalty | `#08383e` | the deep teal panel the offer sits on — the vehicle is sand |
-| Ram 3500 | `#c9783c` | the orange of the rules and the CASH DISCOUNT type — the truck is white |
+That is a consequence of the artwork, not a reversal of the earlier decision. The
+October creatives were each shot in the vehicle's own colour, so keying the accent to
+the vehicle made the card and the poster read as one object. The Black Friday
+creatives are a single system — black panel, red BLACK FRIDAY lockup, same type —
+across all nine, so nine different accents would fight the artwork instead of
+matching it.
 
-Orange and gold cannot carry white text at 4.5:1 without turning brown, which
-is what made two of them read as the same colour on the first attempt. So each
-card also sets `--accent-ink`, and those two take near-black text instead.
-If you change an accent, keep its badge above 4.5:1 and keep it at least 60
-apart in RGB from the others — `wordpress/build-onepage.js` does not check
-this, but the script that set them did.
+If a future set goes back to per-vehicle artwork, the mechanism is still there: set
+`--accent` and `--accent-ink` inline on the `<article>`, keep the eyebrow above
+4.5:1 against the accent, and keep the accents at least 60 apart in RGB from each
+other. Orange and gold cannot carry white text at 4.5:1 without turning brown, which
+is why the October Compass and Wrangler cards set `--accent-ink` to near-black.
+`wordpress/build-onepage.js` does not check any of this.
 
 ## Dates
 
-All seven offers carry the same end date, currently **November 30, 2026**. It appears
+All nine offers carry the same end date, currently **November 30, 2026**. It appears
 in four kinds of place:
 
 | Where | What |
@@ -568,12 +593,11 @@ Change them all at once rather than by hand — there are 61 of them across twel
 files. In the plugin, the date lives in `offers.php` and the `event_ends` setting
 only, so those two are the whole job there.
 
-> **This date is an assumption, not a program date.** The creatives are the *October
-> 2026* program and state no end date anywhere. The previous offer set said November 2,
-> which had already passed by the time the page was built, so it was moved to the end
-> of the month to stop the page advertising expired offers. **Confirm the real November
-> program dates with the manufacturer and change it before this goes public**, along
-> with the unsourced fine print noted below.
+> **This date is now sourced.** It was an assumption under the October creatives, which
+> stated no end date. The November 2026 set states it directly: every Dealer Event POS
+> poster and pole sign in the November pack carries **OFFER ENDS NOVEMBER 30** in the
+> artwork, and the figures on the page were taken from that same pack. The date and the
+> headline figures no longer need confirming; the fine print still does — see below.
 
 ## Local preview
 
@@ -583,25 +607,29 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 
 ## Not done yet
 
-- **The Ram 3500 and Wrangler loyalty offers have no end date of their own.** Both
-  creatives state a program code (2618F4 and 2646M1) but no expiry, so both cards
-  carry the page-wide November 30, 2026. Confirm against the program sheet.
-- **The sixth square creative never arrived.** The October set
-  (`October_2026_MY26_*_1080x1080_ViewOffers`) supplied five: Durango, Compass,
-  Wrangler Rubicon, Grand Cherokee and Cherokee. The two banners added since are a
-  different format, not that sixth square. If it turns up, add it in the four places
-  listed under "Updating the offers".
-- **Three offers have unverified fine print.** The Wrangler rate paragraph and the
-  Cherokee lease paragraph were carried over from the previous verified set. The
-  **Durango**, **Compass** and **Grand Cherokee** paragraphs, and the shared **$1,500
-  loyalty** paragraph, were written from what the creative states plus the standard
-  Stellantis boilerplate — no payment examples were invented, but they are not the
-  manufacturer's own legal copy. Replace them from the program sheet before launch.
-- **The loyalty ownership cutoff is unstated on four of the five loyalty mentions.**
-  Only the Wrangler loyalty banner gives one: registered on or before **November 3,
-  2026**. The square creatives say "for eligible owners" and nothing more, so the
-  cutoff is absent from the Wrangler Rubicon and Grand Cherokee paragraphs and from
-  the form note. Confirm whether November 3 applies to all of them and put it back.
+- **Every fine-print paragraph is still unverified.** The nine headline figures, the
+  model and trim scopes, and the November 30 date all come straight off the November
+  2026 creatives and are sound. The `<details>` paragraphs underneath them are not:
+  they were written from what each creative states plus the standard Stellantis
+  boilerplate. No payment examples, rates or amounts were invented — every number in
+  the fine print also appears on its creative — but this is not the manufacturer's own
+  legal copy. **Replace all nine from the program sheet before this goes public.**
+- **No loyalty ownership cutoff is stated anywhere.** The two loyalty offers
+  (`ram-1500`, `ram-hd`) say "eligible owners" and nothing more, because that is all
+  the creatives say. The October Wrangler loyalty banner gave one — registered on or
+  before **November 3, 2026** — but that program is not in the November set, so the
+  date was not carried over rather than being assumed to still apply. Get the real
+  cutoff from the program sheet and put it in both fine-print paragraphs and the
+  form's conditional note.
+- **Two inventory slugs are new and unverified**: `/new/Ram/1500`, `/new/Ram/2500`,
+  `/new/Chrysler/Pacifica` and `/new/Chrysler/Grand-Caravan` have never been
+  resolved against the live eDealer site. Check each returns a real listing page
+  before launch — the Ram HD card points at `/new/Ram/2500`, but the offer covers
+  2500 and 3500, so that slug may need to be a search across both.
+- **The Grand Caravan card is a price, not an incentive.** "Starting at $50,995" is
+  what the November creative advertises, so it is on the page, but it is the only
+  card whose figure is an MSRP rather than a discount or a rate. If the page should
+  carry incentives only, drop that card — it is self-contained, like any other.
 - **Lead delivery is now the site's own job, but it has never run inside
   WordPress.** No PHP runtime exists on the build machine, so `lead.php` has been
   syntax-checked and its client side exercised in a browser against a stubbed
@@ -618,10 +646,10 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   See "Route 2" above. They have no server, so there is nothing better available
   to them short of a hosted function.
 - ~~The paste blocks point at GitHub Pages for images~~ — **done.** `main` now
-  carries the creatives and Pages serves all seven (verified 200, and verified
+  carries the creatives and Pages serves all nine (verified 200, and verified
   loading in a browser from the real URLs). The blocks work as pasted, with no
   upload step. Moving them to the Media Library is still the more robust
-  option, since it drops the GitHub dependency: upload the seven `.webp` and
+  option, since it drops the GitHub dependency: upload the nine `.webp` and
   find-and-replace the shared prefix, as "WordPress" above describes.
 - **The WordPress plugin has not been run inside WordPress.** There is no PHP on
   the machine it was written on, so it was verified by parsing rather than by
@@ -630,7 +658,7 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   the previous set's November 2 had already passed. Confirm the real program dates
   and change them as "Dates" above describes.
 - The eDealer page paths (`/offers`, `/offers-claim`) are assumed — confirm the real
-  slugs and update the seven card hrefs plus `OFFERS_PATH`.
+  slugs and update the nine card hrefs plus `OFFERS_PATH`.
 - Set the claim page to **noindex** in eDealer and keep it out of the nav.
 - The inventory buttons point at `goldenmilechrysler.ca` model URLs that were assumed,
   not verified. Check each one resolves before launch — `/new/Dodge/Durango`,
