@@ -739,6 +739,37 @@ without a code change. Resend is set up this way:
    | Username | `resend` |
    | Password | the API key |
 
+   Or set it in `wp-config.php` instead, above the
+   `/* That's all, stop editing! */` line. WP Mail SMTP reads these constants
+   in preference to its own settings, which keeps the key out of the database
+   and out of a settings page any administrator can read:
+
+   ```php
+   define( 'WPMS_ON', true );
+   define( 'WPMS_MAILER', 'smtp' );
+   define( 'WPMS_SMTP_HOST', 'smtp.resend.com' );
+   define( 'WPMS_SMTP_PORT', 587 );
+   define( 'WPMS_SSL', 'tls' );              // STARTTLS
+   define( 'WPMS_SMTP_AUTH', true );
+   define( 'WPMS_SMTP_USER', 'resend' );
+   define( 'WPMS_SMTP_PASS', 'PASTE_THE_RESEND_KEY_HERE' );
+
+   define( 'WPMS_MAIL_FROM', 'offers@goldenmilechrysler.ca' );
+   define( 'WPMS_MAIL_FROM_NAME', 'Golden Mile Chrysler' );
+   define( 'WPMS_MAIL_FROM_FORCE', true );
+   ```
+
+   `WPMS_MAIL_FROM` has to be on the domain verified in step 1 or Resend
+   rejects the send. `WPMS_MAIL_FROM_FORCE` makes every plugin on the site
+   send from it, which is what you want here: a From that Resend has not
+   verified fails, whichever plugin set it.
+
+   Whichever way it is stored, the key is a password. It belongs in the
+   database or in `wp-config.php` on the server, and nowhere else — not in
+   this repo, not in a paste block, not in chat or email. One pasted into a
+   message should be rotated in Resend, because a key is only as private as
+   the least private place it has been.
+
 **Who receives a lead.** `lead_to` gets it, `lead_cc` is copied, and `lead_cc`
 takes several addresses separated by commas (or an array). Each is validated
 separately, so a typo in one costs that copy and never the delivery to
