@@ -205,6 +205,14 @@ ${motion}
   var PHONE = '647-288-5337';
   var PHONE_HREF = '+16472885337';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
+
+  /* Deliver through the site itself, which is what puts the lead in
+     Offer Leads and sends it with wp_mail() - and therefore through
+     whatever SMTP provider WordPress is configured with. Relative on
+     purpose: it resolves against the site this block is pasted into.
+     If the plugin is not installed the path 404s and the script falls
+     back to FormSubmit, so leads keep arriving either way. */
+  var LEAD_URL = '/wp-json/gmi/v1/lead';
   var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
 
   var OFFERS = ${JSON.stringify(offers, null, 4).replace(/\n/g, '\n  ')};

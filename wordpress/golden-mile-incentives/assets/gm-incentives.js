@@ -241,26 +241,41 @@
        before any mail is attempted, so a mail server having a bad day
        cannot lose it. FormSubmit is the fallback for the builds that have
        no server behind them - the standalone page and the eDealer CMS. */
-    var endpoint = (window.GMI_LEAD && window.GMI_LEAD.url) || MAIL_ENDPOINT;
-    var onSite = endpoint !== MAIL_ENDPOINT;
+    /* LEAD_URL is set by the WordPress paste builds, which are pasted into a
+       page the plugin did not render, so window.GMI_LEAD is not there to find.
+       It is a relative path, so it resolves against whatever site the block
+       is pasted into and carries no hostname to get stale. */
+    var endpoint = (window.GMI_LEAD && window.GMI_LEAD.url) || LEAD_URL || MAIL_ENDPOINT;
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(onSite ? buildLead(data) : buildEmail(data))
-    }).then(function (res) {
-      return res.json().catch(function () { return {}; }).then(function (json) {
-        if (!res.ok || String(json.success) === 'false') {
-          throw new Error(json.message || 'HTTP ' + res.status);
-        }
-        form.classList.add('gmi-hidden');
-        successMsg.textContent = 'Thanks ' + data.firstName + ' — your request for the ' +
-          offer.name + ' offer is in. A Golden Mile product advisor will contact you by ' +
-          String(data.contactMethod).toLowerCase() + ' shortly.';
-        success.classList.add('is-on');
-        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    function send(url, isLast) {
+      var onSite = url !== MAIL_ENDPOINT;
+      return fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(onSite ? buildLead(data) : buildEmail(data))
+      }).then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (json) {
+          if (!res.ok || String(json.success) === 'false') {
+            throw new Error(json.message || 'HTTP ' + res.status);
+          }
+          form.classList.add('gmi-hidden');
+          successMsg.textContent = 'Thanks ' + data.firstName + ' — your request for the ' +
+            offer.name + ' offer is in. A Golden Mile product advisor will contact you by ' +
+            String(data.contactMethod).toLowerCase() + ' shortly.';
+          success.classList.add('is-on');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }).catch(function (err) {
+        /* The on-site route is only there once the plugin is installed. Until
+           then the path 404s, and a lead is far too expensive to drop over a
+           deployment step, so fall back to FormSubmit and let the visitor see
+           the same success they would have seen. */
+        if (!isLast) { return send(MAIL_ENDPOINT, true); }
+        throw err;
       });
-    }).catch(function () {
+    }
+
+    send(endpoint, endpoint === MAIL_ENDPOINT).catch(function () {
       submit.disabled = false;
       submit.textContent = 'Send My Request';
       status.innerHTML = 'Sorry — that did not go through. Please call ' +

@@ -702,6 +702,19 @@ avoid. Both are built every time, so switching back is one paste.
 
 ## Sending leads through Resend
 
+**The pasted block has to deliver through WordPress first.** On its own it
+posts straight from the browser to FormSubmit, which never touches wp_mail()
+and so never touches Resend. The WordPress builds now set:
+
+
+
+which is the plugin's own REST route, relative so it resolves against whatever
+site the block is pasted into. With the plugin installed the lead is recorded
+under **Offer Leads** and then sent with wp_mail(), which is the only path
+Resend can carry. Without the plugin that path 404s and the script falls back
+to FormSubmit, so leads keep arriving while the plugin is still being set up.
+
+
 The paste blocks send from the browser to FormSubmit, which needs no key. The
 **plugin** sends with `wp_mail()`, so it can go through any SMTP provider
 without a code change. Resend is set up this way:
