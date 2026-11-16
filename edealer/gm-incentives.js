@@ -97,13 +97,15 @@
   var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
 
   var OFFERS = {
-    'durango':          { name: 'Up to $10,000 in Total Incentives — 2026 Dodge Durango', ends: 'Offer ends November 30, 2026' },
-    'compass':          { name: 'Up to $7,500 in Total Incentives — 2026 Jeep Compass', ends: 'Offer ends November 30, 2026' },
-    'wrangler':         { name: '0% Financing for 84 Months + $1,500 Loyalty — 2026 Jeep Wrangler 4-Door Rubicon', ends: 'Offer ends November 30, 2026' },
-    'wrangler-loyalty':   { name: 'Up to $1,500 Loyalty Bonus Cash — 2026 Jeep Wrangler', ends: 'Offer ends November 30, 2026' },
-    'grand-cherokee':   { name: '0% Financing for up to 72 Months + $1,500 Loyalty — 2026 Jeep Grand Cherokee Summit', ends: 'Offer ends November 30, 2026' },
-    'cherokee':         { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 30, 2026' },
-    'ram-3500':           { name: 'Up to $11,000 Cash Discount — 2026 Ram 3500 6.7L Cummins HO Diesel', ends: 'Offer ends November 30, 2026' }
+    'durango':        { name: 'Up to $10,000 in Total Incentives — 2026 Dodge Durango', ends: 'Offer ends November 30, 2026' },
+    'compass':        { name: 'Up to $7,500 in Total Incentives — 2026 Jeep Compass', ends: 'Offer ends November 30, 2026' },
+    'wrangler':       { name: '0% Financing for 84 Months + $4,500 in Black Friday Incentives — 2026 Jeep Wrangler 4-Door Rubicon 2.0L', ends: 'Offer ends November 30, 2026' },
+    'grand-cherokee': { name: '0% Financing for up to 72 Months + $4,500 in Black Friday Incentives — 2026 Jeep Grand Cherokee Summit 4x4', ends: 'Offer ends November 30, 2026' },
+    'cherokee':       { name: '1.99% Lease for up to 24 Months — All-New 2026 Jeep Cherokee Hybrid', ends: 'Offer ends November 30, 2026' },
+    'ram-1500':       { name: '0% Financing for 84 Months + Up to $5,000 Loyalty Bonus Cash — 2026 Ram 1500 Big Horn & RHO Crew Cab 4x4', ends: 'Offer ends November 30, 2026' },
+    'ram-hd':         { name: 'No-Charge Cummins Turbo Diesel ($11,000 Total Value) + $1,500 Loyalty Bonus Cash — 2026 Ram Heavy Duty Pickup', ends: 'Offer ends November 30, 2026' },
+    'pacifica':       { name: '0% Financing for 36 Months or Lease from 3.99% — 2027 Chrysler Pacifica', ends: 'Offer ends November 30, 2026' },
+    'grand-caravan':  { name: 'Starting at $50,995 — 2027 Chrysler Grand Caravan', ends: 'Offer ends November 30, 2026' }
   };
 
   /* ---------- link paths ---------- */
@@ -138,7 +140,7 @@
     if (daysLeft > 0) {
       countdown.innerHTML = '<span class="gmi-count-n">' + daysLeft + '</span>' +
         '<span class="gmi-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
-        ' left in the All-Out Clearout</span>';
+        ' left in the Black Friday Sales Event</span>';
     }
   }
 

@@ -197,7 +197,7 @@ ${motion}
     if (daysLeft > 0) {
       countdown.innerHTML = '<span class="gmi-count-n">' + daysLeft + '</span>' +
         '<span class="gmi-count-l">' + (daysLeft === 1 ? 'day' : 'days') +
-        ' left in the All-Out Clearout</span>';
+        ' left in the Black Friday Sales Event</span>';
     }
   }
 
@@ -287,7 +287,7 @@ const out = `<!--
   out unstyled, that is why.
 
   IMAGES are served from GitHub Pages. To serve them from your own Media
-  Library instead, upload the five .webp files and replace every
+  Library instead, upload the nine .webp files and replace every
     ${IMG_BASE}
   with the Media Library URL. They all share that prefix, so it is one
   find-and-replace.

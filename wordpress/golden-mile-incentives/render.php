@@ -225,7 +225,7 @@ function gmi_render_claim( $atts ) {
 
 	<?php if ( $loyalty_keys ) : ?>
 <div class="gmi-conditional" data-for="<?php echo esc_attr( implode( ' ', $loyalty_keys ) ); ?>">
-<p class="gmi-conditional-note"><strong>$1,500 Loyalty Bonus Cash.</strong> Available to eligible owners &mdash; you need a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name, and proof of ownership at time of purchase.</p>
+<p class="gmi-conditional-note"><strong>Loyalty Bonus Cash.</strong> Available to eligible owners &mdash; you need a Chrysler, Dodge, Jeep, Ram or FIAT&reg; vehicle registered in your name, and proof of ownership at time of purchase. Up to $5,000 on the Ram 1500 ($5,000 on RHO models); $1,500 on most Ram Heavy Duty pickup models.</p>
 <div class="gmi-field">
 <label for="gmi-loyalty-vehicle">Vehicle currently registered to you</label>
 <input type="text" id="gmi-loyalty-vehicle" name="loyaltyVehicle" placeholder="e.g. 2019 Jeep Grand Cherokee">
