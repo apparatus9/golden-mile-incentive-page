@@ -702,19 +702,42 @@ avoid. Both are built every time, so switching back is one paste.
 
 ## Sending leads through Resend
 
-**The pasted block has to deliver through WordPress first.** On its own it
-posts straight from the browser to FormSubmit, which never touches wp_mail()
-and so never touches Resend. The WordPress builds now set:
+**The pasted blocks deliver through a Vercel function.** The WordPress builds
+set:
 
 ```js
-var LEAD_URL = '/wp-json/gmi/v1/lead';
+var LEAD_URL = 'https://goldenmile-incentives.vercel.app/api/lead';
 ```
 
-which is the plugin's own REST route, relative so it resolves against whatever
-site the block is pasted into. With the plugin installed the lead is recorded
-under **Offer Leads** and then sent with wp_mail(), which is the only path
-Resend can carry. Without the plugin that path 404s and the script falls back
-to FormSubmit, so leads keep arriving while the plugin is still being set up.
+That is `vercel/api/lead.js`, deployed as the Vercel project
+`goldenmile-incentives` — the same arrangement as the fleet and financing
+pages. It takes the form's JSON and sends the lead with Resend, as a styled
+HTML card with a plain text copy. Nothing has to be installed on the
+WordPress site, and the Resend key lives only in that Vercel project.
+
+| Variable | Set? | What it does |
+|---|---|---|
+| `RESEND_API_KEY` | yes, required | The Resend key. Never in this repo or a paste block. |
+| `LEAD_CC` | yes | Copies, comma separated. Currently mitch@ and nav@. |
+| `LEAD_TO` | no | Defaults to ejay@goldenmilechrysler.ca. |
+| `LEAD_FROM` | no | Defaults to `Golden Mile Chrysler <offers@goldenmiledeals.ca>`. Must be on a domain verified in Resend. |
+| `ALLOWED_ORIGINS` | no | Defaults to goldenmilechrysler.ca (with and without www) and the GitHub Pages preview. |
+
+Deploy after any change to the function, or to a variable — a variable only
+takes effect on the next deploy:
+
+```bash
+npx vercel deploy --prod --cwd vercel
+```
+
+The function stores nothing. If Resend refuses or cannot be reached it
+answers with an error and the page falls back to FormSubmit, so a lead is
+never shown as sent when nobody received it. A preview opened from a local
+file is not an allowed origin, so it falls back to FormSubmit too.
+
+With the plugin installed and rendering the page, `window.GMI_LEAD.url` still
+wins and the lead goes through the site instead; everything below is about
+that plugin route, which the pasted blocks no longer need.
 
 
 The paste blocks send from the browser to FormSubmit, which needs no key. The

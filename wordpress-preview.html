@@ -866,13 +866,14 @@ fieldset.gmi-field{border:0;margin:0;padding:0;min-width:0}
   var PHONE_HREF = '+16472885337';
   var MAIL_ENDPOINT = 'https://formsubmit.co/ajax/' + LEAD_TO;
 
-  /* Deliver through the site itself, which is what puts the lead in
-     Offer Leads and sends it with wp_mail() - and therefore through
-     whatever SMTP provider WordPress is configured with. Relative on
-     purpose: it resolves against the site this block is pasted into.
-     If the plugin is not installed the path 404s and the script falls
-     back to FormSubmit, so leads keep arriving either way. */
-  var LEAD_URL = '/wp-json/gmi/v1/lead';
+  /* Deliver through the Vercel function in vercel/api/lead.js, which
+     sends the lead with Resend. The Resend key lives in that Vercel
+     project and nowhere else, so nothing has to be installed on the
+     site this block is pasted into. If the function refuses or cannot
+     be reached the script falls back to FormSubmit, so leads keep
+     arriving either way. (With the plugin active, window.GMI_LEAD.url
+     still wins and the lead goes through the site instead.) */
+  var LEAD_URL = 'https://goldenmile-incentives.vercel.app/api/lead';
   var EVENT_ENDS = '2026-11-30T23:59:59-05:00';
 
   var OFFERS = {
