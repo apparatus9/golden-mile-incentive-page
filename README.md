@@ -626,11 +626,16 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
   date was not carried over rather than being assumed to still apply. Get the real
   cutoff from the program sheet and put it in both fine-print paragraphs and the
   form's conditional note.
-- **Two inventory slugs are new and unverified**: `/new/Ram/1500`, `/new/Ram/2500`,
-  `/new/Chrysler/Pacifica` and `/new/Chrysler/Grand-Caravan` have never been
-  resolved against the live eDealer site. Check each returns a real listing page
-  before launch — the Ram HD card points at `/new/Ram/2500`, but the offer covers
-  2500 and 3500, so that slug may need to be a search across both.
+- **The inventory buttons use the site's real listing pages**, taken from
+  `inventory-listing-sitemap.xml` on November 17, 2026 (the old `/new/Make/Model`
+  paths never existed). Each card links to the model-year listing its offer
+  names, with two exceptions that follow what is actually in stock:
+  the **Ram HD** card goes to the new Ram 2500 listing, which held only 2027
+  trucks and no 3500s that day, though the offer is for 2026; and the
+  **Grand Caravan** card goes to the 2026 listing, because the card names the
+  2027 and none were in stock. Re-check both when stock changes. The pages sit
+  behind a Cloudflare check, so they were confirmed from the sitemap, not by
+  loading them.
 - **The Grand Caravan card is a price, not an incentive.** "Starting at $50,995" is
   what the November creative advertises, so it is on the page, but it is the only
   card whose figure is an MSRP rather than a discount or a rate. If the page should
@@ -665,9 +670,6 @@ node -e "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'t
 - The eDealer page paths (`/offers`, `/offers-claim`) are assumed — confirm the real
   slugs and update the nine card hrefs plus `OFFERS_PATH`.
 - Set the claim page to **noindex** in eDealer and keep it out of the nav.
-- The inventory buttons point at `goldenmilechrysler.ca` model URLs that were assumed,
-  not verified. Check each one resolves before launch — `/new/Dodge/Durango`,
-  `/new/Jeep/Compass` and `/new/Jeep/Grand-Cherokee` are new and entirely unverified.
 - The consent checkbox links to `/privacy-policy` — confirm that is the real path.
 
 ## Pasting once: the hosted block
